@@ -1,11 +1,15 @@
 <?php
 	require_once('init_data.php');
-
+	include_once 'file.php';
+	
 	function msg_thread_status_get($sender_id){
 		return load_from_mem($sender_id);
 	}
 	function msg_thread_status_set($sender_id, $value){
 		store_to_mem($sender_id, $result);
+	}
+	function msg_thread_status_clear($sender_id){
+		clear_cache($sender_id);
 	}
 	
 	function private_process($msg){
@@ -84,13 +88,19 @@
 					return send_text_message($sender_id, $msg);
 				}
 				$msg = private_process($msg);
-				send_text_message($sender_id, $msg);
+				//send_text_message($sender_id, $msg);
 				//return send_button_template_test($sender_id);
-				//return process_msg_when_chatting($sender_id, $msg, $payload);
+				return process_msg_when_chatting($sender_id, $msg, $payload);
 			}
 			if($messaging->delivery || $messaging->read){
 				return 'thang thai';
 			}
+		}else if($messaging->postback){
+			// user choose postback
+			$sender_id = $messaging->sender->id;
+			$payload = $messaging->postback->payload;
+			
+			return process_msg_when_chatting($sender_id, $msg, $payload);
 		} else {
 			$changes = $entry->changes;
 			if($changes){
@@ -113,31 +123,88 @@
 
 	function process_msg_when_chatting($sender_id, $msg, $payload){
 		$data = load_from_mem('init_data');
+		
+		$data = $data['value'];
 		$data_dic = $data['dic'];
 		unset($data['dic']);
 		
+		$recipient_id = $sender_id;
+		$dic_cat1 = $data_dic['dic_cat1'];
+		$dic_cat2 = $data_dic['dic_cat2'];
+		$title = 'Mời bạn chọn danh mục?';
 		
-		if($msg == 'hi' || $msg == 'Hi' || (stripos($msg, 'chào') !== false)){
-			$title = 'Bạn muốn mua gì?';
-			// Lua chon danh muc
-			$buttons_obj_arr = array();
-			$dic_cat1 = $data_dic['dic_cat1'];
-			$dic_cat2 = $data_dic['dic_cat2'];
-			
-			foreach($dic_cat1 as $key => $value){
-				$obj = new stdclass();
-				$obj->type = 'postback';
-				$obj->title = $value;
-				$obj->payload = $key;
-				$buttons_obj_arr[] = $obj;
-				$recipient_id = $sender_id;
+		$count = msg_thread_status_get($sender_id);
+		if($count === false){
+			// Not existed
+			msg_thread_status_set($sender_id, 0);
+			$count = 0;
+		}else{
+			// Existed
+		}
+		write_file('call2.txt', $count, false);
+		if($msg){
+			if($msg == 'hi' || $msg == 'Hi' || (stripos($msg, 'chào') !== false)){
+				msg_thread_status_clear($sender_id);
+				//$title = 'Mời bạn chọn danh mục?';
+				// Lua chon danh muc
+				$buttons_obj_arr = array();
+				
+				$i = 0;
+				foreach($dic_cat1 as $key => $value){
+					$obj = new stdclass();
+					$obj->type = 'postback';
+					$obj->title = $value;
+					$obj->payload = $key;
+					$buttons_obj_arr[] = $obj;
+					if($i++ >= 2){
+						break;
+					}
+				}
+				return send_button_template($recipient_id, $title, $buttons_obj_arr);
 			}
-			return send_button_template($recipient_id, $title, $buttons_obj_arr);
 		}else{
 			if($payload != ''){
-				// Choose option
 				
+				// Choose option
+				$key = $payload;
+				msg_thread_status_set($sender_id, 2);
+				if($count == 1){
+					// Level 2
+					$arr = explode("_", $key);
+					$k0 = $arr[0];
+					$k1 = $arr[1];
+					
+					//$cat2 = $data[$k0][$k1];
+					//return var_dum_to_string($cat2);
+					return 'abcd_'.$k0.'---'.$k1;
+					if(is_array($cat2)){
+						return var_dum_to_string($cat2);
+					}
+				}else if($count > 1){
+					return 'iadd';
+				}
+				
+				if(array_key_exists($key, $data)){
+					$count = 1;
+					// Chon danh muc 2
+					$buttons_obj_arr = array();
+				
+					$i = 0;
+					foreach($dic_cat2 as $k => $v){
+						$obj = new stdclass();
+						$obj->type = 'postback';
+						$obj->title = $v;
+						$obj->payload = $key .'_'. $k;
+						$buttons_obj_arr[] = $obj;
+						if($i++ >= 2){
+							break;
+						}
+					}
+					msg_thread_status_set($sender_id, $count);
+					return send_button_template($recipient_id, $title, $buttons_obj_arr);
+				}
 			}
+			//return $payload;
 		}
 	}
 	

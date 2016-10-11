@@ -20,7 +20,7 @@
 	write_file($file_name, $input, false);
 	$entry = process_msg($input);
 	//write_file('call2.txt', json_encode($input), false);
-	write_file('call2.txt', $entry, false);
+	//write_file('call2.txt', $entry, false);
 	// receive msg: {"object":"page","entry":[{"id":"1681271828857371","time":1474009466178,"messaging":[{"sender":{"id":"1078614338912257"},"recipient":{"id":"1681271828857371"},"timestamp":1474009466130,"message":{"mid":"mid.1474009466121:220c1279719466a349","seq":3,"text":"\u1edd"}}]}]}
 	
 	// send msg:{"id":"1078614338912257"},"timestamp":1474009537404,"message":{"is_echo":true,"mid":"mid.1474009537378:e32abf7e4ec0571e00","seq":5,"text":"c\u00f3 g\u00ec hot"}}]}]}{"object":"page","entry":[{"id":"1681271828857371","time":1474009538668,"messaging":[{"sender":{"id":"1078614338912257"},"recipient":{"id":"1681271828857371"},"timestamp":0,"delivery":{"mids":["mid.1474009537378:e32abf7e4ec0571e00"],"watermark":1474009537404,"seq":6}}]}]}

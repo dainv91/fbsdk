@@ -42,19 +42,19 @@
 		
 		$item1 = new stdclass();
 		$item1->img = 'img1';
-		$item1->desc = 'desc1';
+		$item1->desc = 'binh sua 1';
 		$item1->price = 45000;
 		$item1->action = 'Mua ngay';
 		
 		$item2 = new stdclass();
 		$item2->img = 'img2';
-		$item2->desc = 'desc2';
+		$item2->desc = 'binh sua 2';
 		$item2->price = 320000;
 		$item2->action = 'Mua ngay';
 		
 		$item3 = new stdclass();
 		$item3->img = 'img3';
-		$item3->desc = 'desc3';
+		$item3->desc = 'binh sua 3';
 		$item3->price = 155000;
 		$item3->action = 'Mua ngay';
 		
@@ -84,11 +84,11 @@
 	$result = init_data();
 	$r = load_from_mem('init_data');
 	if($r === false){
-		store_to_mem('init_data', $result);
+		//store_to_mem('init_data', $result);
 	}else{
 		//clear_cache('init_data');
 	}
-	//echo '<pre>';
-	//var_dump($r);
-	//echo '</pre>';
+	echo '<pre>';
+	var_dump($r);
+	echo '</pre>';
 ?>
