@@ -1,0 +1,369 @@
+object(stdClass)#9 (4) {
+  ["recipient"]=>
+  object(stdClass)#10 (1) {
+    ["id"]=>
+    string(16) "1681271828857371"
+  }
+  ["timestamp"]=>
+  int(1476092311654)
+  ["sender"]=>
+  object(stdClass)#11 (1) {
+    ["id"]=>
+    string(16) "1305653869458699"
+  }
+  ["postback"]=>
+  object(stdClass)#12 (1) {
+    ["payload"]=>
+    string(37) "http://streaming.inet.vn:6790/monitor"
+  }
+}
+
+NULL
+
+{"error":{"message":"(#100) No matching user found","type":"OAuthException","code":100,"fbtrace_id":"GiB1xZGtgUz"}}
+NULL
+
+{"error":{"message":"(#100) No matching user found","type":"OAuthException","code":100,"fbtrace_id":"HhZL6AbgrG4"}}
+NULL
+
+object(stdClass)#9 (4) {
+  ["sender"]=>
+  object(stdClass)#10 (1) {
+    ["id"]=>
+    string(16) "1305653869458699"
+  }
+  ["recipient"]=>
+  object(stdClass)#11 (1) {
+    ["id"]=>
+    string(16) "1681271828857371"
+  }
+  ["timestamp"]=>
+  int(1476094966299)
+  ["message"]=>
+  object(stdClass)#12 (3) {
+    ["mid"]=>
+    string(36) "mid.1476094966290:55fc473e09fea60d83"
+    ["seq"]=>
+    int(795)
+    ["text"]=>
+    string(2) "hi"
+  }
+}
+
+object(stdClass)#9 (4) {
+  ["sender"]=>
+  object(stdClass)#10 (1) {
+    ["id"]=>
+    string(16) "1681271828857371"
+  }
+  ["recipient"]=>
+  object(stdClass)#11 (1) {
+    ["id"]=>
+    string(16) "1305653869458699"
+  }
+  ["timestamp"]=>
+  int(1476094967854)
+  ["message"]=>
+  object(stdClass)#12 (5) {
+    ["is_echo"]=>
+    bool(true)
+    ["app_id"]=>
+    int(849657341831100)
+    ["mid"]=>
+    string(36) "mid.1476094967764:22a4f5c4e7b1f33887"
+    ["seq"]=>
+    int(796)
+    ["text"]=>
+    string(2) "hi"
+  }
+}
+
+object(stdClass)#9 (4) {
+  ["sender"]=>
+  object(stdClass)#10 (1) {
+    ["id"]=>
+    string(16) "1305653869458699"
+  }
+  ["recipient"]=>
+  object(stdClass)#11 (1) {
+    ["id"]=>
+    string(16) "1681271828857371"
+  }
+  ["timestamp"]=>
+  int(1476094968144)
+  ["read"]=>
+  object(stdClass)#12 (2) {
+    ["watermark"]=>
+    int(1476094967854)
+    ["seq"]=>
+    int(797)
+  }
+}
+
+NULL
+
+object(stdClass)#9 (4) {
+  ["sender"]=>
+  object(stdClass)#10 (1) {
+    ["id"]=>
+    string(16) "1231308980276237"
+  }
+  ["recipient"]=>
+  object(stdClass)#11 (1) {
+    ["id"]=>
+    string(16) "1681271828857371"
+  }
+  ["timestamp"]=>
+  int(1476146032932)
+  ["message"]=>
+  object(stdClass)#12 (3) {
+    ["mid"]=>
+    string(28) "mid.1476146032932:835bbb8e61"
+    ["seq"]=>
+    int(798)
+    ["text"]=>
+    string(2) "Hi"
+  }
+}
+
+object(stdClass)#9 (4) {
+  ["sender"]=>
+  object(stdClass)#10 (1) {
+    ["id"]=>
+    string(16) "1681271828857371"
+  }
+  ["recipient"]=>
+  object(stdClass)#11 (1) {
+    ["id"]=>
+    string(16) "1231308980276237"
+  }
+  ["timestamp"]=>
+  int(1476146034499)
+  ["message"]=>
+  object(stdClass)#12 (5) {
+    ["is_echo"]=>
+    bool(true)
+    ["app_id"]=>
+    int(849657341831100)
+    ["mid"]=>
+    string(36) "mid.1476146034426:757ae70725580b5917"
+    ["seq"]=>
+    int(799)
+    ["text"]=>
+    string(2) "Hi"
+  }
+}
+
+object(stdClass)#9 (4) {
+  ["sender"]=>
+  object(stdClass)#10 (1) {
+    ["id"]=>
+    string(16) "1231308980276237"
+  }
+  ["recipient"]=>
+  object(stdClass)#11 (1) {
+    ["id"]=>
+    string(16) "1681271828857371"
+  }
+  ["timestamp"]=>
+  int(0)
+  ["delivery"]=>
+  object(stdClass)#12 (3) {
+    ["mids"]=>
+    array(1) {
+      [0]=>
+      string(36) "mid.1476146034426:757ae70725580b5917"
+    }
+    ["watermark"]=>
+    int(1476146034499)
+    ["seq"]=>
+    int(800)
+  }
+}
+
+NULL
+
+object(stdClass)#9 (4) {
+  ["recipient"]=>
+  object(stdClass)#10 (1) {
+    ["id"]=>
+    string(16) "1681271828857371"
+  }
+  ["timestamp"]=>
+  int(1476146044219)
+  ["sender"]=>
+  object(stdClass)#11 (1) {
+    ["id"]=>
+    string(16) "1231308980276237"
+  }
+  ["postback"]=>
+  object(stdClass)#12 (1) {
+    ["payload"]=>
+    string(37) "http://streaming.inet.vn:6790/monitor"
+  }
+}
+
+NULL
+
+object(stdClass)#9 (4) {
+  ["sender"]=>
+  object(stdClass)#10 (1) {
+    ["id"]=>
+    string(16) "1231308980276237"
+  }
+  ["recipient"]=>
+  object(stdClass)#11 (1) {
+    ["id"]=>
+    string(16) "1681271828857371"
+  }
+  ["timestamp"]=>
+  int(1476146061308)
+  ["message"]=>
+  object(stdClass)#12 (3) {
+    ["mid"]=>
+    string(28) "mid.1476146061308:e5a86a3347"
+    ["seq"]=>
+    int(803)
+    ["text"]=>
+    string(2) "Hi"
+  }
+}
+
+object(stdClass)#9 (4) {
+  ["sender"]=>
+  object(stdClass)#10 (1) {
+    ["id"]=>
+    string(16) "1681271828857371"
+  }
+  ["recipient"]=>
+  object(stdClass)#11 (1) {
+    ["id"]=>
+    string(16) "1231308980276237"
+  }
+  ["timestamp"]=>
+  int(1476146062849)
+  ["message"]=>
+  object(stdClass)#12 (5) {
+    ["is_echo"]=>
+    bool(true)
+    ["app_id"]=>
+    int(849657341831100)
+    ["mid"]=>
+    string(36) "mid.1476146062799:a08e343ec0ba7a9805"
+    ["seq"]=>
+    int(804)
+    ["text"]=>
+    string(2) "Hi"
+  }
+}
+
+object(stdClass)#9 (4) {
+  ["sender"]=>
+  object(stdClass)#10 (1) {
+    ["id"]=>
+    string(16) "1231308980276237"
+  }
+  ["recipient"]=>
+  object(stdClass)#11 (1) {
+    ["id"]=>
+    string(16) "1681271828857371"
+  }
+  ["timestamp"]=>
+  int(0)
+  ["delivery"]=>
+  object(stdClass)#12 (3) {
+    ["mids"]=>
+    array(1) {
+      [0]=>
+      string(36) "mid.1476146062799:a08e343ec0ba7a9805"
+    }
+    ["watermark"]=>
+    int(1476146062849)
+    ["seq"]=>
+    int(805)
+  }
+}
+
+NULL
+
+object(stdClass)#9 (4) {
+  ["sender"]=>
+  object(stdClass)#10 (1) {
+    ["id"]=>
+    string(16) "1231308980276237"
+  }
+  ["recipient"]=>
+  object(stdClass)#11 (1) {
+    ["id"]=>
+    string(16) "1681271828857371"
+  }
+  ["timestamp"]=>
+  int(1476146066873)
+  ["message"]=>
+  object(stdClass)#12 (3) {
+    ["mid"]=>
+    string(28) "mid.1476146066873:1fa41a2841"
+    ["seq"]=>
+    int(807)
+    ["text"]=>
+    string(11) "Chào bạn"
+  }
+}
+
+object(stdClass)#9 (4) {
+  ["sender"]=>
+  object(stdClass)#10 (1) {
+    ["id"]=>
+    string(16) "1681271828857371"
+  }
+  ["recipient"]=>
+  object(stdClass)#11 (1) {
+    ["id"]=>
+    string(16) "1231308980276237"
+  }
+  ["timestamp"]=>
+  int(1476146068378)
+  ["message"]=>
+  object(stdClass)#12 (5) {
+    ["is_echo"]=>
+    bool(true)
+    ["app_id"]=>
+    int(849657341831100)
+    ["mid"]=>
+    string(36) "mid.1476146068327:9f65c9602ab803b867"
+    ["seq"]=>
+    int(808)
+    ["text"]=>
+    string(11) "Chào bạn"
+  }
+}
+
+object(stdClass)#9 (4) {
+  ["sender"]=>
+  object(stdClass)#10 (1) {
+    ["id"]=>
+    string(16) "1231308980276237"
+  }
+  ["recipient"]=>
+  object(stdClass)#11 (1) {
+    ["id"]=>
+    string(16) "1681271828857371"
+  }
+  ["timestamp"]=>
+  int(0)
+  ["delivery"]=>
+  object(stdClass)#12 (3) {
+    ["mids"]=>
+    array(1) {
+      [0]=>
+      string(36) "mid.1476146068327:9f65c9602ab803b867"
+    }
+    ["watermark"]=>
+    int(1476146068378)
+    ["seq"]=>
+    int(809)
+  }
+}
+
+NULL
+
