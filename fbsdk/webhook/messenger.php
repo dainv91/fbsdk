@@ -1,5 +1,5 @@
 <?php
-	require_once('init_data.php');
+	include_once('init_data.php');
 	include_once 'file.php';
 	
 	function msg_thread_status_get($sender_id){

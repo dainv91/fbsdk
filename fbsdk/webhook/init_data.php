@@ -81,13 +81,84 @@
 		}
 		return $result;
 	}
-	$result = init_data();
+	
+	function init_data_v2(){
+		$result = array();
+		
+		$obj = new stdclass();
+		$obj->id = 1;
+		$obj->title = 'Bé ăn';
+		$obj->level = 0;
+		$obj->is_leaf = false;
+		$result[] = $obj;
+		
+		$obj = new stdclass();
+		$obj->id = 2;
+		$obj->title = 'Bé mặc';
+		$obj->level = 0;
+		$obj->is_leaf = false;
+		$result[] = $obj;
+		
+		$obj = new stdclass();
+		$obj->id = 3;
+		$obj->title = 'Bình sữa';
+		$obj->level = 1;
+		$obj->is_leaf = false;
+		$obj->p_id = 1;
+		$result[] = $obj;
+		
+		$obj = new stdclass();
+		$obj->id = 4;
+		$obj->title = 'Thìa';
+		$obj->level = 1;
+		$obj->is_leaf = false;
+		$obj->p_id = 1;
+		$result[] = $obj;
+		
+		$obj = new stdclass();
+		$obj->id = 5;
+		$obj->title = 'Bình sữa 1';
+		$obj->level = 2;
+		$obj->is_leaf = true;
+		$obj->p_id = 3;
+		$result[] = $obj;
+		
+		$obj = new stdclass();
+		$obj->id = 6;
+		$obj->title = 'Bình sữa 2';
+		$obj->level = 2;
+		$obj->is_leaf = true;
+		$obj->p_id = 3;
+		$result[] = $obj;
+		
+		$obj = new stdclass();
+		$obj->id = 7;
+		$obj->title = 'Thìa 1';
+		$obj->level = 2;
+		$obj->is_leaf = true;
+		$obj->p_id = 4;
+		$result[] = $obj;
+		
+		$obj = new stdclass();
+		$obj->id = 8;
+		$obj->title = 'Thìa 2';
+		$obj->level = 2;
+		$obj->is_leaf = true;
+		$obj->p_id = 4;
+		$result[] = $obj;		
+		
+		return $result;
+	}
+	
+	//$result = init_data();
+	$result = init_data_v2();
 	$r = load_from_mem('init_data');
 	if($r === false){
-		//store_to_mem('init_data', $result);
+		store_to_mem('init_data', $result);
 	}else{
 		//clear_cache('init_data');
 	}
+	$obj = new stdclass();
 	echo '<pre>';
 	var_dump($r);
 	echo '</pre>';
