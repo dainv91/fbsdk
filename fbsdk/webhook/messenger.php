@@ -6,7 +6,7 @@
 		return load_from_mem($sender_id);
 	}
 	function msg_thread_status_set($sender_id, $value){
-		store_to_mem($sender_id, $result);
+		store_to_mem($sender_id, $value);
 	}
 	function msg_thread_status_clear($sender_id){
 		clear_cache($sender_id);

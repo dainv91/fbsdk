@@ -159,7 +159,7 @@
 		//clear_cache('init_data');
 	}
 	$obj = new stdclass();
-	echo '<pre>';
-	var_dump($r);
-	echo '</pre>';
+	//echo '<pre>';
+	//var_dump($r);
+	//echo '</pre>';
 ?>

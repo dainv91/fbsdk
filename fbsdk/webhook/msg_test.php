@@ -33,8 +33,20 @@
 		return $result;
 	}
 	
+	function get_child_by_parent_id($data, $parent_id){
+		$result = array();
+		foreach($data as $obj){
+			if($obj->p_id != $parent_id){
+				continue;
+			}
+			$result[] = $obj;
+		}
+		return $result;
+	}
+	
+	
 	function msg_test($input){
-		$entry = json_decode($msg_data);
+		$entry = json_decode($input);
 		$entry = $entry->entry[0];
 		
 		// message
@@ -43,7 +55,7 @@
 			$message = $messaging->message;	
 		}
 		$changes = null;
-		
+		//return var_dum_to_string($entry);
 		if($message){			
 			if($message->is_echo){
 				// page reply => do not check
@@ -86,6 +98,7 @@
 					return send_text_message($sender_id, $msg);
 				}
 				$msg = private_process($msg);
+				//return $sender_id;
 				//send_text_message($sender_id, $msg);
 				//return send_button_template_test($sender_id);
 				return process_msg_with_payload($sender_id, $msg, $payload);
@@ -128,7 +141,7 @@
 		$leaves = get_leaf_from_data($data);
 		$max_leaf_level = get_max_level_of_leaves($leaves);
 		
-		if($level == $max_leaf_level){
+		if($level == $max_leaf_level + 1){
 			// Clear level
 			msg_thread_status_clear($sender_id . $current_level_str);
 			return;
@@ -137,13 +150,18 @@
 		//$current_level = msg_thread_status_get($sender_id . $current_level_str);
 		$menus = get_menu_by_level($data, $level);
 		
+		if($level > 0){
+			// Child level
+			$menus = get_child_by_parent_id($menus, $payload);
+		}
+		
 		$buttons_obj_arr = array();
 		$i = 0;
 		foreach($menus as $menu){
 			$obj = new stdclass();
 			$obj->type = 'postback';
 			$obj->title = $menu->title;
-			$obj->payload = $id;
+			$obj->payload = $menu->id;
 			$buttons_obj_arr[] = $obj;
 			if($i++ >= 2){
 				break;
@@ -191,10 +209,9 @@
 		}
 		// Level set
 		$current_level = $current_level['value'];
-		show_menu_of_level($current_level, $sender_id, $msg, $payload);
-		
 		// Increment current_level
 		msg_thread_status_set($sender_id . $current_level_str, $current_level + 1);
+		return show_menu_of_level($current_level, $sender_id, $msg, $payload);
 	}
 
 ?>
