@@ -121,6 +121,8 @@
 		$obj->level = 2;
 		$obj->is_leaf = true;
 		$obj->p_id = 3;
+		$obj->item_url = 'https://stream.inet.vn:6969/monitor';
+		$obj->image_url = 'http://hstatic.net/143/1000057143/1/2016/3-24/1934764_994606787293903_6605892986235271264_n_master.jpg';
 		$result[] = $obj;
 		
 		$obj = new stdclass();
@@ -129,6 +131,8 @@
 		$obj->level = 2;
 		$obj->is_leaf = true;
 		$obj->p_id = 3;
+		$obj->item_url = 'https://stream.inet.vn:6969/monitor';
+		$obj->image_url = 'http://hstatic.net/143/1000057143/1/2016/4-20/binh-thia-vt-farlin-bf-193a-1_copy_master.jpg';
 		$result[] = $obj;
 		
 		$obj = new stdclass();
@@ -137,6 +141,8 @@
 		$obj->level = 2;
 		$obj->is_leaf = true;
 		$obj->p_id = 4;
+		$obj->item_url = 'https://stream.inet.vn:6969/monitor';
+		$obj->image_url = 'http://hstatic.net/143/1000057143/1/2016/4-20/binh-thia-vt-farlin-bf-193a-1_copy_master.jpg';
 		$result[] = $obj;
 		
 		$obj = new stdclass();
@@ -145,6 +151,8 @@
 		$obj->level = 2;
 		$obj->is_leaf = true;
 		$obj->p_id = 4;
+		$obj->item_url = 'https://stream.inet.vn:6969/monitor';
+		$obj->image_url = 'http://hstatic.net/143/1000057143/1/2016/3-24/1934764_994606787293903_6605892986235271264_n_master.jpg';
 		$result[] = $obj;		
 		
 		return $result;
@@ -154,7 +162,7 @@
 	$result = init_data_v2();
 	$r = load_from_mem('init_data');
 	if($r === false){
-		store_to_mem('init_data', $result);
+		//store_to_mem('init_data', $result);
 	}else{
 		//clear_cache('init_data');
 	}

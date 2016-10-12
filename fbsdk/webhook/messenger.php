@@ -329,6 +329,82 @@
 		return send_button_template($recipient_id, $title, $buttons_obj_arr);
 	}
 	
+	function send_generic_template($recipient_id, $title, $elements_obj_arr, $access_token = null){
+		if($access_token == null){
+			$access_token = 'EAAMEwkQKZA7wBAL9DjYj0hBbMzzdNoBUbXmnG2ma6kw6P4DtsqijouIVZBZCjv8WYu5KF3rCv2GGyeHpgIwyHMRaa4TLK4vDAufQkZCQg1fB8ZCU4avJBfeQGWvOtm7TTMd763dBzLdz4ZBBrQY1cCqHtJrsL2DZCMpfg3PA0gscAZDZD';
+		}
+		$obj_msg = new stdclass();
+		$obj_msg->recipient = new stdclass();
+		$obj_msg->message = new stdclass();
+		
+		$obj_msg->message->attachment = new stdclass();
+		$obj_msg->message->attachment->type = 'template';
+		
+		$obj_msg->message->attachment->payload = new stdclass();
+		$obj_msg->message->attachment->payload->template_type = 'generic';
+		//$obj_msg->message->attachment->payload->text = $title;
+		//$obj_msg->message->attachment->payload->buttons = $buttons_obj_arr;
+		$obj_msg->message->attachment->payload->elements = $elements_obj_arr;
+		
+		$obj_msg->recipient->id = $recipient_id;
+		
+		$msg_data = json_encode($obj_msg);
+		//return $msg_data;
+		return call_send_api($msg_data, $access_token);
+	}
+	
+	function send_generic_template_test($recipient_id){
+		$title = 'test';
+		$elements_obj_arr = array();
+		
+		// Element
+		$obj = new stdclass();
+		$obj->title = 'This is title 1';
+		$obj->item_url = 'https://stream.inet.vn:6969/monitor';
+		$obj->image_url = 'http://hstatic.net/143/1000057143/1/2016/3-24/1934764_994606787293903_6605892986235271264_n_master.jpg';
+		$obj->subtitle = 'This is subtitle 1';
+		$obj->buttons = array();
+		
+		$obj_btn = new stdclass();
+		$obj_btn->type = 'postback';
+		$obj_btn->title = 'Mua ngay';
+		$obj_btn->payload = 'MN';
+		$obj->buttons[] = $obj_btn;
+		
+		$obj_btn = new stdclass();
+		$obj_btn->type = 'postback';
+		$obj_btn->title = 'Thanh toán';
+		$obj_btn->payload = 'TT';
+		$obj->buttons[] = $obj_btn;
+		
+		$elements_obj_arr[] = $obj;
+		
+		// Element
+		$obj = new stdclass();
+		$obj->title = 'This is title 2';
+		$obj->item_url = 'https://stream.inet.vn:6969/monitor';
+		$obj->image_url = 'http://hstatic.net/143/1000057143/1/2016/4-20/binh-thia-vt-farlin-bf-193a-1_copy_master.jpg';
+		$obj->subtitle = 'This is subtitle 1';
+		$obj->buttons = array();
+		
+		$obj_btn = new stdclass();
+		$obj_btn->type = 'postback';
+		$obj_btn->title = 'Mua ngay';
+		$obj_btn->payload = 'MN';
+		$obj->buttons[] = $obj_btn;
+		
+		$obj_btn = new stdclass();
+		$obj_btn->type = 'postback';
+		$obj_btn->title = 'Thanh toán';
+		$obj_btn->payload = 'TT';
+		$obj->buttons[] = $obj_btn;
+		
+		$elements_obj_arr[] = $obj;
+		
+		
+		return send_generic_template($recipient_id, $title, $elements_obj_arr);
+	}
+	
 	function reply_cmt($cmt_id, $msg, $access_token = null){
 		if ($access_token == null){			
 			$access_token = 'EAAMEwkQKZA7wBAL9DjYj0hBbMzzdNoBUbXmnG2ma6kw6P4DtsqijouIVZBZCjv8WYu5KF3rCv2GGyeHpgIwyHMRaa4TLK4vDAufQkZCQg1fB8ZCU4avJBfeQGWvOtm7TTMd763dBzLdz4ZBBrQY1cCqHtJrsL2DZCMpfg3PA0gscAZDZD';

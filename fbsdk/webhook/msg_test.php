@@ -151,8 +151,37 @@
 		$menus = get_menu_by_level($data, $level);
 		
 		if($level > 0){
-			// Child level
 			$menus = get_child_by_parent_id($menus, $payload);
+			
+			if($level == $max_leaf_level){
+				// Child level
+				$elements_obj_arr = array();
+				
+				foreach($menus as $leaf){
+					// Element
+					$obj = new stdclass();
+					$obj->title = $leaf->title;
+					$obj->item_url = $leaf->item_url;
+					$obj->image_url = $leaf->image_url;
+					$obj->subtitle = 'This is subtitle_' . $leaf->id;
+					$obj->buttons = array();
+					
+					$obj_btn = new stdclass();
+					$obj_btn->type = 'postback';
+					$obj_btn->title = 'Mua ngay';
+					$obj_btn->payload = 'MN_' .$leaf->id;
+					$obj->buttons[] = $obj_btn;
+					
+					$obj_btn = new stdclass();
+					$obj_btn->type = 'postback';
+					$obj_btn->title = 'Thanh toán';
+					$obj_btn->payload = 'TT_' .$leaf->id;
+					$obj->buttons[] = $obj_btn;
+					
+					$elements_obj_arr[] = $obj;
+				}
+				return send_generic_template($recipient_id, $title, $elements_obj_arr);
+			}
 		}
 		
 		$buttons_obj_arr = array();
