@@ -1,6 +1,7 @@
 <?php
 	include_once 'messenger.php';
 	include_once '../../helper/mem.php';
+	include_once '../lib/excel.php';
 	
 	$msg = 'iadd';
 	$msg_data = array(
@@ -20,7 +21,11 @@
 		echo '</pre>';
 	}
 	if($_REQUEST['iadd'] == 'iadd'){
-		test();
+		//test();
+		clear_cache('init_data');
+		exit();
+	}else if($_REQUEST['iadd'] == 'upload'){
+		
 		exit();
 	}
 	//echo $msg;
@@ -159,7 +164,8 @@
 	}
 	
 	//$result = init_data();
-	$result = init_data_v2();
+	//$result = init_data_v2();
+	$result = read_xlsx('../lib/data/data.xlsx');
 	$r = load_from_mem('init_data');
 	if($r === false){
 		//store_to_mem('init_data', $result);
@@ -167,7 +173,14 @@
 		//clear_cache('init_data');
 	}
 	$obj = new stdclass();
-	//echo '<pre>';
-	//var_dump($r);
-	//echo '</pre>';
+	echo '<pre>';
+	var_dump($r);
+	foreach($r as $dic){
+		//var_dump($dic);
+		if($dic->id){
+			//var_dump($dic->is_leaf);
+		}
+	}
+	//var_dump(read_xlsx('../lib/data.xlsx'));
+	echo '</pre>';
 ?>

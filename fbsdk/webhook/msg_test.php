@@ -162,8 +162,11 @@
 					$obj = new stdclass();
 					$obj->title = $leaf->title;
 					$obj->item_url = $leaf->item_url;
-					$obj->image_url = $leaf->image_url;
-					$obj->subtitle = 'This is subtitle_' . $leaf->id;
+					//$obj->image_url = $leaf->image_url;
+					$obj->image_url = $leaf->image;
+					//$obj->subtitle = 'This is subtitle_' . $leaf->id;
+					//$obj->subtitle = $leaf->description;
+					$obj->subtitle = 'Giá: '. $leaf->price;
 					$obj->buttons = array();
 					
 					$obj_btn = new stdclass();
