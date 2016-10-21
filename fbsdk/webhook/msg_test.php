@@ -1,6 +1,11 @@
 <?php
 	include_once('messenger.php');
 
+	define('RANK_TEXT', 1);
+	define('RANK_BTN', 2);
+	define('RANK_HMENU', 3);
+	define('RANK_QUICK_REPLY', 4);
+	
 	function get_leaf_from_data($data){
 		$result = array();
 		foreach($data as $obj){
@@ -15,16 +20,22 @@
 	function get_max_level_of_leaves($leaves){
 		$max = 0;
 		foreach($leaves as $leaf){
-			if($leaf->is_leaf && ($leaf->level > $max)){
+			//if($leaf->is_leaf && ($leaf->level > $max)){
+			if($leaf->level > $max){
 				$max = $leaf->level;
 			}
 		}
 		return $max;
 	}
 	
-	function get_menu_by_level($data, $level){
+	function get_menu_by_level($data, $level, $not_accept_text = false){
 		$result = array();
 		foreach($data as $obj){
+			if($not_accept_text != false){
+				if($obj->rank == RANK_TEXT){
+					continue;
+				}
+			}
 			if($obj->level != $level){
 				continue;
 			}
@@ -36,12 +47,36 @@
 	function get_child_by_parent_id($data, $parent_id){
 		$result = array();
 		foreach($data as $obj){
-			if($obj->p_id != $parent_id){
+			if($obj->p_id != $parent_id || $obj->rank == RANK_TEXT){
 				continue;
 			}
 			$result[] = $obj;
 		}
 		return $result;
+	}
+	
+	function get_title_of_level($data, $level){
+		$data_of_level = get_menu_by_level($data, $level);
+		$title = '';
+		foreach($data_of_level as $obj){
+			if($obj->rank != RANK_TEXT){
+				continue;
+			}
+			$title = $obj->title;
+			break;
+		}
+		return $title;
+	}
+	
+	function get_rank_action_of_menu($menus){
+		$rank_action = RANK_BTN;
+		foreach($menus as $obj){
+			if($obj){
+				$rank_action = $obj->rank;
+				break;
+			}
+		}
+		return $rank_action;
 	}
 	
 	
@@ -115,40 +150,152 @@
 		} else {
 			$changes = $entry->changes;
 			if($changes){
-				// cmt	
 				$change = $changes[0];
 				$value = $change->value;
+				
+				// cmt	
 				if($change->field == 'feed'){
 					$comment_id = $value->comment_id;
 					$message = $value->message;
 					
 					$msg = "Ê, ai cho mày comment: $message ?";
 					reply_cmt($comment_id, $msg);
+				}else if($change->item == 'like'){
+					$parent_id = $value->post_id;
+					return reply_cmt($parent_id, 'hehe');
 				}
 			}
 		}
 	}
 	
+	//function show_menu_by_type($sender_id, $data, $level, $type_rank){
+	function show_menu_by_type($data_of_level, $type_rank){
+		//return 'by_type';
+		if($type_rank != RANK_TEXT){
+			if($data_of_level->data == null || count($data_of_level->data) == 0){
+				return show_menu_by_type($data_of_level, RANK_TEXT);
+			}
+		}
+		switch($type_rank){
+			case RANK_TEXT:
+				//echo 'RANK_TEXT';
+				return send_text_message($data_of_level->sender_id, $data_of_level->title);
+				break;
+			case RANK_BTN:
+				//echo 'RANK_BTN';
+				$buttons_obj_arr = array();
+				$i = 0;
+				foreach($data_of_level->data as $menu){
+					$obj = new stdclass();
+					$obj->type = 'postback';
+					$obj->title = $menu->title;
+					$obj->payload = $menu->id;
+					$buttons_obj_arr[] = $obj;
+					if($i++ >= 2){
+						break;
+					}
+				}
+				return send_button_template($data_of_level->sender_id, $data_of_level->title, $buttons_obj_arr);
+				break;
+			case RANK_HMENU:
+				$elements_obj_arr = array();
+				
+				foreach($data_of_level->data as $leaf){
+					// Element
+					$obj = new stdclass();
+					$obj->title = $leaf->title;
+					$obj->item_url = $leaf->item_url;
+					//$obj->image_url = $leaf->image_url;
+					$obj->image_url = $leaf->image;
+					//$obj->subtitle = 'This is subtitle_' . $leaf->id;
+					//$obj->subtitle = $leaf->description;
+					$obj->subtitle = 'Giá: '. $leaf->price;
+					$obj->buttons = array();
+					
+					$obj_btn = new stdclass();
+					$obj_btn->type = 'postback';
+					$obj_btn->title = 'Mua ngay';
+					$obj_btn->payload = 'MN_' .$leaf->id;
+					$obj->buttons[] = $obj_btn;
+					
+					$obj_btn = new stdclass();
+					$obj_btn->type = 'postback';
+					$obj_btn->title = 'Thanh toán';
+					$obj_btn->payload = 'TT_' .$leaf->id;
+					$obj->buttons[] = $obj_btn;
+					
+					$elements_obj_arr[] = $obj;
+				}
+				return send_generic_template($recipient_id, $title, $elements_obj_arr);
+				break;
+			case RANK_QUICK_REPLY:
+				$i = 0;
+				$elements_obj_arr = array();
+				foreach($data_of_level->data as $menu){
+					$obj = new stdclass();
+					$obj->content_type = 'text';
+					$obj->title = $menu->title;
+					//$obj->payload = $menu->p_id .'_'. $menu->id;
+					$obj->payload = $menu->id;
+					//$obj->image_url = '';
+					$elements_obj_arr[] = $obj;
+					if($i++ >= 2){
+						break;
+					}
+				}
+				//return var_dum_to_string($elements_obj_arr);
+				//return $data_of_level->title;
+				return send_quick_replies($data_of_level->sender_id, $data_of_level->title, $elements_obj_arr);
+				break;
+		}
+	}
+	
 	function show_menu_of_level($level, $sender_id, $msg, $payload){
+		return show_menu_of_level_v2($level, $sender_id, $msg, $payload);
+		//return;
 		$data = load_from_mem('init_data');
 		$data = $data['value'];
 		
-		$title = 'Mời bạn chọn danh mục';
+		//$title = 'Mời bạn chọn danh mục';
+		$title = get_title_of_level($data, $level);
 		$recipient_id = $sender_id;
 		$current_level_str = '_current_level';
 		$max_leaf_level_str = '_max_leaf_level';
 		
-		$leaves = get_leaf_from_data($data);
-		$max_leaf_level = get_max_level_of_leaves($leaves);
+		//$leaves = get_leaf_from_data($data);
+		//$max_leaf_level = get_max_level_of_leaves($leaves);
+		$max_leaf_level = get_max_level_of_leaves($data);
 		
 		if($level == $max_leaf_level + 1){
 			// Clear level
+			//msg_thread_status_clear($sender_id . $current_level_str);
+			
+			// Test quick replies
+			$title = 'Chọn màu: ';
+			$elements_obj_arr = array();
+			
+			$obj = new stdclass();
+			$obj->content_type = 'text';
+			$obj->title = 'Read';
+			$obj->payload = 'RED_' . $payload;
+			//$obj->image_url = 'http://www.iconsdb.com/icons/download/red/circle-24.png';
+			$elements_obj_arr[] = $obj;
+			
+			$obj = new stdclass();
+			$obj->content_type = 'text';
+			$obj->title = 'Green';
+			$obj->payload = 'GREEN_' . $payload;
+			//$obj->image_url = 'http://www.iconsdb.com/icons/download/guacamole-green/circle-32.png';
+			$elements_obj_arr[] = $obj;
+			
+			return send_quick_replies($sender_id, $title, $elements_obj_arr);
+		}else if($level == $max_leaf_level + 2){
 			msg_thread_status_clear($sender_id . $current_level_str);
 			return;
 		}
 		
 		//$current_level = msg_thread_status_get($sender_id . $current_level_str);
-		$menus = get_menu_by_level($data, $level);
+		$menus = get_menu_by_level($data, $level, true);
 		
 		if($level > 0){
 			$menus = get_child_by_parent_id($menus, $payload);
@@ -200,6 +347,128 @@
 			}
 		}
 		return send_button_template($recipient_id, $title, $buttons_obj_arr);		
+	}
+	
+	function show_menu_of_level_v2($level, $sender_id, $msg, $payload){
+		$data = load_from_mem('init_data');
+		$data = $data['value'];
+		
+		//$title = 'Mời bạn chọn danh mục';
+		$title = get_title_of_level($data, $level);
+		if($title == ''){
+			$title = 'Mời bạn chọn danh mục';
+		}
+		
+		$recipient_id = $sender_id;
+		$current_level_str = '_current_level';
+		$max_leaf_level_str = '_max_leaf_level';
+		
+		//$leaves = get_leaf_from_data($data);
+		//$max_leaf_level = get_max_level_of_leaves($leaves);
+		$max_leaf_level = get_max_level_of_leaves($data);
+		
+		/*
+		if($level == $max_leaf_level + 1){
+			// Clear level
+			//msg_thread_status_clear($sender_id . $current_level_str);
+			
+			// Test quick replies
+			$title = 'Chọn màu: ';
+			$elements_obj_arr = array();
+			
+			$obj = new stdclass();
+			$obj->content_type = 'text';
+			$obj->title = 'Read';
+			$obj->payload = 'RED_' . $payload;
+			//$obj->image_url = 'http://www.iconsdb.com/icons/download/red/circle-24.png';
+			$elements_obj_arr[] = $obj;
+			
+			$obj = new stdclass();
+			$obj->content_type = 'text';
+			$obj->title = 'Green';
+			$obj->payload = 'GREEN_' . $payload;
+			//$obj->image_url = 'http://www.iconsdb.com/icons/download/guacamole-green/circle-32.png';
+			$elements_obj_arr[] = $obj;
+			
+			return send_quick_replies($sender_id, $title, $elements_obj_arr);
+		}else if($level == $max_leaf_level + 2){
+			msg_thread_status_clear($sender_id . $current_level_str);
+			return;
+		}
+		*/
+		//$current_level = msg_thread_status_get($sender_id . $current_level_str);
+		$menus = get_menu_by_level($data, $level, true);
+		
+		if($level > 0){
+			$menu_tmp = get_child_by_parent_id($menus, $payload);
+			if($menu_tmp != null && is_array($menu_tmp)){
+				$menus = $menu_tmp;
+			}
+			//return $payload;
+			/*
+			$menus = get_child_by_parent_id($menus, $payload);
+			
+			if($level == $max_leaf_level){
+				// Child level
+				$elements_obj_arr = array();
+				
+				foreach($menus as $leaf){
+					// Element
+					$obj = new stdclass();
+					$obj->title = $leaf->title;
+					$obj->item_url = $leaf->item_url;
+					//$obj->image_url = $leaf->image_url;
+					$obj->image_url = $leaf->image;
+					//$obj->subtitle = 'This is subtitle_' . $leaf->id;
+					//$obj->subtitle = $leaf->description;
+					$obj->subtitle = 'Giá: '. $leaf->price;
+					$obj->buttons = array();
+					
+					$obj_btn = new stdclass();
+					$obj_btn->type = 'postback';
+					$obj_btn->title = 'Mua ngay';
+					$obj_btn->payload = 'MN_' .$leaf->id;
+					$obj->buttons[] = $obj_btn;
+					
+					$obj_btn = new stdclass();
+					$obj_btn->type = 'postback';
+					$obj_btn->title = 'Thanh toán';
+					$obj_btn->payload = 'TT_' .$leaf->id;
+					$obj->buttons[] = $obj_btn;
+					
+					$elements_obj_arr[] = $obj;
+				}
+				return send_generic_template($recipient_id, $title, $elements_obj_arr);
+			
+			}
+			*/
+		}
+		
+		
+		$rank_action = get_rank_action_of_menu($menus);
+		/*
+		$buttons_obj_arr = array();
+		$i = 0;
+		foreach($menus as $menu){
+			$obj = new stdclass();
+			$obj->type = 'postback';
+			$obj->title = $menu->title;
+			$obj->payload = $menu->id;
+			$buttons_obj_arr[] = $obj;
+			if($i++ >= 2){
+				break;
+			}
+		}
+		return send_button_template($recipient_id, $title, $buttons_obj_arr);		
+		*/
+		$data_of_level = new stdclass();
+		$data_of_level->title = $title;
+		$data_of_level->sender_id = $sender_id;
+		$data_of_level->payload = $payload;
+		$data_of_level->data = $menus;
+		$data_of_level->level = $level;
+		
+		return show_menu_by_type($data_of_level, $rank_action);
 	}
 	
 	function process_msg_with_payload($sender_id, $msg, $payload){

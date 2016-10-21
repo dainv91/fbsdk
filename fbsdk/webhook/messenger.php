@@ -2,6 +2,8 @@
 	include_once('init_data.php');
 	include_once 'file.php';
 	
+	define("ACCESS_TOKEN", 'EAAMEwkQKZA7wBAL9DjYj0hBbMzzdNoBUbXmnG2ma6kw6P4DtsqijouIVZBZCjv8WYu5KF3rCv2GGyeHpgIwyHMRaa4TLK4vDAufQkZCQg1fB8ZCU4avJBfeQGWvOtm7TTMd763dBzLdz4ZBBrQY1cCqHtJrsL2DZCMpfg3PA0gscAZDZD');
+	
 	function msg_thread_status_get($sender_id){
 		return load_from_mem($sender_id);
 	}
@@ -405,6 +407,59 @@
 		return send_generic_template($recipient_id, $title, $elements_obj_arr);
 	}
 	
+	function send_quick_replies($recipient_id, $title, $elements_obj_arr, $access_token = null){
+		if($access_token == null){
+			$access_token = ACCESS_TOKEN;
+		}
+		
+		$obj_msg = new stdclass();
+		$obj_msg->recipient = new stdclass();
+		$obj_msg->message = new stdclass();
+		
+		$obj_msg->recipient->id = $recipient_id;
+		//$obj_msg->recipient->phone_number = '+841699733008';
+		$obj_msg->message->text = $title;
+		$obj_msg->message->quick_replies = $elements_obj_arr;
+		
+		$msg_data = json_encode($obj_msg);
+		return call_send_api($msg_data, $access_token);
+	}
+	
+	function send_quick_replies_test($recipient_id = '1285422414804001'){
+		//$recipient_id = '1285422414804001';
+		//return $recipient_id;
+		$title = 'Chọn màu:';
+		$elements_obj_arr = array();
+			
+		$obj = new stdclass();
+		$obj->content_type = 'text';
+		$obj->title = 'Red';
+		$obj->payload = 'RED_' . $payload;
+		//$obj->image_url = 'http://www.iconsdb.com/icons/download/red/circle-24.png';
+		$elements_obj_arr[] = $obj;
+		
+		$obj = new stdclass();
+		$obj->content_type = 'text';
+		$obj->title = 'Green';
+		$obj->payload = 'GREEN_' . $payload;
+		//$obj->image_url = 'http://www.iconsdb.com/icons/download/guacamole-green/circle-32.png';
+		$elements_obj_arr[] = $obj;
+		
+		
+		/*
+		// test location
+		$elements_obj_arr = array();
+		
+		$obj = new stdclass();
+		$obj->content_type = 'location';
+		//$obj->title = 'Green';
+		//$obj->payload = 'GREEN_' . $payload;
+		//$obj->image_url = 'http://www.iconsdb.com/icons/download/guacamole-green/circle-32.png';
+		$elements_obj_arr[] = $obj;
+		*/
+		return send_quick_replies($recipient_id, $title, $elements_obj_arr);
+	}
+	
 	function reply_cmt($cmt_id, $msg, $access_token = null){
 		if ($access_token == null){			
 			$access_token = 'EAAMEwkQKZA7wBAL9DjYj0hBbMzzdNoBUbXmnG2ma6kw6P4DtsqijouIVZBZCjv8WYu5KF3rCv2GGyeHpgIwyHMRaa4TLK4vDAufQkZCQg1fB8ZCU4avJBfeQGWvOtm7TTMd763dBzLdz4ZBBrQY1cCqHtJrsL2DZCMpfg3PA0gscAZDZD';
@@ -493,6 +548,8 @@
 	//$result = send_text_message('1078614338912257', 'xin cam on', $page_access_token);
 	//var_dump($result);
 	//var_dump(load_from_mem('init_data'));
-	echo private_process('bạn dung');
+	//echo private_process('bạn dung');
+	echo '<br />';
+	//echo ACCESS_TOKEN;
 	//test();
 ?>

@@ -175,12 +175,6 @@
 	$obj = new stdclass();
 	echo '<pre>';
 	var_dump($r);
-	foreach($r as $dic){
-		//var_dump($dic);
-		if($dic->id){
-			//var_dump($dic->is_leaf);
-		}
-	}
 	//var_dump(read_xlsx('../lib/data.xlsx'));
 	echo '</pre>';
 ?>

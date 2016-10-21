@@ -20,12 +20,13 @@ function conver_column_arr_to_obj($column_arr){
 	$obj->id = $column_arr[0];
 	$obj->title = $column_arr[1];
 	$obj->level = $column_arr[2];
-	$obj->is_leaf = $column_arr[3];
-	$obj->p_id = $column_arr[4];
-	$obj->price = $column_arr[5];
-	$obj->image = $column_arr[6];
-	$obj->description = $column_arr[7];
-	$obj->action = $column_arr[8];
+	//$obj->is_leaf = $column_arr[3];
+	$obj->p_id = $column_arr[3];
+	$obj->price = $column_arr[4];
+	$obj->image = $column_arr[5];
+	$obj->description = $column_arr[6];
+	//$obj->action = $column_arr[8];
+	$obj->rank = $column_arr[7]; // action: 1 - text, 2 - button, 3 - menu ngang. 4 - quick reply
 	return $obj;
 }
 
