@@ -105,6 +105,15 @@
 		return $result;
 	}
 	
+	function get_level_need_save_info($data){
+		$arr_level = array();
+		foreach($data as $obj){
+			if($obj->save_info !=null){
+				$arr_level[$obj->level] = $obj->save_info;
+			}
+		}
+		return $arr_level;
+	}
 	
 	function msg_test($input){
 		$entry = json_decode($input);
@@ -227,6 +236,7 @@
 				$elements_obj_arr = array();
 				
 				$btns = get_data_by_rank($data_of_level->data, RANK_HMENU_BTN);
+				//return var_dum_to_string($data_of_level->data);
 				$btn_arr_obj = array();
 				// init btn option
 				if($btns != null && count($btns) > 0){
@@ -245,6 +255,9 @@
 				}
 				
 				foreach($data_of_level->data as $leaf){
+					if($leaf->rank != RANK_HMENU){
+						continue;
+					}
 					// Element
 					$obj = new stdclass();
 					$obj->title = $leaf->title;
@@ -272,11 +285,13 @@
 					$btn_arr_clone = clone_arr_obj($btn_arr_obj);
 					set_payload_for_button($btn_arr_clone, $leaf->id);
 					
-					$obj->buttons = $btn_arr_obj;
+					//return var_dum_to_string($btn_arr_clone);
+					$obj->buttons = $btn_arr_clone;
 					
 					$elements_obj_arr[] = $obj;
 				}
-				return send_generic_template($recipient_id, $title, $elements_obj_arr);
+				//return var_dum_to_string($elements_obj_arr);
+				return send_generic_template($data_of_level->sender_id, $data_of_level->title, $elements_obj_arr);
 				break;
 			case RANK_QUICK_REPLY:
 				$i = 0;
@@ -405,6 +420,32 @@
 	function show_menu_of_level_v2($level, $sender_id, $msg, $payload){
 		$data = load_from_mem('init_data');
 		$data = $data['value'];
+		
+		$arr_level_need_save_info = get_level_need_save_info($data);
+		foreach($arr_level_need_save_info as $key => $value){
+			if($key == $level - 1){
+				$key_info = 'user_info';
+				$mem = load_from_mem($key_info);
+				
+				$arr = array();
+				$info = array();
+				$info[$value] = $msg;
+				$arr[$sender_id] = $info;
+				if($mem === false){
+				// Not existed
+					store_to_mem($key_info, $arr);
+				}else{
+					// Existed
+					$arr = $mem['value'];
+					$info = $arr[$sender_id];
+					$info[$value] = $msg;
+					
+					$arr[$sender_id] = $info;
+					store_to_mem($key_info, $arr);
+				}
+				//return;
+			}
+		}
 		
 		//$title = 'Mời bạn chọn danh mục';
 		$title = get_title_of_level($data, $level);

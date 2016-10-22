@@ -27,6 +27,7 @@ function conver_column_arr_to_obj($column_arr){
 	$obj->description = $column_arr[6];
 	//$obj->action = $column_arr[8];
 	$obj->rank = $column_arr[7]; // action: 1 - text, 2 - button, 3 - menu ngang. 4 - quick reply
+	$obj->save_info = $column_arr[8];
 	return $obj;
 }
 
