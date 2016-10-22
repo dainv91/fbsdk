@@ -5,6 +5,7 @@
 	define('RANK_BTN', 2);
 	define('RANK_HMENU', 3);
 	define('RANK_QUICK_REPLY', 4);
+	define('RANK_HMENU_BTN', 5);
 	
 	function get_leaf_from_data($data){
 		$result = array();
@@ -77,6 +78,31 @@
 			}
 		}
 		return $rank_action;
+	}
+	
+	function get_data_by_rank($menus, $rank_action){
+		$result = array();
+		foreach($menus as $obj){
+			if($obj->rank != $rank_action){
+				continue;
+			}
+			$result[] = $obj;
+		}
+		return $result;
+	}
+	
+	function set_payload_for_button($arr_btn, $payload){
+		foreach($arr_btn as $btn){
+			$btn->payload .= '_'. $payload;
+		}
+	}
+	
+	function clone_arr_obj($arr_obj){
+		$result = array();
+		foreach($arr_obj as $obj){
+			$result[] = clone $obj;
+		}
+		return $result;
 	}
 	
 	
@@ -200,6 +226,24 @@
 			case RANK_HMENU:
 				$elements_obj_arr = array();
 				
+				$btns = get_data_by_rank($data_of_level->data, RANK_HMENU_BTN);
+				$btn_arr_obj = array();
+				// init btn option
+				if($btns != null && count($btns) > 0){
+					$i = 0;
+					foreach($btns as $btn){
+						$obj_btn = new stdclass();
+						$obj_btn->type = 'postback';
+						$obj_btn->title = $btn->title;
+						$obj_btn->payload = $leaf->id;
+						
+						$btn_arr_obj[] = $obj_btn;
+						if($i++ >= 2){
+							break;
+						}
+					}
+				}
+				
 				foreach($data_of_level->data as $leaf){
 					// Element
 					$obj = new stdclass();
@@ -210,8 +254,9 @@
 					//$obj->subtitle = 'This is subtitle_' . $leaf->id;
 					//$obj->subtitle = $leaf->description;
 					$obj->subtitle = 'Giá: '. $leaf->price;
-					$obj->buttons = array();
+					//$obj->buttons = array();
 					
+					/*
 					$obj_btn = new stdclass();
 					$obj_btn->type = 'postback';
 					$obj_btn->title = 'Mua ngay';
@@ -222,7 +267,12 @@
 					$obj_btn->type = 'postback';
 					$obj_btn->title = 'Thanh toán';
 					$obj_btn->payload = 'TT_' .$leaf->id;
-					$obj->buttons[] = $obj_btn;
+					*/
+					//$obj->buttons[] = $obj_btn;
+					$btn_arr_clone = clone_arr_obj($btn_arr_obj);
+					set_payload_for_button($btn_arr_clone, $leaf->id);
+					
+					$obj->buttons = $btn_arr_obj;
 					
 					$elements_obj_arr[] = $obj;
 				}
@@ -246,6 +296,9 @@
 				//return var_dum_to_string($elements_obj_arr);
 				//return $data_of_level->title;
 				return send_quick_replies($data_of_level->sender_id, $data_of_level->title, $elements_obj_arr);
+				break;
+			case RANK_HMENU_BTN:
+				
 				break;
 		}
 	}
