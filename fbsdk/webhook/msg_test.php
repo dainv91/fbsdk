@@ -115,6 +115,50 @@
 		return $arr_level;
 	}
 	
+	function save_data_for_user($sender_id, $key, $value, $is_append = false){
+		$key_info = 'user_info';
+		$mem = load_from_mem($key_info);
+		
+		$arr = array();
+		$info = array();
+		$info[$key] = $value;
+		$arr[$sender_id] = $info;
+		
+		if($mem == false){
+		// Not existed
+			store_to_mem($key_info, $arr);
+		}else{
+			// Existed
+			$arr = $mem['value'];
+			$info = $arr[$sender_id];
+		
+			if($is_append != false){
+				// append
+				$info[$key] = $info[$key]. '_' .$value;
+			}else{
+				$info[$key] = $value;
+			}		
+			
+			$arr[$sender_id] = $info;
+			store_to_mem($key_info, $arr);
+		}
+	}
+	
+	function save_data_for_user_v2($sender_id, $value){
+		save_data_for_user($sender_id, 'other', $value, true);
+	}
+	
+	function get_level_of_payload($data, $payload){
+		if(is_numeric($payload)){
+			foreach($data as $obj){
+				if($obj->id == $payload){
+					return $obj->level;
+				}
+			}
+		}
+		return 0;
+	}
+	
 	function msg_test($input){
 		$entry = json_decode($input);
 		$entry = $entry->entry[0];
@@ -160,7 +204,10 @@
 				
 				if($messaging->postback){
 					$payload = $messaging->postback->payload;
+				}else if($message->quick_reply){
+					$payload = $message->quick_reply->payload;
 				}
+				//write_file('call3.txt', $payload, false);
 				
 				if($msg == ''){
 					$msg = 'Chịu chịu';
@@ -235,7 +282,7 @@
 			case RANK_HMENU:
 				$elements_obj_arr = array();
 				
-				$btns = get_data_by_rank($data_of_level->data, RANK_HMENU_BTN);
+				$btns = get_data_by_rank($data_of_level->data_by_level, RANK_HMENU_BTN);
 				//return var_dum_to_string($data_of_level->data);
 				$btn_arr_obj = array();
 				// init btn option
@@ -245,15 +292,15 @@
 						$obj_btn = new stdclass();
 						$obj_btn->type = 'postback';
 						$obj_btn->title = $btn->title;
-						$obj_btn->payload = $leaf->id;
+						$obj_btn->payload = $btn->id;
 						
 						$btn_arr_obj[] = $obj_btn;
-						if($i++ >= 2){
+						if($i++ >= 10){
 							break;
 						}
 					}
 				}
-				
+				//return var_dum_to_string($btns);
 				foreach($data_of_level->data as $leaf){
 					if($leaf->rank != RANK_HMENU){
 						continue;
@@ -282,10 +329,31 @@
 					$obj_btn->payload = 'TT_' .$leaf->id;
 					*/
 					//$obj->buttons[] = $obj_btn;
+					//$btn_arr_clone = clone_arr_obj($btn_arr_obj);
+					$btn_arr_obj = array();
+					// init btn option
+					if($btns != null && count($btns) > 0){
+						$i = 0;
+						foreach($btns as $btn){
+							if($btn->p_id != $leaf->id){
+								continue;
+							}
+							$obj_btn = new stdclass();
+							$obj_btn->type = 'postback';
+							$obj_btn->title = $btn->title;
+							$obj_btn->payload = $btn->id;
+							
+							$btn_arr_obj[] = $obj_btn;
+							if($i++ >= 10){
+								break;
+							}
+						}
+					}
+					
 					$btn_arr_clone = clone_arr_obj($btn_arr_obj);
+					
 					set_payload_for_button($btn_arr_clone, $leaf->id);
 					
-					//return var_dum_to_string($btn_arr_clone);
 					$obj->buttons = $btn_arr_clone;
 					
 					$elements_obj_arr[] = $obj;
@@ -304,7 +372,7 @@
 					$obj->payload = $menu->id;
 					//$obj->image_url = '';
 					$elements_obj_arr[] = $obj;
-					if($i++ >= 2){
+					if($i++ >= 9){
 						break;
 					}
 				}
@@ -424,6 +492,8 @@
 		$arr_level_need_save_info = get_level_need_save_info($data);
 		foreach($arr_level_need_save_info as $key => $value){
 			if($key == $level - 1){
+				save_data_for_user($sender_id, $value, $msg);
+				/*
 				$key_info = 'user_info';
 				$mem = load_from_mem($key_info);
 				
@@ -431,7 +501,7 @@
 				$info = array();
 				$info[$value] = $msg;
 				$arr[$sender_id] = $info;
-				if($mem === false){
+				if($mem == false){
 				// Not existed
 					store_to_mem($key_info, $arr);
 				}else{
@@ -443,6 +513,7 @@
 					$arr[$sender_id] = $info;
 					store_to_mem($key_info, $arr);
 				}
+				*/
 				//return;
 			}
 		}
@@ -461,36 +532,8 @@
 		//$max_leaf_level = get_max_level_of_leaves($leaves);
 		$max_leaf_level = get_max_level_of_leaves($data);
 		
-		/*
-		if($level == $max_leaf_level + 1){
-			// Clear level
-			//msg_thread_status_clear($sender_id . $current_level_str);
-			
-			// Test quick replies
-			$title = 'Chọn màu: ';
-			$elements_obj_arr = array();
-			
-			$obj = new stdclass();
-			$obj->content_type = 'text';
-			$obj->title = 'Read';
-			$obj->payload = 'RED_' . $payload;
-			//$obj->image_url = 'http://www.iconsdb.com/icons/download/red/circle-24.png';
-			$elements_obj_arr[] = $obj;
-			
-			$obj = new stdclass();
-			$obj->content_type = 'text';
-			$obj->title = 'Green';
-			$obj->payload = 'GREEN_' . $payload;
-			//$obj->image_url = 'http://www.iconsdb.com/icons/download/guacamole-green/circle-32.png';
-			$elements_obj_arr[] = $obj;
-			
-			return send_quick_replies($sender_id, $title, $elements_obj_arr);
-		}else if($level == $max_leaf_level + 2){
-			msg_thread_status_clear($sender_id . $current_level_str);
-			return;
-		}
-		*/
 		//$current_level = msg_thread_status_get($sender_id . $current_level_str);
+		$data_by_level = get_menu_by_level($data, $level, true);
 		$menus = get_menu_by_level($data, $level, true);
 		
 		if($level > 0){
@@ -560,6 +603,7 @@
 		$data_of_level->sender_id = $sender_id;
 		$data_of_level->payload = $payload;
 		$data_of_level->data = $menus;
+		$data_of_level->data_by_level = $data_by_level;
 		$data_of_level->level = $level;
 		
 		return show_menu_by_type($data_of_level, $rank_action);
@@ -568,6 +612,9 @@
 	function process_msg_with_payload($sender_id, $msg, $payload){
 		//$data = load_from_mem('init_data');
 		//$data = $data['value'];
+		
+		//write_file('call3.txt', $payload, false);
+		write_file('call3.txt', $payload . '_' .$msg, false);
 		
 		$current_level_str = '_current_level';
 		//$max_leaf_level_str = '_max_leaf_level';
@@ -606,6 +653,7 @@
 		$current_level = $current_level['value'];
 		// Increment current_level
 		msg_thread_status_set($sender_id . $current_level_str, $current_level + 1);
+		save_data_for_user_v2($sender_id, $payload);
 		return show_menu_of_level($current_level, $sender_id, $msg, $payload);
 	}
 

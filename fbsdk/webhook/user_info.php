@@ -12,7 +12,7 @@
 	}
 	
 	function clear_info(){
-		
+		clear_cache('user_info');
 	}
 	
 	if(isset($_REQUEST['iadd'])){

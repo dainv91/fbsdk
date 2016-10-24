@@ -1,369 +1,3489 @@
-object(stdClass)#9 (4) {
-  ["recipient"]=>
-  object(stdClass)#10 (1) {
-    ["id"]=>
-    string(16) "1681271828857371"
-  }
-  ["timestamp"]=>
-  int(1476092311654)
-  ["sender"]=>
-  object(stdClass)#11 (1) {
-    ["id"]=>
-    string(16) "1305653869458699"
-  }
-  ["postback"]=>
-  object(stdClass)#12 (1) {
+{"recipient_id":"1231308980276237","message_id":"mid.1477110893048:c6d4f07431"}
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477110897165:ddd0083b37"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477110903620:adc40af096"}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477110909473:8b0528e763"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477110915880:be057fe724"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477112266821:074f81e779"}
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477112270493:91f1c8fd80"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477112274640:0bc2abad34"}
+
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477112296313:4639ea2421"}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477112302593:724f4c7931"}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477112306471:048f292d98"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477112311294:c476555d16"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477112315957:80054a6097"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477112324301:ee95581158"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477112415473:042beecc27"}
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477112418738:114b1c0436"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477112450123:5a012c3381"}
+
+
+{"error":{"message":"(#100) No matching user found","type":"OAuthException","code":100,"error_subcode":2018001,"fbtrace_id":"FfgWl0QFvtu"}}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477112459226:c6b47cb427"}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477112464503:98e0ba3225"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477112489338:adfe06e845"}
+
+
+{"error":{"message":"(#100) No matching user found","type":"OAuthException","code":100,"error_subcode":2018001,"fbtrace_id":"F+WCTZwktrZ"}}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477112498336:47a0734523"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477113897706:cb41dd8646"}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477113902646:2921458f87"}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477113906543:427f484841"}
+
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477118782595:73e63f9e87"}
+
+
+
+
+{"error":{"message":"(#100) No matching user found","type":"OAuthException","code":100,"error_subcode":2018001,"fbtrace_id":"GEhO4FMJjt\/"}}
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477118796161:c247f2b593"}
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477124436512:3d78654352"}
+
+
+
+
+{"error":{"message":"(#100) No matching user found","type":"OAuthException","code":100,"error_subcode":2018001,"fbtrace_id":"Dlu5Lp59V0R"}}
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477124712443:c5d4408e09"}
+
+
+
+
+
+{"error":{"message":"(#100) No matching user found","type":"OAuthException","code":100,"error_subcode":2018001,"fbtrace_id":"H2hgklF4AAK"}}
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477124758509:80c16ebc66"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477124769242:96311df536"}
+
+
+array(2) {
+  [0]=>
+  object(stdClass)#1093 (3) {
+    ["type"]=>
+    string(8) "postback"
+    ["title"]=>
+    string(11) "Thanh toán"
     ["payload"]=>
-    string(37) "http://streaming.inet.vn:6790/monitor"
+    string(2) "_6"
   }
-}
-
-NULL
-
-{"error":{"message":"(#100) No matching user found","type":"OAuthException","code":100,"fbtrace_id":"GiB1xZGtgUz"}}
-NULL
-
-{"error":{"message":"(#100) No matching user found","type":"OAuthException","code":100,"fbtrace_id":"HhZL6AbgrG4"}}
-NULL
-
-object(stdClass)#9 (4) {
-  ["sender"]=>
-  object(stdClass)#10 (1) {
-    ["id"]=>
-    string(16) "1305653869458699"
-  }
-  ["recipient"]=>
-  object(stdClass)#11 (1) {
-    ["id"]=>
-    string(16) "1681271828857371"
-  }
-  ["timestamp"]=>
-  int(1476094966299)
-  ["message"]=>
-  object(stdClass)#12 (3) {
-    ["mid"]=>
-    string(36) "mid.1476094966290:55fc473e09fea60d83"
-    ["seq"]=>
-    int(795)
-    ["text"]=>
-    string(2) "hi"
-  }
-}
-
-object(stdClass)#9 (4) {
-  ["sender"]=>
-  object(stdClass)#10 (1) {
-    ["id"]=>
-    string(16) "1681271828857371"
-  }
-  ["recipient"]=>
-  object(stdClass)#11 (1) {
-    ["id"]=>
-    string(16) "1305653869458699"
-  }
-  ["timestamp"]=>
-  int(1476094967854)
-  ["message"]=>
-  object(stdClass)#12 (5) {
-    ["is_echo"]=>
-    bool(true)
-    ["app_id"]=>
-    int(849657341831100)
-    ["mid"]=>
-    string(36) "mid.1476094967764:22a4f5c4e7b1f33887"
-    ["seq"]=>
-    int(796)
-    ["text"]=>
-    string(2) "hi"
-  }
-}
-
-object(stdClass)#9 (4) {
-  ["sender"]=>
-  object(stdClass)#10 (1) {
-    ["id"]=>
-    string(16) "1305653869458699"
-  }
-  ["recipient"]=>
-  object(stdClass)#11 (1) {
-    ["id"]=>
-    string(16) "1681271828857371"
-  }
-  ["timestamp"]=>
-  int(1476094968144)
-  ["read"]=>
-  object(stdClass)#12 (2) {
-    ["watermark"]=>
-    int(1476094967854)
-    ["seq"]=>
-    int(797)
-  }
-}
-
-NULL
-
-object(stdClass)#9 (4) {
-  ["sender"]=>
-  object(stdClass)#10 (1) {
-    ["id"]=>
-    string(16) "1231308980276237"
-  }
-  ["recipient"]=>
-  object(stdClass)#11 (1) {
-    ["id"]=>
-    string(16) "1681271828857371"
-  }
-  ["timestamp"]=>
-  int(1476146032932)
-  ["message"]=>
-  object(stdClass)#12 (3) {
-    ["mid"]=>
-    string(28) "mid.1476146032932:835bbb8e61"
-    ["seq"]=>
-    int(798)
-    ["text"]=>
-    string(2) "Hi"
-  }
-}
-
-object(stdClass)#9 (4) {
-  ["sender"]=>
-  object(stdClass)#10 (1) {
-    ["id"]=>
-    string(16) "1681271828857371"
-  }
-  ["recipient"]=>
-  object(stdClass)#11 (1) {
-    ["id"]=>
-    string(16) "1231308980276237"
-  }
-  ["timestamp"]=>
-  int(1476146034499)
-  ["message"]=>
-  object(stdClass)#12 (5) {
-    ["is_echo"]=>
-    bool(true)
-    ["app_id"]=>
-    int(849657341831100)
-    ["mid"]=>
-    string(36) "mid.1476146034426:757ae70725580b5917"
-    ["seq"]=>
-    int(799)
-    ["text"]=>
-    string(2) "Hi"
-  }
-}
-
-object(stdClass)#9 (4) {
-  ["sender"]=>
-  object(stdClass)#10 (1) {
-    ["id"]=>
-    string(16) "1231308980276237"
-  }
-  ["recipient"]=>
-  object(stdClass)#11 (1) {
-    ["id"]=>
-    string(16) "1681271828857371"
-  }
-  ["timestamp"]=>
-  int(0)
-  ["delivery"]=>
-  object(stdClass)#12 (3) {
-    ["mids"]=>
-    array(1) {
-      [0]=>
-      string(36) "mid.1476146034426:757ae70725580b5917"
-    }
-    ["watermark"]=>
-    int(1476146034499)
-    ["seq"]=>
-    int(800)
-  }
-}
-
-NULL
-
-object(stdClass)#9 (4) {
-  ["recipient"]=>
-  object(stdClass)#10 (1) {
-    ["id"]=>
-    string(16) "1681271828857371"
-  }
-  ["timestamp"]=>
-  int(1476146044219)
-  ["sender"]=>
-  object(stdClass)#11 (1) {
-    ["id"]=>
-    string(16) "1231308980276237"
-  }
-  ["postback"]=>
-  object(stdClass)#12 (1) {
+  [1]=>
+  object(stdClass)#1094 (3) {
+    ["type"]=>
+    string(8) "postback"
+    ["title"]=>
+    string(8) "Mua ngay"
     ["payload"]=>
-    string(37) "http://streaming.inet.vn:6790/monitor"
+    string(2) "_6"
   }
 }
 
-NULL
 
-object(stdClass)#9 (4) {
-  ["sender"]=>
-  object(stdClass)#10 (1) {
-    ["id"]=>
-    string(16) "1231308980276237"
-  }
-  ["recipient"]=>
-  object(stdClass)#11 (1) {
-    ["id"]=>
-    string(16) "1681271828857371"
-  }
-  ["timestamp"]=>
-  int(1476146061308)
-  ["message"]=>
-  object(stdClass)#12 (3) {
-    ["mid"]=>
-    string(28) "mid.1476146061308:e5a86a3347"
-    ["seq"]=>
-    int(803)
-    ["text"]=>
-    string(2) "Hi"
-  }
-}
 
-object(stdClass)#9 (4) {
-  ["sender"]=>
-  object(stdClass)#10 (1) {
-    ["id"]=>
-    string(16) "1681271828857371"
-  }
-  ["recipient"]=>
-  object(stdClass)#11 (1) {
-    ["id"]=>
-    string(16) "1231308980276237"
-  }
-  ["timestamp"]=>
-  int(1476146062849)
-  ["message"]=>
-  object(stdClass)#12 (5) {
-    ["is_echo"]=>
-    bool(true)
-    ["app_id"]=>
-    int(849657341831100)
-    ["mid"]=>
-    string(36) "mid.1476146062799:a08e343ec0ba7a9805"
-    ["seq"]=>
-    int(804)
-    ["text"]=>
-    string(2) "Hi"
-  }
-}
 
-object(stdClass)#9 (4) {
-  ["sender"]=>
-  object(stdClass)#10 (1) {
-    ["id"]=>
-    string(16) "1231308980276237"
-  }
-  ["recipient"]=>
-  object(stdClass)#11 (1) {
-    ["id"]=>
-    string(16) "1681271828857371"
-  }
-  ["timestamp"]=>
-  int(0)
-  ["delivery"]=>
-  object(stdClass)#12 (3) {
-    ["mids"]=>
-    array(1) {
-      [0]=>
-      string(36) "mid.1476146062799:a08e343ec0ba7a9805"
+{"recipient_id":"1078614338912257","message_id":"mid.1477124849515:7736492227"}
+
+
+
+object(stdClass)#1089 (5) {
+  ["title"]=>
+  string(35) "Bạn muốn vay bao nhiêu tiền?"
+  ["sender_id"]=>
+  string(16) "1078614338912257"
+  ["payload"]=>
+  string(1) "2"
+  ["data"]=>
+  array(20) {
+    [0]=>
+    object(stdClass)#1035 (8) {
+      ["id"]=>
+      float(6)
+      ["title"]=>
+      string(9) "1 triệu"
+      ["level"]=>
+      float(1)
+      ["p_id"]=>
+      string(3) "=A3"
+      ["price"]=>
+      NULL
+      ["image"]=>
+      NULL
+      ["description"]=>
+      NULL
+      ["rank"]=>
+      float(3)
     }
-    ["watermark"]=>
-    int(1476146062849)
-    ["seq"]=>
-    int(805)
-  }
-}
-
-NULL
-
-object(stdClass)#9 (4) {
-  ["sender"]=>
-  object(stdClass)#10 (1) {
-    ["id"]=>
-    string(16) "1231308980276237"
-  }
-  ["recipient"]=>
-  object(stdClass)#11 (1) {
-    ["id"]=>
-    string(16) "1681271828857371"
-  }
-  ["timestamp"]=>
-  int(1476146066873)
-  ["message"]=>
-  object(stdClass)#12 (3) {
-    ["mid"]=>
-    string(28) "mid.1476146066873:1fa41a2841"
-    ["seq"]=>
-    int(807)
-    ["text"]=>
-    string(11) "Chào bạn"
-  }
-}
-
-object(stdClass)#9 (4) {
-  ["sender"]=>
-  object(stdClass)#10 (1) {
-    ["id"]=>
-    string(16) "1681271828857371"
-  }
-  ["recipient"]=>
-  object(stdClass)#11 (1) {
-    ["id"]=>
-    string(16) "1231308980276237"
-  }
-  ["timestamp"]=>
-  int(1476146068378)
-  ["message"]=>
-  object(stdClass)#12 (5) {
-    ["is_echo"]=>
-    bool(true)
-    ["app_id"]=>
-    int(849657341831100)
-    ["mid"]=>
-    string(36) "mid.1476146068327:9f65c9602ab803b867"
-    ["seq"]=>
-    int(808)
-    ["text"]=>
-    string(11) "Chào bạn"
-  }
-}
-
-object(stdClass)#9 (4) {
-  ["sender"]=>
-  object(stdClass)#10 (1) {
-    ["id"]=>
-    string(16) "1231308980276237"
-  }
-  ["recipient"]=>
-  object(stdClass)#11 (1) {
-    ["id"]=>
-    string(16) "1681271828857371"
-  }
-  ["timestamp"]=>
-  int(0)
-  ["delivery"]=>
-  object(stdClass)#12 (3) {
-    ["mids"]=>
-    array(1) {
-      [0]=>
-      string(36) "mid.1476146068327:9f65c9602ab803b867"
+    [1]=>
+    object(stdClass)#1036 (8) {
+      ["id"]=>
+      float(7)
+      ["title"]=>
+      string(9) "2 triệu"
+      ["level"]=>
+      float(1)
+      ["p_id"]=>
+      string(3) "=A3"
+      ["price"]=>
+      NULL
+      ["image"]=>
+      NULL
+      ["description"]=>
+      NULL
+      ["rank"]=>
+      float(3)
     }
-    ["watermark"]=>
-    int(1476146068378)
-    ["seq"]=>
-    int(809)
+    [2]=>
+    object(stdClass)#1037 (8) {
+      ["id"]=>
+      float(8)
+      ["title"]=>
+      string(9) "3 triệu"
+      ["level"]=>
+      float(1)
+      ["p_id"]=>
+      string(3) "=A3"
+      ["price"]=>
+      NULL
+      ["image"]=>
+      NULL
+      ["description"]=>
+      NULL
+      ["rank"]=>
+      float(3)
+    }
+    [3]=>
+    object(stdClass)#1038 (8) {
+      ["id"]=>
+      float(9)
+      ["title"]=>
+      string(11) "Thanh toán"
+      ["level"]=>
+      float(1)
+      ["p_id"]=>
+      float(-1)
+      ["price"]=>
+      NULL
+      ["image"]=>
+      NULL
+      ["description"]=>
+      NULL
+      ["rank"]=>
+      float(5)
+    }
+    [4]=>
+    object(stdClass)#1039 (8) {
+      ["id"]=>
+      float(10)
+      ["title"]=>
+      string(8) "Mua ngay"
+      ["level"]=>
+      float(1)
+      ["p_id"]=>
+      string(4) "=--1"
+      ["price"]=>
+      NULL
+      ["image"]=>
+      NULL
+      ["description"]=>
+      NULL
+      ["rank"]=>
+      float(5)
+    }
+    [5]=>
+    object(stdClass)#1049 (8) {
+      ["id"]=>
+      float(25)
+      ["title"]=>
+      string(13) "Lãi và phí"
+      ["level"]=>
+      float(1)
+      ["p_id"]=>
+      string(3) "=A5"
+      ["price"]=>
+      NULL
+      ["image"]=>
+      NULL
+      ["description"]=>
+      NULL
+      ["rank"]=>
+      float(4)
+    }
+    [6]=>
+    object(stdClass)#1050 (8) {
+      ["id"]=>
+      float(26)
+      ["title"]=>
+      string(28) "Thời hạn và hạn mức"
+      ["level"]=>
+      float(1)
+      ["p_id"]=>
+      string(3) "=A5"
+      ["price"]=>
+      NULL
+      ["image"]=>
+      NULL
+      ["description"]=>
+      NULL
+      ["rank"]=>
+      float(4)
+    }
+    [7]=>
+    object(stdClass)#1051 (8) {
+      ["id"]=>
+      float(27)
+      ["title"]=>
+      string(30) "Điều kiện và thủ tục"
+      ["level"]=>
+      float(1)
+      ["p_id"]=>
+      string(3) "=A5"
+      ["price"]=>
+      NULL
+      ["image"]=>
+      NULL
+      ["description"]=>
+      NULL
+      ["rank"]=>
+      float(4)
+    }
+    [8]=>
+    object(stdClass)#1052 (8) {
+      ["id"]=>
+      float(28)
+      ["title"]=>
+      string(12) "Giải ngân"
+      ["level"]=>
+      float(1)
+      ["p_id"]=>
+      string(3) "=A5"
+      ["price"]=>
+      NULL
+      ["image"]=>
+      NULL
+      ["description"]=>
+      NULL
+      ["rank"]=>
+      float(4)
+    }
+    [9]=>
+    object(stdClass)#1053 (8) {
+      ["id"]=>
+      float(29)
+      ["title"]=>
+      string(11) "Thanh toán"
+      ["level"]=>
+      float(1)
+      ["p_id"]=>
+      string(3) "=A5"
+      ["price"]=>
+      NULL
+      ["image"]=>
+      NULL
+      ["description"]=>
+      NULL
+      ["rank"]=>
+      float(4)
+    }
+    [10]=>
+    object(stdClass)#1070 (8) {
+      ["id"]=>
+      float(46)
+      ["title"]=>
+      string(9) "1 triệu"
+      ["level"]=>
+      float(1)
+      ["p_id"]=>
+      string(4) "=D41"
+      ["price"]=>
+      NULL
+      ["image"]=>
+      NULL
+      ["description"]=>
+      NULL
+      ["rank"]=>
+      float(4)
+    }
+    [11]=>
+    object(stdClass)#1071 (8) {
+      ["id"]=>
+      float(47)
+      ["title"]=>
+      string(9) "2 triệu"
+      ["level"]=>
+      float(1)
+      ["p_id"]=>
+      string(4) "=D42"
+      ["price"]=>
+      NULL
+      ["image"]=>
+      NULL
+      ["description"]=>
+      NULL
+      ["rank"]=>
+      float(4)
+    }
+    [12]=>
+    object(stdClass)#1072 (8) {
+      ["id"]=>
+      float(48)
+      ["title"]=>
+      string(9) "3 triệu"
+      ["level"]=>
+      float(1)
+      ["p_id"]=>
+      string(4) "=D43"
+      ["price"]=>
+      NULL
+      ["image"]=>
+      NULL
+      ["description"]=>
+      NULL
+      ["rank"]=>
+      float(4)
+    }
+    [13]=>
+    object(stdClass)#1073 (8) {
+      ["id"]=>
+      float(49)
+      ["title"]=>
+      string(9) "4 triệu"
+      ["level"]=>
+      float(1)
+      ["p_id"]=>
+      string(4) "=D44"
+      ["price"]=>
+      NULL
+      ["image"]=>
+      NULL
+      ["description"]=>
+      NULL
+      ["rank"]=>
+      float(4)
+    }
+    [14]=>
+    object(stdClass)#1074 (8) {
+      ["id"]=>
+      float(50)
+      ["title"]=>
+      string(9) "5 triệu"
+      ["level"]=>
+      float(1)
+      ["p_id"]=>
+      string(4) "=D45"
+      ["price"]=>
+      NULL
+      ["image"]=>
+      NULL
+      ["description"]=>
+      NULL
+      ["rank"]=>
+      float(4)
+    }
+    [15]=>
+    object(stdClass)#1075 (8) {
+      ["id"]=>
+      float(51)
+      ["title"]=>
+      string(9) "6 triệu"
+      ["level"]=>
+      float(1)
+      ["p_id"]=>
+      string(4) "=D46"
+      ["price"]=>
+      NULL
+      ["image"]=>
+      NULL
+      ["description"]=>
+      NULL
+      ["rank"]=>
+      float(4)
+    }
+    [16]=>
+    object(stdClass)#1076 (8) {
+      ["id"]=>
+      float(52)
+      ["title"]=>
+      string(9) "7 triệu"
+      ["level"]=>
+      float(1)
+      ["p_id"]=>
+      string(4) "=D47"
+      ["price"]=>
+      NULL
+      ["image"]=>
+      NULL
+      ["description"]=>
+      NULL
+      ["rank"]=>
+      float(4)
+    }
+    [17]=>
+    object(stdClass)#1077 (8) {
+      ["id"]=>
+      float(53)
+      ["title"]=>
+      string(9) "8 triệu"
+      ["level"]=>
+      float(1)
+      ["p_id"]=>
+      string(4) "=D48"
+      ["price"]=>
+      NULL
+      ["image"]=>
+      NULL
+      ["description"]=>
+      NULL
+      ["rank"]=>
+      float(4)
+    }
+    [18]=>
+    object(stdClass)#1078 (8) {
+      ["id"]=>
+      float(54)
+      ["title"]=>
+      string(9) "9 triệu"
+      ["level"]=>
+      float(1)
+      ["p_id"]=>
+      string(4) "=D49"
+      ["price"]=>
+      NULL
+      ["image"]=>
+      NULL
+      ["description"]=>
+      NULL
+      ["rank"]=>
+      float(4)
+    }
+    [19]=>
+    object(stdClass)#1079 (8) {
+      ["id"]=>
+      float(55)
+      ["title"]=>
+      string(10) "10 triệu"
+      ["level"]=>
+      float(1)
+      ["p_id"]=>
+      string(4) "=D50"
+      ["price"]=>
+      NULL
+      ["image"]=>
+      NULL
+      ["description"]=>
+      NULL
+      ["rank"]=>
+      float(4)
+    }
+  }
+  ["level"]=>
+  int(1)
+}
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477125133268:a0a36ccf40"}
+
+
+
+
+
+object(stdClass)#1089 (5) {
+  ["title"]=>
+  string(35) "Bạn muốn vay bao nhiêu tiền?"
+  ["sender_id"]=>
+  string(16) "1078614338912257"
+  ["payload"]=>
+  string(1) "2"
+  ["data"]=>
+  array(3) {
+    [0]=>
+    object(stdClass)#1035 (8) {
+      ["id"]=>
+      float(6)
+      ["title"]=>
+      string(9) "1 triệu"
+      ["level"]=>
+      float(1)
+      ["p_id"]=>
+      float(2)
+      ["price"]=>
+      NULL
+      ["image"]=>
+      NULL
+      ["description"]=>
+      NULL
+      ["rank"]=>
+      float(3)
+    }
+    [1]=>
+    object(stdClass)#1036 (8) {
+      ["id"]=>
+      float(7)
+      ["title"]=>
+      string(9) "2 triệu"
+      ["level"]=>
+      float(1)
+      ["p_id"]=>
+      float(2)
+      ["price"]=>
+      NULL
+      ["image"]=>
+      NULL
+      ["description"]=>
+      NULL
+      ["rank"]=>
+      float(3)
+    }
+    [2]=>
+    object(stdClass)#1037 (8) {
+      ["id"]=>
+      float(8)
+      ["title"]=>
+      string(9) "3 triệu"
+      ["level"]=>
+      float(1)
+      ["p_id"]=>
+      float(2)
+      ["price"]=>
+      NULL
+      ["image"]=>
+      NULL
+      ["description"]=>
+      NULL
+      ["rank"]=>
+      float(3)
+    }
+  }
+  ["level"]=>
+  int(1)
+}
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477125213550:0411646990"}
+
+
+
+
+array(0) {
+}
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477125349906:7ca604c433"}
+
+
+
+
+array(0) {
+}
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477125461991:90c8f7bc68"}
+
+
+array(3) {
+  [0]=>
+  object(stdClass)#1035 (8) {
+    ["id"]=>
+    float(6)
+    ["title"]=>
+    string(9) "1 triệu"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(2)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(3)
+  }
+  [1]=>
+  object(stdClass)#1036 (8) {
+    ["id"]=>
+    float(7)
+    ["title"]=>
+    string(9) "2 triệu"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(2)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(3)
+  }
+  [2]=>
+  object(stdClass)#1037 (8) {
+    ["id"]=>
+    float(8)
+    ["title"]=>
+    string(9) "3 triệu"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(2)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(3)
   }
 }
 
-NULL
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477125525062:ce174b9189"}
+
+
+array(5) {
+  [0]=>
+  object(stdClass)#1035 (8) {
+    ["id"]=>
+    float(6)
+    ["title"]=>
+    string(9) "1 triệu"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(2)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(3)
+  }
+  [1]=>
+  object(stdClass)#1036 (8) {
+    ["id"]=>
+    float(7)
+    ["title"]=>
+    string(9) "2 triệu"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(2)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(3)
+  }
+  [2]=>
+  object(stdClass)#1037 (8) {
+    ["id"]=>
+    float(8)
+    ["title"]=>
+    string(9) "3 triệu"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(2)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(3)
+  }
+  [3]=>
+  object(stdClass)#1038 (8) {
+    ["id"]=>
+    float(9)
+    ["title"]=>
+    string(11) "Thanh toán"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(2)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(5)
+  }
+  [4]=>
+  object(stdClass)#1039 (8) {
+    ["id"]=>
+    float(10)
+    ["title"]=>
+    string(8) "Mua ngay"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(2)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(5)
+  }
+}
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477125554639:c0872a5e44"}
+
+
+{"error":{"message":"(#100) No matching user found","type":"OAuthException","code":100,"error_subcode":2018001,"fbtrace_id":"FNYWU\/3xQPb"}}
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477125649868:8485149d52"}
+
+
+{"error":{"message":"(#100) Payload cannot be empty for postback type button","type":"OAuthException","code":100,"error_subcode":2018040,"fbtrace_id":"FM8LT1o641M"}}
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477125695649:11d3224510"}
+
+
+
+array(5) {
+  [0]=>
+  object(stdClass)#1092 (5) {
+    ["title"]=>
+    string(9) "1 triệu"
+    ["item_url"]=>
+    NULL
+    ["image_url"]=>
+    NULL
+    ["subtitle"]=>
+    string(6) "Giá: "
+    ["buttons"]=>
+    array(2) {
+      [0]=>
+      object(stdClass)#1090 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(11) "Thanh toán"
+        ["payload"]=>
+        NULL
+      }
+      [1]=>
+      object(stdClass)#1091 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(8) "Mua ngay"
+        ["payload"]=>
+        NULL
+      }
+    }
+  }
+  [1]=>
+  object(stdClass)#1095 (5) {
+    ["title"]=>
+    string(9) "2 triệu"
+    ["item_url"]=>
+    NULL
+    ["image_url"]=>
+    NULL
+    ["subtitle"]=>
+    string(6) "Giá: "
+    ["buttons"]=>
+    array(2) {
+      [0]=>
+      object(stdClass)#1090 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(11) "Thanh toán"
+        ["payload"]=>
+        NULL
+      }
+      [1]=>
+      object(stdClass)#1091 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(8) "Mua ngay"
+        ["payload"]=>
+        NULL
+      }
+    }
+  }
+  [2]=>
+  object(stdClass)#1094 (5) {
+    ["title"]=>
+    string(9) "3 triệu"
+    ["item_url"]=>
+    NULL
+    ["image_url"]=>
+    NULL
+    ["subtitle"]=>
+    string(6) "Giá: "
+    ["buttons"]=>
+    array(2) {
+      [0]=>
+      object(stdClass)#1090 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(11) "Thanh toán"
+        ["payload"]=>
+        NULL
+      }
+      [1]=>
+      object(stdClass)#1091 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(8) "Mua ngay"
+        ["payload"]=>
+        NULL
+      }
+    }
+  }
+  [3]=>
+  object(stdClass)#1097 (5) {
+    ["title"]=>
+    string(11) "Thanh toán"
+    ["item_url"]=>
+    NULL
+    ["image_url"]=>
+    NULL
+    ["subtitle"]=>
+    string(6) "Giá: "
+    ["buttons"]=>
+    array(2) {
+      [0]=>
+      object(stdClass)#1090 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(11) "Thanh toán"
+        ["payload"]=>
+        NULL
+      }
+      [1]=>
+      object(stdClass)#1091 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(8) "Mua ngay"
+        ["payload"]=>
+        NULL
+      }
+    }
+  }
+  [4]=>
+  object(stdClass)#1098 (5) {
+    ["title"]=>
+    string(8) "Mua ngay"
+    ["item_url"]=>
+    NULL
+    ["image_url"]=>
+    NULL
+    ["subtitle"]=>
+    string(6) "Giá: "
+    ["buttons"]=>
+    array(2) {
+      [0]=>
+      object(stdClass)#1090 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(11) "Thanh toán"
+        ["payload"]=>
+        NULL
+      }
+      [1]=>
+      object(stdClass)#1091 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(8) "Mua ngay"
+        ["payload"]=>
+        NULL
+      }
+    }
+  }
+}
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477125741430:5cbd93d391"}
+
+array(5) {
+  [0]=>
+  object(stdClass)#1092 (5) {
+    ["title"]=>
+    string(9) "1 triệu"
+    ["item_url"]=>
+    NULL
+    ["image_url"]=>
+    NULL
+    ["subtitle"]=>
+    string(6) "Giá: "
+    ["buttons"]=>
+    array(2) {
+      [0]=>
+      object(stdClass)#1090 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(11) "Thanh toán"
+        ["payload"]=>
+        NULL
+      }
+      [1]=>
+      object(stdClass)#1091 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(8) "Mua ngay"
+        ["payload"]=>
+        NULL
+      }
+    }
+  }
+  [1]=>
+  object(stdClass)#1095 (5) {
+    ["title"]=>
+    string(9) "2 triệu"
+    ["item_url"]=>
+    NULL
+    ["image_url"]=>
+    NULL
+    ["subtitle"]=>
+    string(6) "Giá: "
+    ["buttons"]=>
+    array(2) {
+      [0]=>
+      object(stdClass)#1090 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(11) "Thanh toán"
+        ["payload"]=>
+        NULL
+      }
+      [1]=>
+      object(stdClass)#1091 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(8) "Mua ngay"
+        ["payload"]=>
+        NULL
+      }
+    }
+  }
+  [2]=>
+  object(stdClass)#1094 (5) {
+    ["title"]=>
+    string(9) "3 triệu"
+    ["item_url"]=>
+    NULL
+    ["image_url"]=>
+    NULL
+    ["subtitle"]=>
+    string(6) "Giá: "
+    ["buttons"]=>
+    array(2) {
+      [0]=>
+      object(stdClass)#1090 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(11) "Thanh toán"
+        ["payload"]=>
+        NULL
+      }
+      [1]=>
+      object(stdClass)#1091 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(8) "Mua ngay"
+        ["payload"]=>
+        NULL
+      }
+    }
+  }
+  [3]=>
+  object(stdClass)#1097 (5) {
+    ["title"]=>
+    string(11) "Thanh toán"
+    ["item_url"]=>
+    NULL
+    ["image_url"]=>
+    NULL
+    ["subtitle"]=>
+    string(6) "Giá: "
+    ["buttons"]=>
+    array(2) {
+      [0]=>
+      object(stdClass)#1090 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(11) "Thanh toán"
+        ["payload"]=>
+        NULL
+      }
+      [1]=>
+      object(stdClass)#1091 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(8) "Mua ngay"
+        ["payload"]=>
+        NULL
+      }
+    }
+  }
+  [4]=>
+  object(stdClass)#1098 (5) {
+    ["title"]=>
+    string(8) "Mua ngay"
+    ["item_url"]=>
+    NULL
+    ["image_url"]=>
+    NULL
+    ["subtitle"]=>
+    string(6) "Giá: "
+    ["buttons"]=>
+    array(2) {
+      [0]=>
+      object(stdClass)#1090 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(11) "Thanh toán"
+        ["payload"]=>
+        NULL
+      }
+      [1]=>
+      object(stdClass)#1091 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(8) "Mua ngay"
+        ["payload"]=>
+        NULL
+      }
+    }
+  }
+}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477125846040:ef8df6b931"}
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477125849237:42dce6de91"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477125867722:ff21917758"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477125887375:85bbe30672"}
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477125908387:bd251bb936"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477126113091:308b878015"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477126126856:bc3e370624"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477126151272:7739728512"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477126259827:24bf5f7594"}
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477126263518:2fd4bc2d67"}
+
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477126271358:5158c2f191"}
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477126275668:f8187e7899"}
+
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477126290137:f8b7669208"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477126296524:ba57844787"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477126311144:3c868eed15"}
+
+
+
+
+{"error":{"message":"(#194) param [elements][0][buttons] has too few elements.","type":"OAuthException","code":194,"fbtrace_id":"HccfKgPH\/wy"}}
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477127881391:6f7fe33191"}
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477127884923:c193876d75"}
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477127888724:5a8f8adb52"}
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477127892910:b9e1a14291"}
+
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477127900654:9b5058ae29"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477127910691:1094845393"}
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477128049015:0f61711995"}
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477128052343:1041af4555"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477128057059:5c41835813"}
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477128061396:bfaff86c02"}
+
+
+
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477128152282:0afeea0d65"}
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477128157166:20adba1962"}
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477128161177:b987788b93"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477128165232:1a3bcd2c72"}
+
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477128174650:e2b6b10752"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477128182720:12b6a5ef41"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477128337475:6361df9015"}
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477128340886:cb08cd1957"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477128345405:1e02aa1124"}
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477128349733:7317e12a45"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477128354906:4934fcaf17"}
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477128360650:e50ffd1314"}
+
+
+
+
+
+
+{"recipient_id":"1189044924488846","message_id":"mid.1477128547642:79e0761d03"}
+
+
+{"recipient_id":"1189044924488846","message_id":"mid.1477128551117:ae269da086"}
+
+
+
+
+{"recipient_id":"1189044924488846","message_id":"mid.1477128554574:637d141059"}
+
+
+
+
+{"recipient_id":"1189044924488846","message_id":"mid.1477128558599:0520726996"}
+
+
+
+
+{"recipient_id":"1189044924488846","message_id":"mid.1477128563981:faf666cf65"}
+
+
+
+
+
+{"recipient_id":"1189044924488846","message_id":"mid.1477128570613:823f356383"}
+
+
+
+
+
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477128708969:39e730b253"}
+
+
+
+
+
+
+
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477128837663:cc9caa3584"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477131308159:57b46a5772"}
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477131311987:d04f72e808"}
+
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477131318905:7a53df0478"}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477131324048:a2bbc55f45"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477131331883:2fc39e3827"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477131337966:7f5ff97678"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477131412900:cd7cbcba82"}
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477131416416:0207e37595"}
+
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477131615050:7ac9df2a16"}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477131618976:46bbeec342"}
+
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477131629003:8d5dd4d824"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477131640220:8debd45f16"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477131651067:c5a8006f44"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477131658972:876bb68a15"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477134589837:f30c2ebe25"}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477134595685:4a0e5e7a68"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477134600484:51785eca72"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477134608740:4ca5618611"}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477134614026:bc62578205"}
+
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477134691172:707362d157"}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477134696001:7f2f6a7e42"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477134701981:02cc69e302"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477134726562:6abfae4524"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477134739561:344934df44"}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477134745388:3cf7b0a019"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477134829773:e67aeb4c48"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477134836513:1825bb1836"}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477134841139:75284fee75"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477134845322:eaecf69327"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477134854996:09c2fc5e09"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477136108597:a63ce56053"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477136441694:5b8f342f68"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477136467217:b2f3d27064"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477136535637:63e1b72c67"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477136542193:0f23691a10"}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477136547620:1d3e54a883"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477145346196:54feb88d30"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477145353883:c91f6cea98"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477145361052:b943f50523"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477145456875:8c542da968"}
+
+
+
+{"error":{"message":"(#194) param [elements][0][buttons] has too few elements.","type":"OAuthException","code":194,"fbtrace_id":"ANgZgKoiu6u"}}
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477145657357:34079a5381"}
+
+
+{"error":{"message":"(#194) param [elements][0][buttons] has too few elements.","type":"OAuthException","code":194,"fbtrace_id":"H6wYOFcGLnd"}}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477145680357:e6e5a5e715"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477145698310:646c5ca740"}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477145702619:fe822c1f92"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477145734862:277e86a550"}
+{"recipient_id":"1231308980276237","message_id":"mid.1477145734862:43b0e2b605"}
+{"recipient_id":"1231308980276237","message_id":"mid.1477145734913:6e493d1d17"}
+
+
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477145822592:e43cb08120"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477150728082:c2fb7a2463"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477150754493:868f8b0152"}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477150759883:b3860b9940"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477150769862:5620b72420"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477150859345:c819fb4182"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477178419596:3cf1538542"}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477178425365:c86cabd469"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477178435890:26d49fe909"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477178447962:34f93c8267"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477178480723:e81e730471"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477178492666:e94de42705"}
+
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477223506502:a5be4fff06"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477223539646:2e99290b38"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477223547375:d40acad660"}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477223552753:76a9153041"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477223557601:46337cff35"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477223567964:a38c879844"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477223574922:94d3c46379"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477223596856:dc0f42cd68"}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477223602801:5757f6f025"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477223606932:bd03526b07"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477223611711:b029e8d050"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477226885065:fbd3965823"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477280392527:4a93ca5173"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477280401551:6f394f2d72"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477280467040:4ebdb41e35"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477280512027:4be676f550"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477280596825:59d76b6a65"}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477280603249:296325aa44"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477281832023:b4f0356537"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477281843292:10e0417a47"}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477281848049:7a5b7ccb51"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477281857698:4b4d36ee52"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477283777951:4eb31bc327"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477307159259:e2bcbff517"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477307285575:2ce9366c83"}
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477307289899:1307a78b00"}
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477307295188:6933eaaa75"}
+
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477307323566:8457957983"}
+
+
+{"error":{"message":"(#194) param [elements][0][buttons] has too few elements.","type":"OAuthException","code":194,"fbtrace_id":"BGot+EXcSbU"}}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477307334574:cb4fecf978"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477307387947:012996a338"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477307457188:b44e31b420"}
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477309642898:243a087761"}
+
+
+
+
+{"error":{"message":"(#194) param [elements][0][buttons] has too few elements.","type":"OAuthException","code":194,"fbtrace_id":"DDHcuQVepBm"}}
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477309701242:5ce8d5cd36"}
+
+
+
+
+{"error":{"message":"(#194) param [elements][0][buttons] has too few elements.","type":"OAuthException","code":194,"fbtrace_id":"GGofb7EpXbe"}}
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477309921909:b7f493de16"}
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477309925640:3041cbcd92"}
+
+
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477309934390:3fdec97807"}
+
+
+
+
+
+
+{"recipient_id":"1231308980276237","message_id":"mid.1477311976285:40d0d06212"}
+
+
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477321913010:437b3f5b81"}
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477321918769:80ec1b1d59"}
+
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477321926941:890a813971"}
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477321934016:c991f3ba47"}
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477321941580:71a8ef9587"}
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477321948592:fb85add920"}
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477323222995:4af2a4d059"}
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477323225791:4dd98e4542"}
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477323231958:2ca0cf6076"}
+
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477323239719:db4b73ac94"}
+
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477323260501:6132d98571"}
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477323269574:9265070293"}
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477323276130:4edad71590"}
+
+
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477323480598:243c3db218"}
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477323485563:7585598325"}
+
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477323561479:71057c0775"}
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477323570639:076b612623"}
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477323577306:50e0c6f271"}
+
+
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477323855765:3bb7557e01"}
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477323860191:718da0f974"}
+
+
+
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477323871047:e0cb7b2709"}
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477323876430:226b71bc46"}
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477323882170:7ca1da2e20"}
+
+
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477323890361:64c8d1ff29"}
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477324257078:c5e618f001"}
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477324262532:5467f90e88"}
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477324267314:86c67f9e40"}
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477324271160:1093c5bd97"}
+
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477324276883:cdb8e67146"}
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477324281607:f61ab4b694"}
+
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477324586612:38abca8d53"}
+
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477324597560:bb1fd52070"}
+
+
+
+array(11) {
+  [0]=>
+  object(stdClass)#1091 (3) {
+    ["content_type"]=>
+    string(4) "text"
+    ["title"]=>
+    string(7) "7 ngày"
+    ["payload"]=>
+    float(17)
+  }
+  [1]=>
+  object(stdClass)#1092 (3) {
+    ["content_type"]=>
+    string(4) "text"
+    ["title"]=>
+    string(8) "15 ngày"
+    ["payload"]=>
+    float(18)
+  }
+  [2]=>
+  object(stdClass)#1093 (3) {
+    ["content_type"]=>
+    string(4) "text"
+    ["title"]=>
+    string(8) "21 ngày"
+    ["payload"]=>
+    float(19)
+  }
+  [3]=>
+  object(stdClass)#1094 (3) {
+    ["content_type"]=>
+    string(4) "text"
+    ["title"]=>
+    string(8) "30 ngày"
+    ["payload"]=>
+    float(20)
+  }
+  [4]=>
+  object(stdClass)#1095 (3) {
+    ["content_type"]=>
+    string(4) "text"
+    ["title"]=>
+    string(11) "Lãi suất"
+    ["payload"]=>
+    float(30)
+  }
+  [5]=>
+  object(stdClass)#1096 (3) {
+    ["content_type"]=>
+    string(4) "text"
+    ["title"]=>
+    string(16) "Phí dịch vụ"
+    ["payload"]=>
+    float(31)
+  }
+  [6]=>
+  object(stdClass)#1097 (3) {
+    ["content_type"]=>
+    string(4) "text"
+    ["title"]=>
+    string(20) "Ví dụ thực tế"
+    ["payload"]=>
+    float(32)
+  }
+  [7]=>
+  object(stdClass)#1098 (3) {
+    ["content_type"]=>
+    string(4) "text"
+    ["title"]=>
+    string(20) "Thời hạn cho vay"
+    ["payload"]=>
+    float(33)
+  }
+  [8]=>
+  object(stdClass)#1099 (3) {
+    ["content_type"]=>
+    string(4) "text"
+    ["title"]=>
+    string(19) "Hạn mức cho vay"
+    ["payload"]=>
+    float(34)
+  }
+  [9]=>
+  object(stdClass)#1100 (3) {
+    ["content_type"]=>
+    string(4) "text"
+    ["title"]=>
+    string(13) "Xin gia hạn"
+    ["payload"]=>
+    float(35)
+  }
+  [10]=>
+  object(stdClass)#1101 (3) {
+    ["content_type"]=>
+    string(4) "text"
+    ["title"]=>
+    string(18) "Điều kiện vay"
+    ["payload"]=>
+    float(36)
+  }
+}
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477324643570:23b868f026"}
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477324655939:6413648965"}
+
+
+
+
+
+{"error":{"message":"(#105) param message[quick_replies] has too many elements.","type":"OAuthException","code":105,"fbtrace_id":"HGe0xi9MFUD"}}
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477324703316:6d6ad78b66"}
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477324709769:186b21dc86"}
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477324713383:2ffe5c9633"}
+
+
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477324725648:52354e3c01"}
+
+
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477324735794:f496422295"}
+
+
+{"recipient_id":"1305653869458699","message_id":"mid.1477324740097:a2ee327840"}
+
+
+
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477325211138:4f8b672387"}
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477325216613:6703340d99"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477325223004:e3417fde98"}
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477325232670:c2f2823727"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477325243019:6c94716518"}
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477325248345:1e1ad93910"}
+
+
+
+
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477325709838:edd6147266"}
+{"recipient_id":"1078614338912257","message_id":"mid.1477325711624:2caff0ac58"}
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477325867796:91403d5979"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477325876506:688d131484"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477325884920:05cf6d9e44"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477325892237:b020681b63"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477325905258:6d63206c83"}
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477325909850:e634a6fa95"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477326069923:9cab788947"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477326085803:07eb769b23"}
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477326090362:700dc82e84"}
+
+
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477326227557:d3f8cdca65"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477326238479:b729792419"}
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477326243115:91d618fd18"}
+
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477326257419:ed1e707533"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477326549358:7c582af035"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477326561272:d026901a99"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477326579844:a016fd9250"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477326587033:4565a3c609"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477326628095:6e08c7b270"}
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477326637376:3da332ed98"}
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477326643464:3c14570b90"}
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477326648272:f6e9a9bf39"}
+
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477326666504:1cad74f280"}
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477326671571:40f1390c21"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477326870235:4508710169"}
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477326876026:c37363d027"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477326882596:f298aad506"}
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477326894153:43fef8b618"}
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477326904216:a3724a3191"}
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477326909841:aa6a462294"}
+
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477328286330:cd16d1f128"}
+
+
+
+{"error":{"message":"(#194) param [elements][0][buttons] has too few elements.","type":"OAuthException","code":194,"fbtrace_id":"D9i3ipE3xB+"}}
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477328298114:88799d8013"}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477328342999:3c9f7b0793"}
+
+
+
+
+
+array(0) {
+}
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477328395117:ec72e4c143"}
+
+
+array(0) {
+}
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477328433385:ea8b9e8173"}
+
+array(0) {
+}
+
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477328513306:300a0ba904"}
+
+
+array(3) {
+  [0]=>
+  object(stdClass)#67319 (10) {
+    ["id"]=>
+    float(6)
+    ["title"]=>
+    string(9) "1 triệu"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(2)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(3)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [1]=>
+  object(stdClass)#67320 (10) {
+    ["id"]=>
+    float(7)
+    ["title"]=>
+    string(9) "2 triệu"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(2)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(3)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [2]=>
+  object(stdClass)#67321 (10) {
+    ["id"]=>
+    float(8)
+    ["title"]=>
+    string(9) "3 triệu"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(2)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(3)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+}
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477328662675:b92ec94531"}
+
+
+{"error":{"message":"(#194) param [elements][0][buttons] has too few elements.","type":"OAuthException","code":194,"fbtrace_id":"GsMQTQ0KxrW"}}
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477328688433:f33cfa6572"}
+
+
+array(24) {
+  [0]=>
+  object(stdClass)#67319 (10) {
+    ["id"]=>
+    float(6)
+    ["title"]=>
+    string(9) "1 triệu"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(2)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(3)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [1]=>
+  object(stdClass)#67320 (10) {
+    ["id"]=>
+    float(7)
+    ["title"]=>
+    string(9) "2 triệu"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(2)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(3)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [2]=>
+  object(stdClass)#67321 (10) {
+    ["id"]=>
+    float(8)
+    ["title"]=>
+    string(9) "3 triệu"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(2)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(3)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [3]=>
+  object(stdClass)#67322 (10) {
+    ["id"]=>
+    float(9)
+    ["title"]=>
+    string(13) "Thanh toán 1"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(6)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(5)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [4]=>
+  object(stdClass)#67323 (10) {
+    ["id"]=>
+    float(10)
+    ["title"]=>
+    string(10) "Mua ngay 1"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(6)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(5)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [5]=>
+  object(stdClass)#67324 (10) {
+    ["id"]=>
+    float(11)
+    ["title"]=>
+    string(13) "Thanh toán 2"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(7)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(5)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [6]=>
+  object(stdClass)#67325 (10) {
+    ["id"]=>
+    float(12)
+    ["title"]=>
+    string(10) "Mua ngay 2"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(7)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(5)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [7]=>
+  object(stdClass)#67326 (10) {
+    ["id"]=>
+    float(13)
+    ["title"]=>
+    string(13) "Thanh toán 3"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(8)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(5)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [8]=>
+  object(stdClass)#67327 (10) {
+    ["id"]=>
+    float(14)
+    ["title"]=>
+    string(10) "Mua ngay 3"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(8)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(5)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [9]=>
+  object(stdClass)#67337 (10) {
+    ["id"]=>
+    float(25)
+    ["title"]=>
+    string(13) "Lãi và phí"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(4)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(4)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [10]=>
+  object(stdClass)#67338 (10) {
+    ["id"]=>
+    float(26)
+    ["title"]=>
+    string(28) "Thời hạn và hạn mức"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(4)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(4)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [11]=>
+  object(stdClass)#67339 (10) {
+    ["id"]=>
+    float(27)
+    ["title"]=>
+    string(30) "Điều kiện và thủ tục"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(4)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(4)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [12]=>
+  object(stdClass)#67340 (10) {
+    ["id"]=>
+    float(28)
+    ["title"]=>
+    string(12) "Giải ngân"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(4)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(4)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [13]=>
+  object(stdClass)#67341 (10) {
+    ["id"]=>
+    float(29)
+    ["title"]=>
+    string(11) "Thanh toán"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(4)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(4)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [14]=>
+  object(stdClass)#67358 (10) {
+    ["id"]=>
+    float(46)
+    ["title"]=>
+    string(9) "1 triệu"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(3)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(4)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [15]=>
+  object(stdClass)#67359 (10) {
+    ["id"]=>
+    float(47)
+    ["title"]=>
+    string(9) "2 triệu"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(3)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(4)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [16]=>
+  object(stdClass)#67360 (10) {
+    ["id"]=>
+    float(48)
+    ["title"]=>
+    string(9) "3 triệu"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(3)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(4)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [17]=>
+  object(stdClass)#67361 (10) {
+    ["id"]=>
+    float(49)
+    ["title"]=>
+    string(9) "4 triệu"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(3)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(4)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [18]=>
+  object(stdClass)#67362 (10) {
+    ["id"]=>
+    float(50)
+    ["title"]=>
+    string(9) "5 triệu"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(3)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(4)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [19]=>
+  object(stdClass)#67363 (10) {
+    ["id"]=>
+    float(51)
+    ["title"]=>
+    string(9) "6 triệu"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(3)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(4)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [20]=>
+  object(stdClass)#67364 (10) {
+    ["id"]=>
+    float(52)
+    ["title"]=>
+    string(9) "7 triệu"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(3)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(4)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [21]=>
+  object(stdClass)#67365 (10) {
+    ["id"]=>
+    float(53)
+    ["title"]=>
+    string(9) "8 triệu"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(3)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(4)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [22]=>
+  object(stdClass)#67366 (10) {
+    ["id"]=>
+    float(54)
+    ["title"]=>
+    string(9) "9 triệu"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(3)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(4)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [23]=>
+  object(stdClass)#67367 (10) {
+    ["id"]=>
+    float(55)
+    ["title"]=>
+    string(10) "10 triệu"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(3)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(4)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+}
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477328795100:6d4e590996"}
+
+
+
+array(6) {
+  [0]=>
+  object(stdClass)#67322 (10) {
+    ["id"]=>
+    float(9)
+    ["title"]=>
+    string(13) "Thanh toán 1"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(6)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(5)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [1]=>
+  object(stdClass)#67323 (10) {
+    ["id"]=>
+    float(10)
+    ["title"]=>
+    string(10) "Mua ngay 1"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(6)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(5)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [2]=>
+  object(stdClass)#67324 (10) {
+    ["id"]=>
+    float(11)
+    ["title"]=>
+    string(13) "Thanh toán 2"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(7)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(5)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [3]=>
+  object(stdClass)#67325 (10) {
+    ["id"]=>
+    float(12)
+    ["title"]=>
+    string(10) "Mua ngay 2"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(7)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(5)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [4]=>
+  object(stdClass)#67326 (10) {
+    ["id"]=>
+    float(13)
+    ["title"]=>
+    string(13) "Thanh toán 3"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(8)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(5)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+  [5]=>
+  object(stdClass)#67327 (10) {
+    ["id"]=>
+    float(14)
+    ["title"]=>
+    string(10) "Mua ngay 3"
+    ["level"]=>
+    float(1)
+    ["p_id"]=>
+    float(8)
+    ["price"]=>
+    NULL
+    ["image"]=>
+    NULL
+    ["description"]=>
+    NULL
+    ["rank"]=>
+    float(5)
+    ["save_info"]=>
+    NULL
+    ["action"]=>
+    NULL
+  }
+}
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477328922047:883aecb925"}
+
+
+
+
+array(0) {
+}
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477328959557:a17be12132"}
+
+
+array(6) {
+  [0]=>
+  object(stdClass)#67378 (3) {
+    ["type"]=>
+    string(8) "postback"
+    ["title"]=>
+    string(13) "Thanh toán 1"
+    ["payload"]=>
+    float(9)
+  }
+  [1]=>
+  object(stdClass)#67379 (3) {
+    ["type"]=>
+    string(8) "postback"
+    ["title"]=>
+    string(10) "Mua ngay 1"
+    ["payload"]=>
+    float(10)
+  }
+  [2]=>
+  object(stdClass)#67380 (3) {
+    ["type"]=>
+    string(8) "postback"
+    ["title"]=>
+    string(13) "Thanh toán 2"
+    ["payload"]=>
+    float(11)
+  }
+  [3]=>
+  object(stdClass)#67381 (3) {
+    ["type"]=>
+    string(8) "postback"
+    ["title"]=>
+    string(10) "Mua ngay 2"
+    ["payload"]=>
+    float(12)
+  }
+  [4]=>
+  object(stdClass)#67382 (3) {
+    ["type"]=>
+    string(8) "postback"
+    ["title"]=>
+    string(13) "Thanh toán 3"
+    ["payload"]=>
+    float(13)
+  }
+  [5]=>
+  object(stdClass)#67383 (3) {
+    ["type"]=>
+    string(8) "postback"
+    ["title"]=>
+    string(10) "Mua ngay 3"
+    ["payload"]=>
+    float(14)
+  }
+}
+
+
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477329163728:4e8a2ebf41"}
+
+
+
+
+
+array(3) {
+  [0]=>
+  object(stdClass)#67384 (5) {
+    ["title"]=>
+    string(9) "1 triệu"
+    ["item_url"]=>
+    NULL
+    ["image_url"]=>
+    NULL
+    ["subtitle"]=>
+    string(6) "Giá: "
+    ["buttons"]=>
+    array(2) {
+      [0]=>
+      object(stdClass)#67381 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(13) "Thanh toán 1"
+        ["payload"]=>
+        string(3) "9_6"
+      }
+      [1]=>
+      object(stdClass)#67380 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(10) "Mua ngay 1"
+        ["payload"]=>
+        string(4) "10_6"
+      }
+    }
+  }
+  [1]=>
+  object(stdClass)#67379 (5) {
+    ["title"]=>
+    string(9) "2 triệu"
+    ["item_url"]=>
+    NULL
+    ["image_url"]=>
+    NULL
+    ["subtitle"]=>
+    string(6) "Giá: "
+    ["buttons"]=>
+    array(2) {
+      [0]=>
+      object(stdClass)#67378 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(13) "Thanh toán 2"
+        ["payload"]=>
+        string(4) "11_7"
+      }
+      [1]=>
+      object(stdClass)#67385 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(10) "Mua ngay 2"
+        ["payload"]=>
+        string(4) "12_7"
+      }
+    }
+  }
+  [2]=>
+  object(stdClass)#67386 (5) {
+    ["title"]=>
+    string(9) "3 triệu"
+    ["item_url"]=>
+    NULL
+    ["image_url"]=>
+    NULL
+    ["subtitle"]=>
+    string(6) "Giá: "
+    ["buttons"]=>
+    array(2) {
+      [0]=>
+      object(stdClass)#67387 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(13) "Thanh toán 3"
+        ["payload"]=>
+        string(4) "13_8"
+      }
+      [1]=>
+      object(stdClass)#67388 (3) {
+        ["type"]=>
+        string(8) "postback"
+        ["title"]=>
+        string(10) "Mua ngay 3"
+        ["payload"]=>
+        string(4) "14_8"
+      }
+    }
+  }
+}
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477329196849:6b44a0b944"}
+
+
+{"recipient_id":"1078614338912257","message_id":"mid.1477329201846:beb3a83480"}
+
+
+
+
+
 
