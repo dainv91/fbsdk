@@ -156,7 +156,7 @@
 				}
 			}
 		}
-		return 0;
+		return -1;
 	}
 	
 	function msg_test($input){
@@ -283,24 +283,6 @@
 				$elements_obj_arr = array();
 				
 				$btns = get_data_by_rank($data_of_level->data_by_level, RANK_HMENU_BTN);
-				//return var_dum_to_string($data_of_level->data);
-				$btn_arr_obj = array();
-				// init btn option
-				if($btns != null && count($btns) > 0){
-					$i = 0;
-					foreach($btns as $btn){
-						$obj_btn = new stdclass();
-						$obj_btn->type = 'postback';
-						$obj_btn->title = $btn->title;
-						$obj_btn->payload = $btn->id;
-						
-						$btn_arr_obj[] = $obj_btn;
-						if($i++ >= 10){
-							break;
-						}
-					}
-				}
-				//return var_dum_to_string($btns);
 				foreach($data_of_level->data as $leaf){
 					if($leaf->rank != RANK_HMENU){
 						continue;
@@ -311,25 +293,8 @@
 					$obj->item_url = $leaf->item_url;
 					//$obj->image_url = $leaf->image_url;
 					$obj->image_url = $leaf->image;
-					//$obj->subtitle = 'This is subtitle_' . $leaf->id;
 					//$obj->subtitle = $leaf->description;
 					$obj->subtitle = 'Giá: '. $leaf->price;
-					//$obj->buttons = array();
-					
-					/*
-					$obj_btn = new stdclass();
-					$obj_btn->type = 'postback';
-					$obj_btn->title = 'Mua ngay';
-					$obj_btn->payload = 'MN_' .$leaf->id;
-					$obj->buttons[] = $obj_btn;
-					
-					$obj_btn = new stdclass();
-					$obj_btn->type = 'postback';
-					$obj_btn->title = 'Thanh toán';
-					$obj_btn->payload = 'TT_' .$leaf->id;
-					*/
-					//$obj->buttons[] = $obj_btn;
-					//$btn_arr_clone = clone_arr_obj($btn_arr_obj);
 					$btn_arr_obj = array();
 					// init btn option
 					if($btns != null && count($btns) > 0){
@@ -351,7 +316,11 @@
 					}
 					
 					$btn_arr_clone = clone_arr_obj($btn_arr_obj);
-					
+					if(count($btn_arr_clone) == 0){
+						// Skip item has no button
+						continue;
+					}
+					//return var_dum_to_string($btns);
 					set_payload_for_button($btn_arr_clone, $leaf->id);
 					
 					$obj->buttons = $btn_arr_clone;
@@ -493,28 +462,6 @@
 		foreach($arr_level_need_save_info as $key => $value){
 			if($key == $level - 1){
 				save_data_for_user($sender_id, $value, $msg);
-				/*
-				$key_info = 'user_info';
-				$mem = load_from_mem($key_info);
-				
-				$arr = array();
-				$info = array();
-				$info[$value] = $msg;
-				$arr[$sender_id] = $info;
-				if($mem == false){
-				// Not existed
-					store_to_mem($key_info, $arr);
-				}else{
-					// Existed
-					$arr = $mem['value'];
-					$info = $arr[$sender_id];
-					$info[$value] = $msg;
-					
-					$arr[$sender_id] = $info;
-					store_to_mem($key_info, $arr);
-				}
-				*/
-				//return;
 			}
 		}
 		
@@ -527,6 +474,19 @@
 		$recipient_id = $sender_id;
 		$current_level_str = '_current_level';
 		$max_leaf_level_str = '_max_leaf_level';
+		
+		// Check level of payload
+		$level_of_payload = get_level_of_payload($data, $payload);
+		write_file('call3.txt', $payload . '+++++' .$level_of_payload . '===' .$level, false);
+		if($level_of_payload != -1){
+			//msg_thread_status_set($sender_id . $current_level_str, $current_level + 1);
+			//write_file('call3.txt', $payload . '_' .$level_of_payload . '===' .$level, false);
+			/*
+			if($level != ($level_of_payload - 1)){
+				show_menu_of_level_v2($level_of_payload - 1, $sender_id, $msg, $payload);
+			}
+			*/
+		}
 		
 		//$leaves = get_leaf_from_data($data);
 		//$max_leaf_level = get_max_level_of_leaves($leaves);
