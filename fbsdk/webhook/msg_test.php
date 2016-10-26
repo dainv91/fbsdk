@@ -92,9 +92,11 @@
 	}
 	
 	function set_payload_for_button($arr_btn, $payload){
+		/*
 		foreach($arr_btn as $btn){
 			$btn->payload .= '_'. $payload;
 		}
+		*/
 	}
 	
 	function clone_arr_obj($arr_obj){
@@ -477,15 +479,16 @@
 		
 		// Check level of payload
 		$level_of_payload = get_level_of_payload($data, $payload);
-		write_file('call3.txt', $payload . '+++++' .$level_of_payload . '===' .$level, false);
+		write_file('call3.txt', 'Payload...'. $payload . '+++++' .$level_of_payload . '===Current level==' .$level, false);
 		if($level_of_payload != -1){
 			//msg_thread_status_set($sender_id . $current_level_str, $current_level + 1);
 			//write_file('call3.txt', $payload . '_' .$level_of_payload . '===' .$level, false);
-			/*
-			if($level != ($level_of_payload - 1)){
-				show_menu_of_level_v2($level_of_payload - 1, $sender_id, $msg, $payload);
+			if($level != ($level_of_payload + 1)){
+				//show_menu_of_level_v2($level_of_payload + 1, $sender_id, $msg, $payload);
+				msg_thread_status_set($sender_id . $current_level_str, $level_of_payload + 1);
+				show_menu_of_level_v2($level_of_payload + 1, $sender_id, $msg, $payload);
+				return;
 			}
-			*/
 		}
 		
 		//$leaves = get_leaf_from_data($data);
@@ -501,44 +504,6 @@
 			if($menu_tmp != null && is_array($menu_tmp)){
 				$menus = $menu_tmp;
 			}
-			//return $payload;
-			/*
-			$menus = get_child_by_parent_id($menus, $payload);
-			
-			if($level == $max_leaf_level){
-				// Child level
-				$elements_obj_arr = array();
-				
-				foreach($menus as $leaf){
-					// Element
-					$obj = new stdclass();
-					$obj->title = $leaf->title;
-					$obj->item_url = $leaf->item_url;
-					//$obj->image_url = $leaf->image_url;
-					$obj->image_url = $leaf->image;
-					//$obj->subtitle = 'This is subtitle_' . $leaf->id;
-					//$obj->subtitle = $leaf->description;
-					$obj->subtitle = 'Giá: '. $leaf->price;
-					$obj->buttons = array();
-					
-					$obj_btn = new stdclass();
-					$obj_btn->type = 'postback';
-					$obj_btn->title = 'Mua ngay';
-					$obj_btn->payload = 'MN_' .$leaf->id;
-					$obj->buttons[] = $obj_btn;
-					
-					$obj_btn = new stdclass();
-					$obj_btn->type = 'postback';
-					$obj_btn->title = 'Thanh toán';
-					$obj_btn->payload = 'TT_' .$leaf->id;
-					$obj->buttons[] = $obj_btn;
-					
-					$elements_obj_arr[] = $obj;
-				}
-				return send_generic_template($recipient_id, $title, $elements_obj_arr);
-			
-			}
-			*/
 		}
 		
 		
