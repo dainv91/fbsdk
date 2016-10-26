@@ -69,6 +69,7 @@
 	//var_dump(load_from_mem('time'));
 	//_test();
 	echo $msg;
-	test_obj();
+	//test_obj();
+	//var_dump(preg_match('/^[0-9]{9,12}$/', '+84988907560'));
 	
 ?>

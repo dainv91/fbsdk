@@ -7,6 +7,9 @@
 	define('RANK_QUICK_REPLY', 4);
 	define('RANK_HMENU_BTN', 5);
 	
+	define('ACTION_BTN_URL', 6);
+	define('ACTION_BTN_CALL', 7);
+	
 	function get_leaf_from_data($data){
 		$result = array();
 		foreach($data as $obj){
@@ -161,6 +164,24 @@
 		return -1;
 	}
 	
+	function check_action_type_of_button($btn_action){
+		$needle = 'http';
+		$len = strlen($needle);
+		
+		if(substr($btn_action, 0, $len) === $needle){
+			// url button
+			return ACTION_BTN_URL;
+		}
+		$phone = str_replace(' ', '', $btn_action);
+		$phone = str_replace('+', '', $phone);
+		$pattern = '/^[0-9]{9,12}$/';
+		if(preg_match($pattern, $phone)){
+			// call button
+			return ACTION_BTN_CALL;
+		}
+		return 0;
+	}
+	
 	function msg_test($input){
 		$entry = json_decode($input);
 		$entry = $entry->entry[0];
@@ -306,9 +327,40 @@
 								continue;
 							}
 							$obj_btn = new stdclass();
-							$obj_btn->type = 'postback';
-							$obj_btn->title = $btn->title;
-							$obj_btn->payload = $btn->id;
+							
+							// check type of button action
+							$btn_action = $btn->action;
+							$action = 0;
+							if($btn_action){
+								$action = check_action_type_of_button($btn_action);
+							}
+							// fix action = 0
+							//$action = 0;
+							if($action != 0){
+								$title_len = strlen($btn->title);
+								$title = $btn->title;
+								if($title_len > 19){
+									$title = substr($btn->title, 0, 19);
+								}
+								switch($action){
+									case ACTION_BTN_CALL:
+										$obj_btn->type = 'phone_number';
+										$obj_btn->title = $title;
+										$obj_btn->payload = $btn_action;
+										break;
+									case ACTION_BTN_URL:
+										$obj_btn->type = 'web_url';
+										$obj_btn->title = $title;
+										$obj_btn->url = $btn_action;
+										$obj_btn->webview_height_ratio = 'full'; // full - compact - tall
+										break;
+								}
+							}else{
+								// postback button
+								$obj_btn->type = 'postback';
+								$obj_btn->title = $btn->title;
+								$obj_btn->payload = $btn->id;
+							}
 							
 							$btn_arr_obj[] = $obj_btn;
 							if($i++ >= 10){
@@ -322,7 +374,7 @@
 						// Skip item has no button
 						continue;
 					}
-					//return var_dum_to_string($btns);
+					//return var_dum_to_string($btn_arr_clone);
 					set_payload_for_button($btn_arr_clone, $leaf->id);
 					
 					$obj->buttons = $btn_arr_clone;
@@ -481,13 +533,10 @@
 		$level_of_payload = get_level_of_payload($data, $payload);
 		write_file('call3.txt', 'Payload...'. $payload . '+++++' .$level_of_payload . '===Current level==' .$level, false);
 		if($level_of_payload != -1){
-			//msg_thread_status_set($sender_id . $current_level_str, $current_level + 1);
-			//write_file('call3.txt', $payload . '_' .$level_of_payload . '===' .$level, false);
 			if($level != ($level_of_payload + 1)){
 				//show_menu_of_level_v2($level_of_payload + 1, $sender_id, $msg, $payload);
 				msg_thread_status_set($sender_id . $current_level_str, $level_of_payload + 1);
-				show_menu_of_level_v2($level_of_payload + 1, $sender_id, $msg, $payload);
-				return;
+				return show_menu_of_level_v2($level_of_payload + 1, $sender_id, $msg, $payload);
 			}
 		}
 		
@@ -508,21 +557,7 @@
 		
 		
 		$rank_action = get_rank_action_of_menu($menus);
-		/*
-		$buttons_obj_arr = array();
-		$i = 0;
-		foreach($menus as $menu){
-			$obj = new stdclass();
-			$obj->type = 'postback';
-			$obj->title = $menu->title;
-			$obj->payload = $menu->id;
-			$buttons_obj_arr[] = $obj;
-			if($i++ >= 2){
-				break;
-			}
-		}
-		return send_button_template($recipient_id, $title, $buttons_obj_arr);		
-		*/
+
 		$data_of_level = new stdclass();
 		$data_of_level->title = $title;
 		$data_of_level->sender_id = $sender_id;
@@ -579,7 +614,8 @@
 		// Increment current_level
 		msg_thread_status_set($sender_id . $current_level_str, $current_level + 1);
 		save_data_for_user_v2($sender_id, $payload);
-		return show_menu_of_level($current_level, $sender_id, $msg, $payload);
+		//return show_menu_of_level($current_level, $sender_id, $msg, $payload);
+		return show_menu_of_level_v2($current_level, $sender_id, $msg, $payload);
 	}
 
 ?>
