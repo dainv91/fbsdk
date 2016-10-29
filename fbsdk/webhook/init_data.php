@@ -13,18 +13,18 @@
 	//$sender_id = '1305653869458699';
 	//$ret = send_button_template_test($sender_id);
 	//var_dump($ret);
-	function test(){
+	function test_init_data(){
 		$sender_id = '1305653869458699';
 		$ret = send_button_template_test($sender_id);
 		echo '<pre>';
 		var_dump($ret);
 		echo '</pre>';
 	}
-	if($_REQUEST['iadd'] == 'iadd'){
+	if(isset($_REQUEST['iadd']) && $_REQUEST['iadd'] == 'iadd'){
 		//test();
 		clear_cache('init_data');
 		exit();
-	}else if($_REQUEST['iadd'] == 'upload'){
+	}else if(isset($_REQUEST['iadd']) && $_REQUEST['iadd'] == 'upload'){
 		
 		exit();
 	}
@@ -163,18 +163,25 @@
 		return $result;
 	}
 	
-	//$result = init_data();
-	//$result = init_data_v2();
-	$result = read_xlsx('../lib/data/data.xlsx');
-	$r = load_from_mem('init_data');
-	if($r === false){
-		//store_to_mem('init_data', $result);
-	}else{
-		//clear_cache('init_data');
+	function init_test(){
+		//$result = init_data();
+		//$result = init_data_v2();
+		$result = read_xlsx('../lib/data/data.xlsx');
+		$r = load_from_mem('init_data');
+		if($r === false){
+			//store_to_mem('init_data', $result);
+		}else{
+			//clear_cache('init_data');
+		}
+		$obj = new stdclass();
+		echo '<pre>';
+		var_dump($r);
+		//var_dump(read_xlsx('../lib/data.xlsx'));
+		echo '</pre>';
 	}
-	$obj = new stdclass();
-	echo '<pre>';
-	var_dump($r);
-	//var_dump(read_xlsx('../lib/data.xlsx'));
-	echo '</pre>';
+	if(isset($_REQUEST['iadd'])){
+		if($_REQUEST['iadd'] == 'load'){
+			init_test();
+		}
+	}
 ?>

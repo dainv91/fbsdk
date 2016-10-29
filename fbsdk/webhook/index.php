@@ -20,7 +20,8 @@
 	$input = file_get_contents('php://input');
 	write_file($file_name, $input, false);
 	//$entry = process_msg($input);
-	$entry = msg_test($input);
+	//$entry = msg_test($input);
+	$entry = msg_test_v2($input);
 	//write_file('call2.txt', json_encode($input), false);
 	write_file('call2.txt', $entry, false);
 	// receive msg: {"object":"page","entry":[{"id":"1681271828857371","time":1474009466178,"messaging":[{"sender":{"id":"1078614338912257"},"recipient":{"id":"1681271828857371"},"timestamp":1474009466130,"message":{"mid":"mid.1474009466121:220c1279719466a349","seq":3,"text":"\u1edd"}}]}]}

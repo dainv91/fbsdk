@@ -407,6 +407,10 @@
 		return send_generic_template($recipient_id, $title, $elements_obj_arr);
 	}
 	
+	function send_receipt_template(){
+		
+	}
+	
 	function send_quick_replies($recipient_id, $title, $elements_obj_arr, $access_token = null){
 		if($access_token == null){
 			$access_token = ACCESS_TOKEN;

@@ -6,6 +6,8 @@
 	define('RANK_HMENU', 3);
 	define('RANK_QUICK_REPLY', 4);
 	define('RANK_HMENU_BTN', 5);
+	define('RANK_STATISTIC', 8);
+	define('RANK_KEYWORD', 9);
 	
 	define('ACTION_BTN_URL', 6);
 	define('ACTION_BTN_CALL', 7);
@@ -51,7 +53,8 @@
 	function get_child_by_parent_id($data, $parent_id){
 		$result = array();
 		foreach($data as $obj){
-			if($obj->p_id != $parent_id || $obj->rank == RANK_TEXT){
+			//if($obj->p_id != $parent_id || $obj->rank == RANK_TEXT){
+			if($obj->p_id != $parent_id){
 				continue;
 			}
 			$result[] = $obj;
@@ -71,9 +74,24 @@
 		}
 		return $title;
 	}
+	function get_obj_by_id_v2($data, $id){
+		$title = '';
+		foreach($data_of_level as $obj){
+			if($obj->rank != RANK_TEXT || $obj->id != $id){
+				continue;
+			}
+			$title = $obj;
+			break;
+		}
+		return $title;
+	}
 	
 	function get_rank_action_of_menu($menus){
 		$rank_action = RANK_BTN;
+		if($menus == '' || !is_array($menus)){
+			return RANK_TEXT;
+		}
+		
 		foreach($menus as $obj){
 			if($obj){
 				$rank_action = $obj->rank;
@@ -115,6 +133,16 @@
 		foreach($data as $obj){
 			if($obj->save_info !=null){
 				$arr_level[$obj->level] = $obj->save_info;
+			}
+		}
+		return $arr_level;
+	}
+	
+	function get_id_need_save_info($data){
+		$arr_level = array();
+		foreach($data as $obj){
+			if($obj->save_info !=null){
+				$arr_level[$obj->id] = $obj->save_info;
 			}
 		}
 		return $arr_level;
@@ -180,6 +208,126 @@
 			return ACTION_BTN_CALL;
 		}
 		return 0;
+	}
+	
+
+	function get_obj_by_id($data, $id){
+		foreach($data as $obj){
+			if($obj->id == $id){
+				return $obj;
+			}
+		}
+		return null;
+	}
+
+	function get_selected_value($data, $str_id_selected){
+		$arr = explode('_', $selected);
+		
+		$obj_result = new stdclass();
+		$obj_result->arr = array();
+		$obj_result->text = '';
+		foreach($arr as $payload){
+			if($arr == ''){
+				continue;
+			}
+			$obj = get_obj_by_id($data, $payload);
+			if($obj != null){
+				if($obj->p_id != -1){
+					$obj = get_obj_by_id($data, $obj->p_id);
+				}
+				$obj_result->arr[] = $payload;
+				$obj_result->text .= '/ ' . $obj->title;
+			}
+		}
+		return $obj_result;
+	}
+
+	function check_level_need_statistic($data, $level){
+		foreach($data as $obj){
+			if($obj == null || $obj->level != $level){
+				continue;
+			}
+			if($obj->show_statistic != null && $obj->show_statistic == 1){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	function get_first_element_of_arr($data){
+		foreach($data as $obj){
+			return $obj;
+		}
+	}
+	
+	function check_keyword_in_obj($obj_kw, $keyword){
+		if($obj_kw == null){
+			return false;
+		}
+		$lst_kw = $obj_kw->title;
+		if(stripos($lst_kw, $keyword) !== false){
+			return true;
+		}
+		return false;
+	}
+	
+	function show_menu_by_id($data, $id, $sender_id, $msg){
+		$arr_id_need_save_info = get_id_need_save_info($data);
+		foreach($arr_id_need_save_info as $key => $value){
+			if($key == $id){
+				save_data_for_user($sender_id, $value, $msg);
+				break;
+			}
+		}
+		
+		$title = '';
+		$obj = get_obj_by_id($data, $id);
+		if($obj == '' || $obj->title == ''){
+			$title = 'Mời bạn chọn danh mục';
+		}else{
+			$title = $obj->title;
+			
+		}
+		//return var_dum_to_string($obj);
+		
+		if($obj == null){
+			return 'aaaaa_bbbbb';
+		}
+		if($obj->id_next != null){
+			show_menu_by_id($data, $obj->id_next, $sender_id, $msg);
+		}else{
+			// get list child
+			$menus = get_child_by_parent_id($data, $obj->id);
+			if(count($menus) == 1){
+				$obj = '';
+				foreach($menus as $menu){
+					$obj = $menu;
+					break;
+				}
+				if($obj->rank == RANK_TEXT){
+					$title = $obj->title;
+					$menus = get_child_by_parent_id($data, $obj->id);
+				}
+			}
+			//return 'iadd';
+			$rank_action = get_rank_action_of_menu($menus);
+
+			$data_of_level = new stdclass();
+			$data_of_level->title = $title;
+			$data_of_level->sender_id = $sender_id;
+			$data_of_level->payload = $payload;
+			$data_of_level->data = $menus;
+			$data_of_level->data_by_level = $data_by_level;
+			//$data_of_level->level = $level;
+			$data_of_level->all_data = $data;
+			
+			write_file('call3.txt',$rank_action . '++'. $title, false);
+			//write_file('call3.txt', var_dum_to_string($data_of_level), false);
+			return show_menu_by_type_v2($data_of_level, $rank_action);
+		}
+		
+		
+		
 	}
 	
 	function msg_test($input){
@@ -273,18 +421,117 @@
 		}
 	}
 	
+	function msg_test_v2($input){
+		$entry = json_decode($input);
+		$entry = $entry->entry[0];
+		
+		// message
+		$messaging = $entry->messaging[0];
+		if($messaging){
+			$message = $messaging->message;	
+		}
+		$changes = null;
+		//return var_dum_to_string($entry);
+		if($message){			
+			if($message->is_echo){
+				// page reply => do not check
+			} else if($message->attachments){
+				$sender_id = $messaging->sender->id;
+				
+				$attach = $message->attachments;
+				$count = count($attach);
+				if($count > 1){
+					// multiple attachment
+					$msg = 'Đừng cậy nhiều ảnh với anh nhớ :-ww';
+					send_text_message($sender_id, $msg);
+					
+					/*
+					$imgs_arr = array();
+					foreach($attach as $att){
+						$imgs_arr[] = $att->payload->url;
+					}
+					send_attachment($sender_id, $imgs_arr);
+					*/
+				}else{
+					// one attach ment
+					$attach = $message->attachments[0];
+					$img_url = $attach->payload->url;
+					send_attachment($sender_id, $img_url);
+				}
+			}else{
+				// nguoi dung chat
+				$sender_id = $messaging->sender->id;
+				$msg = $message->text;
+				$payload = '';
+				
+				if($messaging->postback){
+					$payload = $messaging->postback->payload;
+				}else if($message->quick_reply){
+					$payload = $message->quick_reply->payload;
+				}
+				//write_file('call3.txt', $payload, false);
+				
+				if($msg == ''){
+					$msg = 'Chịu chịu';
+					$msg = private_process($msg);
+					return send_text_message($sender_id, $msg);
+				}
+				$msg = private_process($msg);
+				//return $sender_id;
+				//send_text_message($sender_id, $msg);
+				//return send_button_template_test($sender_id);
+				return process_msg_with_payload_v2($sender_id, $msg, $payload);
+			}
+			if($messaging->delivery || $messaging->read){
+				return 'thang thai';
+			}
+		}else if($messaging->postback){
+			// user choose postback
+			$sender_id = $messaging->sender->id;
+			$payload = $messaging->postback->payload;
+			
+			return process_msg_with_payload_v2($sender_id, $msg, $payload);
+		} else {
+			$changes = $entry->changes;
+			if($changes){
+				$change = $changes[0];
+				$value = $change->value;
+				
+				// cmt	
+				if($change->field == 'feed'){
+					$comment_id = $value->comment_id;
+					$message = $value->message;
+					
+					$msg = "Ê, ai cho mày comment: $message ?";
+					reply_cmt($comment_id, $msg);
+				}else if($change->item == 'like'){
+					$parent_id = $value->post_id;
+					return reply_cmt($parent_id, 'hehe');
+				}
+			}
+		}
+	}
+	
 	//function show_menu_by_type($sender_id, $data, $level, $type_rank){
-	function show_menu_by_type($data_of_level, $type_rank){
+	function show_menu_by_type($data_of_level, $type_rank, $level){
 		//return 'by_type';
 		if($type_rank != RANK_TEXT){
 			if($data_of_level->data == null || count($data_of_level->data) == 0){
-				return show_menu_by_type($data_of_level, RANK_TEXT);
+				return show_menu_by_type($data_of_level, RANK_TEXT, $level);
 			}
 		}
 		switch($type_rank){
 			case RANK_TEXT:
 				//echo 'RANK_TEXT';
-				return send_text_message($data_of_level->sender_id, $data_of_level->title);
+				$need_check = check_level_need_statistic($data_of_level->all_data, $level);
+				$need_check = false;
+				if($need_check != false){
+					send_text_message($data_of_level->sender_id, $data_of_level->title);
+					$type_rank = RANK_STATISTIC;
+					return show_menu_by_type($data_of_level, $type_rank, $level);
+				}else{
+					return send_text_message($data_of_level->sender_id, $data_of_level->title);	
+				}
 				break;
 			case RANK_BTN:
 				//echo 'RANK_BTN';
@@ -405,6 +652,172 @@
 				break;
 			case RANK_HMENU_BTN:
 				
+				break;
+			case RANK_STATISTIC:
+				$key = 'user_info';
+				$mem = load_from_mem($key);
+				$mem = $mem['value'];
+				
+				$selected = $mem[$data_by_level->sender_id]->other;
+				$obj_selected = get_selected_value($all_data, $selected);
+				
+				$text = 'Bạn vừa chọn: ' . $obj_selected->text;
+				send_text_message($data_of_level->sender_id, $text);
+				break;
+		}
+	}
+	
+	function show_menu_by_type_v2($data_of_level, $type_rank){
+		//return 'by_type';
+		if($type_rank != RANK_TEXT){
+			if($data_of_level->data == null || count($data_of_level->data) == 0){
+				return show_menu_by_type_v2($data_of_level, RANK_TEXT);
+			}
+		}
+		switch($type_rank){
+			case RANK_TEXT:
+				//echo 'RANK_TEXT';
+				//$need_check = check_level_need_statistic($data_of_level->all_data, $level);
+				$need_check = false;
+				if($need_check != false){
+					send_text_message($data_of_level->sender_id, $data_of_level->title);
+					$type_rank = RANK_STATISTIC;
+					return show_menu_by_type_v2($data_of_level, $type_rank);
+				}else{
+					return send_text_message($data_of_level->sender_id, $data_of_level->title);	
+				}
+				break;
+			case RANK_BTN:
+				//echo 'RANK_BTN';
+				$buttons_obj_arr = array();
+				$i = 0;
+				foreach($data_of_level->data as $menu){
+					$obj = new stdclass();
+					$obj->type = 'postback';
+					$obj->title = $menu->title;
+					$obj->payload = $menu->id;
+					$buttons_obj_arr[] = $obj;
+					if($i++ >= 2){
+						break;
+					}
+				}
+				return send_button_template($data_of_level->sender_id, $data_of_level->title, $buttons_obj_arr);
+				break;
+			case RANK_HMENU:
+				$elements_obj_arr = array();
+				
+				$btns = get_data_by_rank($data_of_level->data_by_level, RANK_HMENU_BTN);
+				foreach($data_of_level->data as $leaf){
+					if($leaf->rank != RANK_HMENU){
+						continue;
+					}
+					// Element
+					$obj = new stdclass();
+					$obj->title = $leaf->title;
+					$obj->item_url = $leaf->item_url;
+					//$obj->image_url = $leaf->image_url;
+					$obj->image_url = $leaf->image;
+					//$obj->subtitle = $leaf->description;
+					$obj->subtitle = 'Giá: '. $leaf->price;
+					$btn_arr_obj = array();
+					// init btn option
+					if($btns != null && count($btns) > 0){
+						$i = 0;
+						foreach($btns as $btn){
+							if($btn->p_id != $leaf->id){
+								continue;
+							}
+							$obj_btn = new stdclass();
+							
+							// check type of button action
+							$btn_action = $btn->action;
+							$action = 0;
+							if($btn_action){
+								$action = check_action_type_of_button($btn_action);
+							}
+							// fix action = 0
+							//$action = 0;
+							if($action != 0){
+								$title_len = strlen($btn->title);
+								$title = $btn->title;
+								if($title_len > 19){
+									$title = substr($btn->title, 0, 19);
+								}
+								switch($action){
+									case ACTION_BTN_CALL:
+										$obj_btn->type = 'phone_number';
+										$obj_btn->title = $title;
+										$obj_btn->payload = $btn_action;
+										break;
+									case ACTION_BTN_URL:
+										$obj_btn->type = 'web_url';
+										$obj_btn->title = $title;
+										$obj_btn->url = $btn_action;
+										$obj_btn->webview_height_ratio = 'full'; // full - compact - tall
+										break;
+								}
+							}else{
+								// postback button
+								$obj_btn->type = 'postback';
+								$obj_btn->title = $btn->title;
+								$obj_btn->payload = $btn->id;
+							}
+							
+							$btn_arr_obj[] = $obj_btn;
+							if($i++ >= 10){
+								break;
+							}
+						}
+					}
+					
+					$btn_arr_clone = clone_arr_obj($btn_arr_obj);
+					if(count($btn_arr_clone) == 0){
+						// Skip item has no button
+						continue;
+					}
+					//return var_dum_to_string($btn_arr_clone);
+					set_payload_for_button($btn_arr_clone, $leaf->id);
+					
+					$obj->buttons = $btn_arr_clone;
+					
+					$elements_obj_arr[] = $obj;
+				}
+				//return var_dum_to_string($elements_obj_arr);
+				return send_generic_template($data_of_level->sender_id, $data_of_level->title, $elements_obj_arr);
+				break;
+			case RANK_QUICK_REPLY:
+				$i = 0;
+				$elements_obj_arr = array();
+				//return var_dum_to_string($data_of_level->data);
+				foreach($data_of_level->data as $menu){
+					$obj = new stdclass();
+					$obj->content_type = 'text';
+					$obj->title = $menu->title;
+					//$obj->payload = $menu->p_id .'_'. $menu->id;
+					$obj->payload = $menu->id;
+					//$obj->image_url = '';
+					$elements_obj_arr[] = $obj;
+					if($i++ >= 9){
+						break;
+					}
+				}
+				//return var_dum_to_string($elements_obj_arr);
+				//return $data_of_level->title;
+				return send_quick_replies($data_of_level->sender_id, $data_of_level->title, $elements_obj_arr);
+				break;
+			case RANK_HMENU_BTN:
+				
+				break;
+			case RANK_STATISTIC:
+				$key = 'user_info';
+				$mem = load_from_mem($key);
+				$mem = $mem['value'];
+				
+				$selected = $mem[$data_by_level->sender_id]->other;
+				$obj_selected = get_selected_value($all_data, $selected);
+				
+				$text = 'Bạn vừa chọn: ' . $obj_selected->text;
+				send_text_message($data_of_level->sender_id, $text);
 				break;
 		}
 	}
@@ -565,8 +978,9 @@
 		$data_of_level->data = $menus;
 		$data_of_level->data_by_level = $data_by_level;
 		$data_of_level->level = $level;
+		$data_of_level->all_data = $data;
 		
-		return show_menu_by_type($data_of_level, $rank_action);
+		return show_menu_by_type($data_of_level, $rank_action, $level);
 	}
 	
 	function process_msg_with_payload($sender_id, $msg, $payload){
@@ -618,4 +1032,31 @@
 		return show_menu_of_level_v2($current_level, $sender_id, $msg, $payload);
 	}
 
+	function process_msg_with_payload_v2($sender_id, $msg, $payload){
+		// 1. Get data from xlsx
+		$data = load_from_mem('init_data');
+		$data = $data['value'];
+		
+		// 2. Check msg =>
+		$arr_obj = get_data_by_rank($data, RANK_KEYWORD);
+		$kw_obj = get_first_element_of_arr($arr_obj);
+		
+		// 	2.1 Check rank tu khoa => next_id;
+		//$condition = check_keyword_in_obj($kw_obj, $msg);
+		$condition = ($msg == 'Hi' || $msg == 'hi');
+		write_file('call3.txt', $msg .'__'. $condition .'==='. $payload, false);
+		if( $condition === true){
+			$id_next = $kw_obj->id_next;
+			// Show menu of id_next;
+			return show_menu_by_id($data, $id_next, $sender_id, $msg);
+		}else{
+			// Other menu
+			if(is_numeric($payload)){
+				return show_menu_by_id($data, $payload, $sender_id, $msg);
+			}else{
+				return show_menu_by_id($data, $id_next, $sender_id, $msg);
+			}
+		}
+	}
+	
 ?>

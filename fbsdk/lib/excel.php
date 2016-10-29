@@ -29,6 +29,8 @@ function conver_column_arr_to_obj($column_arr){
 	$obj->rank = $column_arr[7]; // action: 1 - text, 2 - button, 3 - menu ngang. 4 - quick reply
 	$obj->save_info = $column_arr[8];
 	$obj->action = $column_arr[9];
+	//$obj->show_statistic = $column_arr[10];
+	$obj->id_next = $column_arr[10];
 	return $obj;
 }
 
@@ -56,7 +58,8 @@ function read_xlsx($input_file){
 		*/
 		$col_arr = array();
 		for($col = 0; $col < $highestColumnIndex; ++$col){
-			$value=$objWorksheet->getCellByColumnAndRow($col, $row)->getValue();
+			//getCalculatedValue $value=$objWorksheet->getCellByColumnAndRow($col, $row)->getValue();
+			$value=$objWorksheet->getCellByColumnAndRow($col, $row)->getCalculatedValue();
 			//$arr_data[$row-2][$col]=$value;
 			$col_arr[] = $value;
 		}
