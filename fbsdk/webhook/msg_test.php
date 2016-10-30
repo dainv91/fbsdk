@@ -62,6 +62,17 @@
 		return $result;
 	}
 	
+	function remove_rank_text_from_list_child($menus, $rank_to_remove = RANK_TEXT){
+		$result = array();
+		foreach($menus as $obj){
+			if($obj->rank == $rank_to_remove){
+				continue;
+			}
+			$result[] = $obj;
+		}
+		return $result;
+	}
+	
 	function get_title_of_level($data, $level){
 		$data_of_level = get_menu_by_level($data, $level);
 		$title = '';
@@ -149,6 +160,7 @@
 	}
 	
 	function save_data_for_user($sender_id, $key, $value, $is_append = false){
+		write_file('call.txt', $key .'__CALLL_SAVE____' .var_dum_to_string($value), false);
 		$key_info = 'user_info';
 		$mem = load_from_mem($key_info);
 		
@@ -219,7 +231,7 @@
 		}
 		return null;
 	}
-
+	
 	function get_selected_value($data, $str_id_selected){
 		$arr = explode('_', $selected);
 		
@@ -271,13 +283,56 @@
 		return false;
 	}
 	
+	function save_current_data($sender_id, $current_data){
+		$current_data_str = '_current_data';
+		msg_thread_status_set($sender_id . $current_data_str, $current_data);
+	}
+	function get_saved_data($sender_id){
+		$current_data_str = '_current_data';
+		$mem = msg_thread_status_get($sender_id . $current_data_str);
+		//write_file('call.txt', var_dum_to_string($mem), false);
+		if($mem != false){
+			return $mem['value'];
+		}
+		return '';
+	}
+	
 	function show_menu_by_id($data, $id, $sender_id, $msg){
+		$current_data = new stdclass();
+		$previous_obj = '';
+		
+		//$previous_data = get_saved_data($sender_id);
+		//write_file('call.txt', 'MSG____' .$msg, false);
+		if(is_numeric($id)){
+			// ** 1. Must save current data for next leve **
+			$current_data->id_previous = $id;
+		}else{
+			// ** 2. Must get previous data and processing... **
+			$previous_data = get_saved_data($sender_id);
+			if($previous_data != ''){
+				$id_next = $previous_data->id_next;
+				$previous_obj = $previous_data->data_previous;
+				$id = $id_next;
+			}
+		}
+		
 		$arr_id_need_save_info = get_id_need_save_info($data);
 		foreach($arr_id_need_save_info as $key => $value){
+			if($previous_obj != ''){
+				if($key == $previous_obj->id){
+					save_data_for_user($sender_id, $value, $msg);
+					break;
+				}
+				//write_file('call.txt', $key .'__CA111____' .var_dum_to_string($previous_obj), false);
+			}else{
+				//write_file('call.txt', $key .'__CALLL____' .var_dum_to_string($value), false);
+			}
+			/*
 			if($key == $id){
 				save_data_for_user($sender_id, $value, $msg);
 				break;
 			}
+			*/
 		}
 		
 		$title = '';
@@ -293,8 +348,24 @@
 		if($obj == null){
 			return 'aaaaa_bbbbb';
 		}
-		if($obj->id_next != null){
-			show_menu_by_id($data, $obj->id_next, $sender_id, $msg);
+		// ** 1. Must save current data for next leve **
+		$current_data->id_previous = $obj->id;
+		$current_data->data_previous = $obj;
+		$current_data->id_next = $obj->id_next;
+		save_current_data($sender_id, $current_data);
+		
+		//return var_dum_to_string($current_data);
+		
+		if($obj->id_next != null && $obj->rank != RANK_TEXT){
+			/*
+			// ** 1. Must save current data for next leve **
+			$current_data->id_previous = $obj->id;
+			$current_data->data_previous = $obj;
+			$current_data->id_next = $obj->id_next;
+			save_current_data($sender_id, $current_data);
+			*/
+			
+			return show_menu_by_id($data, $obj->id_next, $sender_id, $msg);
 		}else{
 			// get list child
 			$menus = get_child_by_parent_id($data, $obj->id);
@@ -308,7 +379,11 @@
 					$title = $obj->title;
 					$menus = get_child_by_parent_id($data, $obj->id);
 				}
+			}else{
+				// Remove rank text from child menu
+				//$menus = remove_rank_text_from_list_child($menus);
 			}
+			//return var_dum_to_string($menus);
 			//return 'iadd';
 			$rank_action = get_rank_action_of_menu($menus);
 
@@ -321,7 +396,8 @@
 			//$data_of_level->level = $level;
 			$data_of_level->all_data = $data;
 			
-			write_file('call3.txt',$rank_action . '++'. $title, false);
+			//write_file('call3.txt',$rank_action . '++'. $title . '######' . var_dum_to_string($menus), false);
+			write_file('call3.txt','RANK: '. $rank_action . '++'. $title . '######', false);
 			//write_file('call3.txt', var_dum_to_string($data_of_level), false);
 			return show_menu_by_type_v2($data_of_level, $rank_action);
 		}
@@ -1033,6 +1109,9 @@
 	}
 
 	function process_msg_with_payload_v2($sender_id, $msg, $payload){
+		$current_data_str = '_current_data';
+		$current_data = new stdclass();
+		
 		// 1. Get data from xlsx
 		$data = load_from_mem('init_data');
 		$data = $data['value'];
@@ -1044,17 +1123,32 @@
 		// 	2.1 Check rank tu khoa => next_id;
 		//$condition = check_keyword_in_obj($kw_obj, $msg);
 		$condition = ($msg == 'Hi' || $msg == 'hi');
-		write_file('call3.txt', $msg .'__'. $condition .'==='. $payload, false);
+		write_file('call3.txt', $msg .'__'. $condition .'===Payload: '. $payload, false);
 		if( $condition === true){
 			$id_next = $kw_obj->id_next;
 			// Show menu of id_next;
 			return show_menu_by_id($data, $id_next, $sender_id, $msg);
 		}else{
+			save_data_for_user_v2($sender_id, $payload);
 			// Other menu
 			if(is_numeric($payload)){
+				// ** 1. Must save current data for next leve **
 				return show_menu_by_id($data, $payload, $sender_id, $msg);
 			}else{
-				return show_menu_by_id($data, $id_next, $sender_id, $msg);
+				if($id_next != ''){
+					return show_menu_by_id($data, $id_next, $sender_id, $msg);
+				}else{
+					/*
+					// ** 2. Must get previous data and processing... **
+					$previous_data = get_saved_data($sender_id);
+					if($previous_data != ''){
+						$id_next = $previous_data->id_next;
+						return show_menu_by_id($data, $id_next, $sender_id, $msg);
+					}
+					return 'Do not implement...';
+					*/
+					return show_menu_by_id($data, $id_next, $sender_id, $msg);
+				}
 			}
 		}
 	}
