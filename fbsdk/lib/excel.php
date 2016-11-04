@@ -31,6 +31,9 @@ function conver_column_arr_to_obj($column_arr){
 	$obj->action = $column_arr[9];
 	//$obj->show_statistic = $column_arr[10];
 	$obj->id_next = $column_arr[10];
+	if(isset($column_arr[11])){
+		$obj->is_done = $column_arr[11];
+	}
 	return $obj;
 }
 

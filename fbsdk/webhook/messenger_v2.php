@@ -2,7 +2,9 @@
 	include_once('init_data.php');
 	include_once 'file.php';
 	
-	define("ACCESS_TOKEN", 'EAAMEwkQKZA7wBAL9DjYj0hBbMzzdNoBUbXmnG2ma6kw6P4DtsqijouIVZBZCjv8WYu5KF3rCv2GGyeHpgIwyHMRaa4TLK4vDAufQkZCQg1fB8ZCU4avJBfeQGWvOtm7TTMd763dBzLdz4ZBBrQY1cCqHtJrsL2DZCMpfg3PA0gscAZDZD');
+	//define("ACCESS_TOKEN", 'EAAMEwkQKZA7wBAL9DjYj0hBbMzzdNoBUbXmnG2ma6kw6P4DtsqijouIVZBZCjv8WYu5KF3rCv2GGyeHpgIwyHMRaa4TLK4vDAufQkZCQg1fB8ZCU4avJBfeQGWvOtm7TTMd763dBzLdz4ZBBrQY1cCqHtJrsL2DZCMpfg3PA0gscAZDZD');
+	// Demo khach san - second bot
+	define("ACCESS_TOKEN", 'EAAZAn88IClRQBAEVAAAWguZC2wGZA1w1ClDRY3EKC5VVZC3UjVuSZClApjR2hGxbiJ6eF3Bt6YFcgkw9MLAq1SZAzslr6pgIkr6JZBIJX46Nzl74vhZBOgQhntrEuJZBDT3lZCgprWSvohN96bmX7V3EfZAdSpCUWFZCfv9A5TPWJ2ZCPZCQZDZD');
 	
 	function msg_thread_status_get($sender_id){
 		return load_from_mem($sender_id);
@@ -237,6 +239,7 @@
 	function send_attachment($recipient_id, $img_arr, $access_token = null){
 		if($access_token == null){
 			$access_token = 'EAAMEwkQKZA7wBAL9DjYj0hBbMzzdNoBUbXmnG2ma6kw6P4DtsqijouIVZBZCjv8WYu5KF3rCv2GGyeHpgIwyHMRaa4TLK4vDAufQkZCQg1fB8ZCU4avJBfeQGWvOtm7TTMd763dBzLdz4ZBBrQY1cCqHtJrsL2DZCMpfg3PA0gscAZDZD';
+			$access_token = ACCESS_TOKEN;
 		}
 		$obj_msg = new stdclass();
 		$obj_msg->recipient = new stdclass();
@@ -275,6 +278,7 @@
 			$access_token = 'EAAMEwkQKZA7wBAL1mc4emdwqNjywiUgZBhV3ojjAYoI4xWau3yZCx9zBngTc1b5c8nq9rATw6yyZAcNfTqthEqeUpBRXNMDqrRWOW5rn9iWMW4cH2n1sas38SfD98U5VwNNKQzuJA4T7HcXeKQq8K39JqdCYnmd1eOi9JA8dFQZDZD';
 			$access_token = 'EAAMEwkQKZA7wBADA7a9Lnv4x7bddtW5kRKcyIGN6dTcgYOz0UKblOf3bqxmAX6RqDxXi8EvkfezvO7i5sGKZAy71Uh9ONnF2Efl0Jk6seQycBRkBnpiAv0IJwk1qbXmSddgnK9IDPAwQcAKafooacEkp52yu40SARdYAmWHQZDZD';
 			$access_token = 'EAAMEwkQKZA7wBAL9DjYj0hBbMzzdNoBUbXmnG2ma6kw6P4DtsqijouIVZBZCjv8WYu5KF3rCv2GGyeHpgIwyHMRaa4TLK4vDAufQkZCQg1fB8ZCU4avJBfeQGWvOtm7TTMd763dBzLdz4ZBBrQY1cCqHtJrsL2DZCMpfg3PA0gscAZDZD';
+			$access_token = ACCESS_TOKEN;
 		}
 		
 		$obj_msg = new stdclass();
@@ -292,6 +296,7 @@
 	function send_button_template($recipient_id, $title, $buttons_obj_arr, $access_token = null){
 		if($access_token == null){
 			$access_token = 'EAAMEwkQKZA7wBAL9DjYj0hBbMzzdNoBUbXmnG2ma6kw6P4DtsqijouIVZBZCjv8WYu5KF3rCv2GGyeHpgIwyHMRaa4TLK4vDAufQkZCQg1fB8ZCU4avJBfeQGWvOtm7TTMd763dBzLdz4ZBBrQY1cCqHtJrsL2DZCMpfg3PA0gscAZDZD';
+			$access_token = ACCESS_TOKEN;
 		}
 		$obj_msg = new stdclass();
 		$obj_msg->recipient = new stdclass();
@@ -334,6 +339,7 @@
 	function send_generic_template($recipient_id, $title, $elements_obj_arr, $access_token = null){
 		if($access_token == null){
 			$access_token = 'EAAMEwkQKZA7wBAL9DjYj0hBbMzzdNoBUbXmnG2ma6kw6P4DtsqijouIVZBZCjv8WYu5KF3rCv2GGyeHpgIwyHMRaa4TLK4vDAufQkZCQg1fB8ZCU4avJBfeQGWvOtm7TTMd763dBzLdz4ZBBrQY1cCqHtJrsL2DZCMpfg3PA0gscAZDZD';
+			$access_token = ACCESS_TOKEN;
 		}
 		$obj_msg = new stdclass();
 		$obj_msg->recipient = new stdclass();
@@ -467,6 +473,7 @@
 	function reply_cmt($cmt_id, $msg, $access_token = null){
 		if ($access_token == null){			
 			$access_token = 'EAAMEwkQKZA7wBAL9DjYj0hBbMzzdNoBUbXmnG2ma6kw6P4DtsqijouIVZBZCjv8WYu5KF3rCv2GGyeHpgIwyHMRaa4TLK4vDAufQkZCQg1fB8ZCU4avJBfeQGWvOtm7TTMd763dBzLdz4ZBBrQY1cCqHtJrsL2DZCMpfg3PA0gscAZDZD';
+			$access_token = ACCESS_TOKEN;
 		}
 		return call_send_api_reply_cmt($cmt_id, $msg, $access_token);
 	}
@@ -578,7 +585,7 @@
 	//var_dump($result);
 	//var_dump(load_from_mem('init_data'));
 	//echo private_process('bạn dung');
-	echo '<br />';
+	//echo '<br />';
 	//echo ACCESS_TOKEN;
 	//test();
 ?>

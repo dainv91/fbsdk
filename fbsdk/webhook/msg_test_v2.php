@@ -1,5 +1,5 @@
 <?php
-	include_once('messenger.php');
+	include_once('messenger_v2.php');
 
 	define('RANK_TEXT', 1);
 	define('RANK_BTN', 2);
