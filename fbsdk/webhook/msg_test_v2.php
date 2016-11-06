@@ -978,7 +978,10 @@
 					// Element
 					$obj = new stdclass();
 					$obj->title = $leaf->title;
-					$obj->item_url = $leaf->item_url;
+					//$obj->item_url = $leaf->item_url;
+					if(isset($leaf->action)){
+						$obj->item_url = $leaf->action;
+					}
 					//$obj->image_url = $leaf->image_url;
 					$obj->image_url = $leaf->image;
 					//$obj->subtitle = $leaf->description;
@@ -1310,7 +1313,9 @@
 		$current_data = new stdclass();
 		
 		// 1. Get data from xlsx
-		$data = load_from_mem('init_data');
+		$data_key_name = 'init_data_' .$recipient_id;
+		//$data = load_from_mem('init_data');
+		$data = load_from_mem($data_key_name);
 		$data = $data['value'];
 		
 		// 2. Check msg =>

@@ -1,7 +1,8 @@
 <?php
 	include_once 'file.php';
 	//include_once 'messenger.php';
-	include_once 'msg_test.php';
+	//include_once 'msg_test.php';
+	include_once 'msg_test_v2.php';
 	
 	$file_name = 'call.txt';
 	write_file($file_name, $_REQUEST, false);
@@ -15,6 +16,7 @@
 			exit();
 		}
 	}
+	echo 'OK';
 	
 	//$input = json_decode(file_get_contents('php://input'), true);
 	$input = file_get_contents('php://input');

@@ -40,7 +40,12 @@ function conver_column_arr_to_obj($column_arr){
 function read_xlsx($input_file){
 	$arr_data = array();
 	$input_file_name = $input_file;
-	$obj_php_excel = PHPExcel_IOFactory::load($input_file_name);
+	try{
+		$obj_php_excel = PHPExcel_IOFactory::load($input_file_name);
+	}catch(Exception $e){
+		echo 'Exception: ' .$e->getMessage();
+		return null;
+	}
 	
 	$total_sheets=$obj_php_excel->getSheetCount();
  
@@ -71,9 +76,6 @@ function read_xlsx($input_file){
 			$arr_data[] = $obj;
 		}
 	}
-	//echo '<pre>';
-	//var_dump($arr_data);
-	//echo '</pre>';
 	return $arr_data;
 }
 
