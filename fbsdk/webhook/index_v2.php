@@ -3,6 +3,9 @@
 	//include_once 'messenger.php';
 	include_once 'msg_test_v2.php';
 	
+	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
+	
 	$file_name = 'call.txt';
 	write_file($file_name, $_REQUEST, false);
 	
@@ -15,7 +18,7 @@
 			exit();
 		}
 	}
-	//echo 'hehehe';
+	echo 'OK';
 	//die();
 	
 	//$input = json_decode(file_get_contents('php://input'), true);

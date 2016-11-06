@@ -196,8 +196,10 @@
 			$mem = $mem['value'];
 			//$arr = $mem[$sender_id];
 			$arr = $mem;
-			
-			$is_done_value = $arr[$sender_id];
+			$is_done_value = -1;
+			if(isset($arr[$sender_id])){
+				$is_done_value = $arr[$sender_id];
+			}
 			write_file('call2.txt', $sender_id .'_IS_DONE_VALUE: ' .var_dum_to_string($arr), false);
 			if($is_done_value == 3){
 				$is_done = true;
@@ -393,7 +395,10 @@
 		return '';
 	}
 	
-	function show_menu_by_id($data, $id, $sender_id, $msg){
+	function show_menu_by_id($data, $id, $obj_id, $msg){
+		$sender_id = $obj_id->sender_id;
+		$recipient_id = $obj_id->recipient_id;
+		
 		$current_data = new stdclass();
 		$previous_obj = '';
 		
@@ -478,7 +483,7 @@
 			save_current_data($sender_id, $current_data);
 			*/
 			
-			return show_menu_by_id($data, $obj->id_next, $sender_id, $msg);
+			return show_menu_by_id($data, $obj->id_next, $obj_id, $msg);
 		}else{
 			// get list child
 			$menus = get_child_by_parent_id($data, $obj->id);
@@ -507,9 +512,10 @@
 			$data_of_level = new stdclass();
 			$data_of_level->title = $title;
 			$data_of_level->sender_id = $sender_id;
-			$data_of_level->payload = $payload;
+			$data_of_level->recipient_id = $recipient_id;
+			//$data_of_level->payload = $payload;
 			$data_of_level->data = $menus;
-			$data_of_level->data_by_level = $data_by_level;
+			//$data_of_level->data_by_level = $data_by_level;
 			//$data_of_level->level = $level;
 			$data_of_level->all_data = $data;
 			
@@ -545,7 +551,7 @@
 				if($count > 1){
 					// multiple attachment
 					$msg = 'Đừng cậy nhiều ảnh với anh nhớ :-ww';
-					send_text_message($sender_id, $msg);
+					send_text_message($recipient_id, $sender_id, $msg);
 					
 					/*
 					$imgs_arr = array();
@@ -576,11 +582,11 @@
 				if($msg == ''){
 					$msg = 'Chịu chịu';
 					$msg = private_process($msg);
-					return send_text_message($sender_id, $msg);
+					return send_text_message($recipient_id, $sender_id, $msg);
 				}
 				$msg = private_process($msg);
 				//return $sender_id;
-				//send_text_message($sender_id, $msg);
+				//send_text_message($recipient_id, $sender_id, $msg);
 				//return send_button_template_test($sender_id);
 				return process_msg_with_payload($sender_id, $msg, $payload);
 			}
@@ -616,27 +622,35 @@
 	
 	function msg_test_v2($input){
 		$entry = json_decode($input);
+		if($input == ''){
+			return 'empty_obj';
+		}
 		$entry = $entry->entry[0];
 		
 		// message
 		$messaging = $entry->messaging[0];
 		if($messaging){
-			$message = $messaging->message;	
+			if(isset($messaging->message)){
+				$message = $messaging->message;		
+			}
 		}
 		$changes = null;
 		//return var_dum_to_string($entry);
-		if($message){			
-			if($message->is_echo){
+		$obj_id = new stdclass();
+		
+		if(isset($message)){
+			if(isset($message->is_echo)){
 				// page reply => do not check
-			} else if($message->attachments){
+			} else if(isset($message->attachments)){
 				$sender_id = $messaging->sender->id;
+				$recipient_id = $messaging->recipient->id;
 				
 				$attach = $message->attachments;
 				$count = count($attach);
 				if($count > 1){
 					// multiple attachment
 					$msg = 'Đừng cậy nhiều ảnh với anh nhớ :-ww';
-					send_text_message($sender_id, $msg);
+					send_text_message($recipient_id, $sender_id, $msg);
 					
 					/*
 					$imgs_arr = array();
@@ -654,12 +668,14 @@
 			}else{
 				// nguoi dung chat
 				$sender_id = $messaging->sender->id;
+				$recipient_id = $messaging->recipient->id;
+				
 				$msg = $message->text;
 				$payload = '';
 				
-				if($messaging->postback){
+				if(isset($messaging->postback)){
 					$payload = $messaging->postback->payload;
-				}else if($message->quick_reply){
+				}else if(isset($message->quick_reply)){
 					$payload = $message->quick_reply->payload;
 				}
 				//write_file('call3.txt', $payload, false);
@@ -667,25 +683,34 @@
 				if($msg == ''){
 					$msg = 'Chịu chịu';
 					$msg = private_process($msg);
-					return send_text_message($sender_id, $msg);
+					return send_text_message($recipient_id, $sender_id, $msg);
 				}
 				$msg = private_process($msg);
 				//return $sender_id;
-				//send_text_message($sender_id, $msg);
+				//send_text_message($recipient_id, $sender_id, $msg);
 				//return send_button_template_test($sender_id);
-				return process_msg_with_payload_v2($sender_id, $msg, $payload);
+				
+				$obj_id->sender_id = $sender_id;
+				$obj_id->recipient_id = $recipient_id;
+				return process_msg_with_payload_v2($obj_id, $msg, $payload);
 			}
-			if($messaging->delivery || $messaging->read){
+			if(isset($messaging->delivery) || isset($messaging->read)){
 				return 'thang thai';
 			}
-		}else if($messaging->postback){
+		}else if(isset($messaging->postback)){
 			// user choose postback
 			$sender_id = $messaging->sender->id;
+			$recipient_id = $messaging->recipient->id;
+			
 			$payload = $messaging->postback->payload;
 			
-			return process_msg_with_payload_v2($sender_id, $msg, $payload);
+			$obj_id->sender_id = $sender_id;
+			$obj_id->recipient_id = $recipient_id;
+			return process_msg_with_payload_v2($obj_id, $msg, $payload);
 		} else {
-			$changes = $entry->changes;
+			if(isset($entry->changes)){
+				$changes = $entry->changes;	
+			}
 			if($changes){
 				$change = $changes[0];
 				$value = $change->value;
@@ -719,11 +744,11 @@
 				$need_check = check_level_need_statistic($data_of_level->all_data, $level);
 				$need_check = false;
 				if($need_check != false){
-					send_text_message($data_of_level->sender_id, $data_of_level->title);
+					send_text_message($recipient_id, $data_of_level->sender_id, $data_of_level->title);
 					$type_rank = RANK_STATISTIC;
 					return show_menu_by_type($data_of_level, $type_rank, $level);
 				}else{
-					return send_text_message($data_of_level->sender_id, $data_of_level->title);	
+					return send_text_message($recipient_id, $data_of_level->sender_id, $data_of_level->title);	
 				}
 				break;
 			case RANK_BTN:
@@ -740,7 +765,7 @@
 						break;
 					}
 				}
-				return send_button_template($data_of_level->sender_id, $data_of_level->title, $buttons_obj_arr);
+				return send_button_template($recipient_id, $data_of_level->sender_id, $data_of_level->title, $buttons_obj_arr);
 				break;
 			case RANK_HMENU:
 				$elements_obj_arr = array();
@@ -822,7 +847,7 @@
 					$elements_obj_arr[] = $obj;
 				}
 				//return var_dum_to_string($elements_obj_arr);
-				return send_generic_template($data_of_level->sender_id, $data_of_level->title, $elements_obj_arr);
+				return send_generic_template($recipient_id, $data_of_level->sender_id, $data_of_level->title, $elements_obj_arr);
 				break;
 			case RANK_QUICK_REPLY:
 				$i = 0;
@@ -841,7 +866,7 @@
 				}
 				//return var_dum_to_string($elements_obj_arr);
 				//return $data_of_level->title;
-				return send_quick_replies($data_of_level->sender_id, $data_of_level->title, $elements_obj_arr);
+				return send_quick_replies($recipient_id, $data_of_level->sender_id, $data_of_level->title, $elements_obj_arr);
 				break;
 			case RANK_HMENU_BTN:
 				
@@ -855,12 +880,15 @@
 				$obj_selected = get_selected_value($all_data, $selected);
 				
 				$text = 'Bạn vừa chọn: ' . $obj_selected->text;
-				send_text_message($data_of_level->sender_id, $text);
+				send_text_message($recipient_id, $data_of_level->sender_id, $text);
 				break;
 		}
 	}
 	
 	function show_menu_by_type_v2($data_of_level, $type_rank){
+		$sender_id = $data_of_level->sender_id;
+		$recipient_id = $data_of_level->recipient_id;
+		
 		//return 'by_type';
 		if($type_rank != RANK_TEXT && $type_rank != RANK_STATISTIC){
 			if($data_of_level->data == null || count($data_of_level->data) == 0){
@@ -873,11 +901,11 @@
 				//$need_check = check_level_need_statistic($data_of_level->all_data, $level);
 				$need_check = false;
 				if($need_check != false){
-					send_text_message($data_of_level->sender_id, $data_of_level->title);
+					send_text_message($recipient_id, $data_of_level->sender_id, $data_of_level->title);
 					$type_rank = RANK_STATISTIC;
 					return show_menu_by_type_v2($data_of_level, $type_rank);
 				}else{
-					return send_text_message($data_of_level->sender_id, $data_of_level->title);	
+					return send_text_message($recipient_id, $data_of_level->sender_id, $data_of_level->title);	
 				}
 				break;
 			case RANK_BTN:
@@ -936,7 +964,7 @@
 						break;
 					}
 				}
-				return send_button_template($data_of_level->sender_id, $data_of_level->title, $buttons_obj_arr);
+				return send_button_template($recipient_id, $data_of_level->sender_id, $data_of_level->title, $buttons_obj_arr);
 				break;
 			case RANK_HMENU:
 				$elements_obj_arr = array();
@@ -1022,7 +1050,7 @@
 					$elements_obj_arr[] = $obj;
 				}
 				//return var_dum_to_string($data_of_level->data);
-				return send_generic_template($data_of_level->sender_id, $data_of_level->title, $elements_obj_arr);
+				return send_generic_template($recipient_id, $data_of_level->sender_id, $data_of_level->title, $elements_obj_arr);
 				break;
 			case RANK_QUICK_REPLY:
 				$i = 0;
@@ -1042,7 +1070,7 @@
 				}
 				//return var_dum_to_string($elements_obj_arr);
 				//return $data_of_level->title;
-				return send_quick_replies($data_of_level->sender_id, $data_of_level->title, $elements_obj_arr);
+				return send_quick_replies($recipient_id, $data_of_level->sender_id, $data_of_level->title, $elements_obj_arr);
 				break;
 			case RANK_HMENU_BTN:
 				
@@ -1059,7 +1087,7 @@
 				//*/
 				$text = 'Bạn vừa chọn: ' . $obj_selected->text;
 				//$text = 'Bạn vừa chọn: ';
-				send_text_message($data_of_level->sender_id, $text);
+				send_text_message($recipient_id, $data_of_level->sender_id, $text);
 				break;
 		}
 	}
@@ -1102,7 +1130,7 @@
 			//$obj->image_url = 'http://www.iconsdb.com/icons/download/guacamole-green/circle-32.png';
 			$elements_obj_arr[] = $obj;
 			
-			return send_quick_replies($sender_id, $title, $elements_obj_arr);
+			return send_quick_replies($recipient_id, $sender_id, $title, $elements_obj_arr);
 		}else if($level == $max_leaf_level + 2){
 			msg_thread_status_clear($sender_id . $current_level_str);
 			return;
@@ -1144,7 +1172,7 @@
 					
 					$elements_obj_arr[] = $obj;
 				}
-				return send_generic_template($recipient_id, $title, $elements_obj_arr);
+				return send_generic_template($recipient_id, $recipient_id, $title, $elements_obj_arr);
 			}
 		}
 		
@@ -1160,7 +1188,7 @@
 				break;
 			}
 		}
-		return send_button_template($recipient_id, $title, $buttons_obj_arr);		
+		return send_button_template($recipient_id, $recipient_id, $title, $buttons_obj_arr);		
 	}
 	
 	function show_menu_of_level_v2($level, $sender_id, $msg, $payload){
@@ -1274,7 +1302,10 @@
 		return show_menu_of_level_v2($current_level, $sender_id, $msg, $payload);
 	}
 
-	function process_msg_with_payload_v2($sender_id, $msg, $payload){
+	function process_msg_with_payload_v2($obj_id, $msg, $payload){
+		$sender_id = $obj_id->sender_id;
+		$recipient_id = $obj_id->recipient_id;
+		
 		$current_data_str = '_current_data';
 		$current_data = new stdclass();
 		
@@ -1290,19 +1321,20 @@
 		$condition = check_keyword_in_obj($kw_obj, $msg);
 		//$condition = ($msg == 'Hi' || $msg == 'hi');
 		write_file('call3.txt', $msg .'__'. $condition .'===Payload: '. $payload, false);
+		$id_next = '';
 		if( $condition === true){
 			$id_next = $kw_obj->id_next;
 			// Show menu of id_next;
-			return show_menu_by_id($data, $id_next, $sender_id, $msg);
+			return show_menu_by_id($data, $id_next, $obj_id, $msg);
 		}else{
 			save_data_for_user_v2($sender_id, $payload);
 			// Other menu
 			if(is_numeric($payload)){
 				// ** 1. Must save current data for next leve **
-				return show_menu_by_id($data, $payload, $sender_id, $msg);
+				return show_menu_by_id($data, $payload, $obj_id, $msg);
 			}else{
 				if($id_next != ''){
-					return show_menu_by_id($data, $id_next, $sender_id, $msg);
+					return show_menu_by_id($data, $id_next, $obj_id, $msg);
 				}else{
 					/*
 					// ** 2. Must get previous data and processing... **
@@ -1313,7 +1345,7 @@
 					}
 					return 'Do not implement...';
 					*/
-					return show_menu_by_id($data, $id_next, $sender_id, $msg);
+					return show_menu_by_id($data, $id_next, $obj_id, $msg);
 				}
 			}
 		}

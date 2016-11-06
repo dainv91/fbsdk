@@ -61,7 +61,7 @@
 				if($count > 1){
 					// multiple attachment
 					$msg = 'Đừng cậy nhiều ảnh với anh nhớ :-ww';
-					send_text_message($sender_id, $msg);
+					send_text_message_1($sender_id, $msg);
 					
 					/*
 					$imgs_arr = array();
@@ -89,10 +89,10 @@
 				if($msg == ''){
 					$msg = 'Chịu chịu';
 					$msg = private_process($msg);
-					return send_text_message($sender_id, $msg);
+					return send_text_message_1($sender_id, $msg);
 				}
 				$msg = private_process($msg);
-				//send_text_message($sender_id, $msg);
+				//send_text_message_1($sender_id, $msg);
 				//return send_button_template_test($sender_id);
 				return process_msg_when_chatting($sender_id, $msg, $payload);
 			}
@@ -164,7 +164,7 @@
 						break;
 					}
 				}
-				return send_button_template($recipient_id, $title, $buttons_obj_arr);
+				return send_button_template_1($recipient_id, $title, $buttons_obj_arr);
 			}
 		}else{
 			if($payload != ''){
@@ -205,7 +205,7 @@
 						}
 					}
 					msg_thread_status_set($sender_id, $count);
-					return send_button_template($recipient_id, $title, $buttons_obj_arr);
+					return send_button_template_1($recipient_id, $title, $buttons_obj_arr);
 				}
 			}
 			//return $payload;
@@ -273,7 +273,7 @@
 	}
 	//*/
 	
-	function send_text_message($recipient_id, $msg, $access_token = null){
+	function send_text_message_1($recipient_id, $msg, $access_token = null){
 		if($access_token == null){
 			$access_token = 'EAAMEwkQKZA7wBAL1mc4emdwqNjywiUgZBhV3ojjAYoI4xWau3yZCx9zBngTc1b5c8nq9rATw6yyZAcNfTqthEqeUpBRXNMDqrRWOW5rn9iWMW4cH2n1sas38SfD98U5VwNNKQzuJA4T7HcXeKQq8K39JqdCYnmd1eOi9JA8dFQZDZD';
 			$access_token = 'EAAMEwkQKZA7wBADA7a9Lnv4x7bddtW5kRKcyIGN6dTcgYOz0UKblOf3bqxmAX6RqDxXi8EvkfezvO7i5sGKZAy71Uh9ONnF2Efl0Jk6seQycBRkBnpiAv0IJwk1qbXmSddgnK9IDPAwQcAKafooacEkp52yu40SARdYAmWHQZDZD';
@@ -293,7 +293,12 @@
 		return call_send_api($msg_data, $access_token);
 	}
 	
-	function send_button_template($recipient_id, $title, $buttons_obj_arr, $access_token = null){
+	function send_text_message($page_id, $recipient_id, $msg){
+		$access_token = get_access_token($page_id);
+		return send_text_message_1($recipient_id, $msg, $access_token);
+	}
+	
+	function send_button_template_1($recipient_id, $title, $buttons_obj_arr, $access_token = null){
 		if($access_token == null){
 			$access_token = 'EAAMEwkQKZA7wBAL9DjYj0hBbMzzdNoBUbXmnG2ma6kw6P4DtsqijouIVZBZCjv8WYu5KF3rCv2GGyeHpgIwyHMRaa4TLK4vDAufQkZCQg1fB8ZCU4avJBfeQGWvOtm7TTMd763dBzLdz4ZBBrQY1cCqHtJrsL2DZCMpfg3PA0gscAZDZD';
 			$access_token = ACCESS_TOKEN;
@@ -317,6 +322,11 @@
 		return call_send_api($msg_data, $access_token);
 	}
 
+	function send_button_template($page_id, $recipient_id, $title, $buttons_obj_arr){
+		$access_token = get_access_token($page_id);
+		return send_button_template_1($recipient_id, $title, $buttons_obj_arr, $access_token);
+	}
+	
 	function send_button_template_test($recipient_id, $title = 'test button'){
 		$buttons_obj_arr = array();
 		for($i=0; $i<2; $i++){
@@ -333,10 +343,10 @@
 			$buttons_obj_arr[] = $obj;
 		}
 		//return $buttons_obj_arr;
-		return send_button_template($recipient_id, $title, $buttons_obj_arr);
+		return send_button_template_1($recipient_id, $title, $buttons_obj_arr);
 	}
 	
-	function send_generic_template($recipient_id, $title, $elements_obj_arr, $access_token = null){
+	function send_generic_template_1($recipient_id, $title, $elements_obj_arr, $access_token = null){
 		if($access_token == null){
 			$access_token = 'EAAMEwkQKZA7wBAL9DjYj0hBbMzzdNoBUbXmnG2ma6kw6P4DtsqijouIVZBZCjv8WYu5KF3rCv2GGyeHpgIwyHMRaa4TLK4vDAufQkZCQg1fB8ZCU4avJBfeQGWvOtm7TTMd763dBzLdz4ZBBrQY1cCqHtJrsL2DZCMpfg3PA0gscAZDZD';
 			$access_token = ACCESS_TOKEN;
@@ -359,6 +369,11 @@
 		$msg_data = json_encode($obj_msg);
 		//return $msg_data;
 		return call_send_api($msg_data, $access_token);
+	}
+	
+	function send_generic_template($page_id, $recipient_id, $title, $elements_obj_arr){
+		$access_token = get_access_token($page_id);
+		return send_generic_template_1($recipient_id, $title, $elements_obj_arr, $access_token);
 	}
 	
 	function send_generic_template_test($recipient_id){
@@ -410,14 +425,14 @@
 		$elements_obj_arr[] = $obj;
 		
 		
-		return send_generic_template($recipient_id, $title, $elements_obj_arr);
+		return send_generic_template_1($recipient_id, $title, $elements_obj_arr);
 	}
 	
 	function send_receipt_template(){
 		
 	}
 	
-	function send_quick_replies($recipient_id, $title, $elements_obj_arr, $access_token = null){
+	function send_quick_replies_1($recipient_id, $title, $elements_obj_arr, $access_token = null){
 		if($access_token == null){
 			$access_token = ACCESS_TOKEN;
 		}
@@ -433,6 +448,11 @@
 		
 		$msg_data = json_encode($obj_msg);
 		return call_send_api($msg_data, $access_token);
+	}
+	
+	function send_quick_replies($page_id, $recipient_id, $title, $elements_obj_arr){
+		$access_token = get_access_token($page_id);
+		return send_quick_replies_1($recipient_id, $title, $elements_obj_arr, $access_token);
 	}
 	
 	function send_quick_replies_test($recipient_id = '1285422414804001'){
@@ -467,7 +487,7 @@
 		//$obj->image_url = 'http://www.iconsdb.com/icons/download/guacamole-green/circle-32.png';
 		$elements_obj_arr[] = $obj;
 		*/
-		return send_quick_replies($recipient_id, $title, $elements_obj_arr);
+		return send_quick_replies_1($recipient_id, $title, $elements_obj_arr);
 	}
 	
 	function reply_cmt($cmt_id, $msg, $access_token = null){
@@ -543,7 +563,7 @@
 	}
 	
 	function get_access_token($page_id){
-		$access_token = '';
+		$access_token = null;
 		$arr = array();
 		
 		// auto all
@@ -561,6 +581,11 @@
 		$token = 'EAAMEwkQKZA7wBAENJZCMjPXXcDJeaCYyZAEWZChrUEFK22IwkKfUv6xwqQltAUMKif2AxEyT6URG16tYT7NuZBbfr1s8AWZB5vniDcdZChJ1ZBWqcJV1TEkIwdCsZAGBMeRLaYHoZCXYZAS9s4sfcuOxUZCJmT5shWuJG8iu45wYA7q1CAZDZD';
 		$arr[$pid] = $token;
 		
+		// khach san, 2nd bot
+		$pid = '205662139870141';
+		$token = 'EAAZAn88IClRQBAEVAAAWguZC2wGZA1w1ClDRY3EKC5VVZC3UjVuSZClApjR2hGxbiJ6eF3Bt6YFcgkw9MLAq1SZAzslr6pgIkr6JZBIJX46Nzl74vhZBOgQhntrEuJZBDT3lZCgprWSvohN96bmX7V3EfZAdSpCUWFZCfv9A5TPWJ2ZCPZCQZDZD';
+		$arr[$pid] = $token;
+		
 		if(isset($arr[$page_id])){
 			$access_token = $arr[$page_id];
 		}
@@ -574,14 +599,14 @@
 		$sender_id = '1387642324596666';
 		$access_token = 'EAAPOqpDSQGgBAKoZAbRfzUZB815G9h1DKz64pZBoXQpI7TugNduO36BenuhPhL4Q6zrXSWCD5zoUyz1anSTsLpin4KeWGh5MSklRbf7TNiJuvPhSz0kNzC9PQhEoSYcchrPQwpwl20WAIcG6ALGS47c7Q8CSkUZD';
 		$msg = 'xin cam on';
-		echo send_text_message($sender_id, $msg, $access_token);
+		echo send_text_message_1($sender_id, $msg, $access_token);
 	}
 	//header('Content-type: application/json');
 	//test();
 	$page_access_token = 'EAAMEwkQKZA7wBAH7cjZADM47S7H62vXjQruPlWrnB1OVkn6oQZA0gNEDfxcIE7MKsBZBXJKdpiVFimbieKyg43TIaYIR58pbBZCdv1TpM0jrkY1BvCsQew4yq4vHOOK0FKmEjoA0jc7FBahjI788ZAhdwgY4Imqp0yHZBaWZCJ33IQZDZD';
 	$page_access_token_v2 = 'EAAMEwkQKZA7wBAL1mc4emdwqNjywiUgZBhV3ojjAYoI4xWau3yZCx9zBngTc1b5c8nq9rATw6yyZAcNfTqthEqeUpBRXNMDqrRWOW5rn9iWMW4cH2n1sas38SfD98U5VwNNKQzuJA4T7HcXeKQq8K39JqdCYnmd1eOi9JA8dFQZDZD';
-	//$result = send_text_message('100006035972260', 'xin chao', $page_access_token);
-	//$result = send_text_message('1078614338912257', 'xin cam on', $page_access_token);
+	//$result = send_text_message_1('100006035972260', 'xin chao', $page_access_token);
+	//$result = send_text_message_1('1078614338912257', 'xin cam on', $page_access_token);
 	//var_dump($result);
 	//var_dump(load_from_mem('init_data'));
 	//echo private_process('bạn dung');
