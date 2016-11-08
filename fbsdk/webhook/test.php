@@ -1,7 +1,8 @@
 <?php
 	//include_once 'messenger.php';
 	//include_once '../../helper/mem.php';
-	include_once 'msg_test.php';
+	//include_once 'msg_test.php';
+	include_once 'msg_test_v2.php';
 	
 	$msg = 'iadd';
 	$msg_data = array(
@@ -115,16 +116,29 @@
 		*/
 	}
 	
+	//https://app.inet.vn:434/iadd/fbsdk/webhook/test.php?iadd=send&msg=Test%20send%20msg&user_id=1231308980276237
+	function msg_test_send_first(){
+		$page_id = '1681271828857371'; // Auto all;
+		if(isset($_REQUEST['iadd']) && $_REQUEST['iadd'] == 'send'){
+			$msg = $_REQUEST['msg'];
+			$user_id = $_REQUEST['user_id'];
+			
+			$result = send_text_message($page_id, $user_id, $msg);
+			echo $result;
+			exit();
+		}
+	}
+	
 	if(isset($_REQUEST['iadd']) && $_REQUEST['iadd'] == 'iadd'){
 		_test_test();
 		exit();
 	}
 	//var_dump(load_from_mem('time'));
 	//_test();
-	echo $msg;
-	test_selected_obj1();
+	//echo $msg;
+	//test_selected_obj1();
 	//test_obj();
 	//var_dump(preg_match('/^[0-9]{9,12}$/', '+84988907560'));
-	
+	msg_test_send_first();
 	
 ?>

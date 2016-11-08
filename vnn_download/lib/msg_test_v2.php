@@ -437,9 +437,7 @@
 		//return var_dum_to_string($obj);
 		
 		if($obj == null){
-			//return 'aaaaa_bbbbb';
-			$msg = 'Chịu thôi, thằng chủ tao nó chưa dạy. Ahihi :">';
-			return send_text_message($recipient_id, $sender_id, $msg);
+			return 'aaaaa_bbbbb';
 		}
 		// Check obj is done to toggle_user_is_done
 		if(isset($obj->is_done) && $obj->is_done != ''){
@@ -613,8 +611,7 @@
 					$message = $value->message;
 					
 					$msg = "Ê, ai cho mày comment: $message ?";
-					write_file('call2.txt', "$comment_id comment....", false);
-					return reply_cmt($comment_id, $msg);
+					reply_cmt($comment_id, $msg);
 				}else if($change->item == 'like'){
 					$parent_id = $value->post_id;
 					return reply_cmt($parent_id, 'hehe');
@@ -910,7 +907,7 @@
 					$type_rank = RANK_STATISTIC;
 					return show_menu_by_type_v2($data_of_level, $type_rank);
 				}else{
-					return send_text_message($recipient_id, $data_of_level->sender_id, $data_of_level->title);
+					return send_text_message($recipient_id, $data_of_level->sender_id, $data_of_level->title);	
 				}
 				break;
 			case RANK_BTN:

@@ -1,7 +1,7 @@
 <?php
-	include_once('init_data.php');
+	//include_once('init_data.php');
 	include_once 'file.php';
-
+	
 	//define("ACCESS_TOKEN", 'EAAMEwkQKZA7wBAL9DjYj0hBbMzzdNoBUbXmnG2ma6kw6P4DtsqijouIVZBZCjv8WYu5KF3rCv2GGyeHpgIwyHMRaa4TLK4vDAufQkZCQg1fB8ZCU4avJBfeQGWvOtm7TTMd763dBzLdz4ZBBrQY1cCqHtJrsL2DZCMpfg3PA0gscAZDZD');
 	// Demo khach san - second bot
 	define("ACCESS_TOKEN", 'EAAZAn88IClRQBAEVAAAWguZC2wGZA1w1ClDRY3EKC5VVZC3UjVuSZClApjR2hGxbiJ6eF3Bt6YFcgkw9MLAq1SZAzslr6pgIkr6JZBIJX46Nzl74vhZBOgQhntrEuJZBDT3lZCgprWSvohN96bmX7V3EfZAdSpCUWFZCfv9A5TPWJ2ZCPZCQZDZD');
@@ -116,7 +116,7 @@
 					$message = $value->message;
 					
 					$msg = "Ê, ai cho mày comment: $message ?";
-					return reply_cmt($comment_id, $msg);
+					reply_cmt($comment_id, $msg);
 				}
 			}
 		}
@@ -534,22 +534,28 @@
 	}
 	
 	function call_send_api_get_list_conversations($page_id, $access_token){
-		$url = "https://graph.facebook.com/v2.8/$page_id/conversations?limit=1000&access_token=" . $access_token;
-		//return $url;
+		$url = "https://graph.facebook.com/v2.8/$page_id/conversations?access_token=" . $access_token . '&limit=1000';
+		//$url = 'https://app.inet.vn:434/iadd/policy.html';
+		//$url = 'http://app.inet.vn:8080/iadd/policy.html';
+		//$url = 'https://graph.facebook.com/v2.8/1681271828857371/conversations?access_token=EAAMEwkQKZA7wBAL9DjYj0hBbMzzdNoBUbXmnG2ma6kw6P4DtsqijouIVZBZCjv8WYu5KF3rCv2GGyeHpgIwyHMRaa4TLK4vDAufQkZCQg1fB8ZCU4avJBfeQGWvOtm7TTMd763dBzLdz4ZBBrQY1cCqHtJrsL2DZCMpfg3PA0gscAZDZD&limit=25&until=1477635654&__paging_token=enc_AdCUac6or8vMYRrvsWDoHC6RoA6q8h9bZBis90CzkgXORNRCtONdCBhIVZCoK2PlHp5DxXCNOdr9alRZA4EjIH3dkxEE3UbqQEa4N5j8ZCZCGZBW8tSgZDZD';
+		//$url = 'https://graph.facebook.com/v2.8/1681271828857371/conversations?limit=25&__paging_token=enc_AdAZAoyGx3uyuX7ncHqpWcEpHONHezbdZAjcICQL3O4ZC9OcPi9KT2uOipZCZAk9DoGZAfmBlFN71oIlE030cjUVbdxZCRZADj32DxcwZCFoLmmaYmVvZClgZDZD&access_token=EAAMEwkQKZA7wBAL9DjYj0hBbMzzdNoBUbXmnG2ma6kw6P4DtsqijouIVZBZCjv8WYu5KF3rCv2GGyeHpgIwyHMRaa4TLK4vDAufQkZCQg1fB8ZCU4avJBfeQGWvOtm7TTMd763dBzLdz4ZBBrQY1cCqHtJrsL2DZCMpfg3PA0gscAZDZD&until=1474396550';
+		$msg_data = '';
+		//$result = send_http($url, $msg_data, 'GET', array('Content-Type: application/json'));
+		//$result = send_http($url, $msg_data, 'GET', array('Content-Type: application/json'));
 		$result = send_http($url, array('iadd'=>'abc'));
+		//$result = send_http($url, $msg_data, 'GET', array());
 		return $result['content'];
+		//return $result;
 	}
 	
-	function call_send_api_get_list_msg_of_conversation($conversation_id, $access_token){
-		$url = "https://graph.facebook.com/v2.8/$conversation_id/messages?fields=from,to&limit=3&access_token=" . $access_token;
-		$result = send_http($url, array('iadd'=>'abc'));
-		return $result['content'];
-	}
+	//function call_send_api_get
+	
 	
 	function send_http($url, $params, $method = 'GET', $headers = null){
 		if(is_array($params)){
 			$params = http_build_query($params);
 		}
+		//echo $params;
 		///*
 		if($headers == null){
 			$headers = array(
@@ -608,39 +614,17 @@
 		
 		// phong kham
 		$pid = '1137226739706218';
-		//$token = 'EAAMEwkQKZA7wBAGCjfynLPy1KNeozNQK6nKrJaJ8VdJiZBZAKINyYZAGZCl8BU1Vmqe0jU8PfocEPEWjorebZBEp9mACtXPOLVcXovwdYQtcuPUpfxFXRJXnc3mvT8XyoZAZCpcEOgcu9pUcZCVpXcEMTX7GaZAnWnZCFtUyF05xkoyOQZDZD';
-		$token = 'EAAMEwkQKZA7wBACQp4GNv0ZAjSjaZBssfqgsgGHjf09hanMyRyxh9XetqwM7XHeij36zeazYYNJQZCWIsJCUHVXRnD2APKD1gqfCpwiWUk0W7o4O4d6u4vwGnxWAIZC1DUbrKZCdytzrdmdZCaud76UBRMmO3MYZAutdNULgFElIDwZDZD';
+		$token = 'EAAMEwkQKZA7wBAGCjfynLPy1KNeozNQK6nKrJaJ8VdJiZBZAKINyYZAGZCl8BU1Vmqe0jU8PfocEPEWjorebZBEp9mACtXPOLVcXovwdYQtcuPUpfxFXRJXnc3mvT8XyoZAZCpcEOgcu9pUcZCVpXcEMTX7GaZAnWnZCFtUyF05xkoyOQZDZD';
 		$arr[$pid] = $token;
 		
 		// ve may bay
 		$pid = '559437760920787';
-		//$token = 'EAAMEwkQKZA7wBAENJZCMjPXXcDJeaCYyZAEWZChrUEFK22IwkKfUv6xwqQltAUMKif2AxEyT6URG16tYT7NuZBbfr1s8AWZB5vniDcdZChJ1ZBWqcJV1TEkIwdCsZAGBMeRLaYHoZCXYZAS9s4sfcuOxUZCJmT5shWuJG8iu45wYA7q1CAZDZD';
-		$token = 'EAAMEwkQKZA7wBANaPrZBZA5hSXsPAnfwMeA7FjcCq0wG4xOuFLx4IcURlGoQaYenPg9qZBdr3er9NZBzLMqlLBsVew1KUeGmEWptYbtG2ZBfrsFLGa5GHZAnlOZBvQaCRJtjRtnxoOERl7ZBjFo3wVa5thZBvj6FMasdK7rcATwVWQIAZDZD';
+		$token = 'EAAMEwkQKZA7wBAENJZCMjPXXcDJeaCYyZAEWZChrUEFK22IwkKfUv6xwqQltAUMKif2AxEyT6URG16tYT7NuZBbfr1s8AWZB5vniDcdZChJ1ZBWqcJV1TEkIwdCsZAGBMeRLaYHoZCXYZAS9s4sfcuOxUZCJmT5shWuJG8iu45wYA7q1CAZDZD';
 		$arr[$pid] = $token;
 		
 		// khach san, 2nd bot
 		$pid = '205662139870141';
 		$token = 'EAAZAn88IClRQBAEVAAAWguZC2wGZA1w1ClDRY3EKC5VVZC3UjVuSZClApjR2hGxbiJ6eF3Bt6YFcgkw9MLAq1SZAzslr6pgIkr6JZBIJX46Nzl74vhZBOgQhntrEuJZBDT3lZCgprWSvohN96bmX7V3EfZAdSpCUWFZCfv9A5TPWJ2ZCPZCQZDZD';
-		$arr[$pid] = $token;
-		
-		// hang thoi trang, 1st bot
-		$pid = '693558664140347';
-		$token = 'EAAMEwkQKZA7wBAAJgcc1c7CVfLr7ZCGTjzfmZAZCovKPg7ZCTTThhKib8RTkHXZClSDkK0nxrSVpCCm3V3LpizWU9OITadE7862waxUlMFS4yDIeZBZBkESn5K2gDcQTblnGBD0aCaP5ZAyG6ruaJdteqTwDJYOIlR29zDurhozt2xgZDZD';
-		$arr[$pid] = $token;
-		
-		// trung tam dao tao, 1st bot
-		$pid = '1435247499821906';
-		$token = 'EAAMEwkQKZA7wBAPIXB3TNS9U38ZBgNmtymxYJbCt14dHJ6scmCxQpoc8ZA50XXXzkSgTiDZBf43wDpWxXAZBrrZBE4dj2JfpOGlAUtQkZCSFbZAGYQ2c60ktUoupr6AtjkBcI9SUH3nKOVygWZBnDDJYlKkSZA06ZAGDfy8ZANouv6wZBmAZDZD';
-		$arr[$pid] = $token;
-		
-		// hoc vien robotics
-		$pid = '556256761138693';
-		$token = 'EAAMEwkQKZA7wBAPYcJjcKym48Dz8g6KPJNYHQqd4ZBjHwn9w79QkncJOQOKzBVkO3phhJXElpOvDZBVtFiZCRvzRjCgjkMlrMhcHNgLplLNAcceginxT8izvkDSHB4TMDTfbQwo1I2E6E27VLnS7NUWutxN9HS7dgjZCqyUY1YAZDZD';
-		$arr[$pid] = $token;
-		
-		// Du hoc han quoc -- chua la admin
-		$pid = '1591469367824430';
-		$token = 'EAAMEwkQKZA7wBAPYcJjcKym48Dz8g6KPJNYHQqd4ZBjHwn9w79QkncJOQOKzBVkO3phhJXElpOvDZBVtFiZCRvzRjCgjkMlrMhcHNgLplLNAcceginxT8izvkDSHB4TMDTfbQwo1I2E6E27VLnS7NUWutxN9HS7dgjZCqyUY1YAZDZD';
 		$arr[$pid] = $token;
 		
 		if(isset($arr[$page_id])){
@@ -658,6 +642,7 @@
 		$msg = 'xin cam on';
 		echo send_text_message_1($sender_id, $msg, $access_token);
 	}
+	
 	//header('Content-type: application/json');
 	//test();
 	$page_access_token = 'EAAMEwkQKZA7wBAH7cjZADM47S7H62vXjQruPlWrnB1OVkn6oQZA0gNEDfxcIE7MKsBZBXJKdpiVFimbieKyg43TIaYIR58pbBZCdv1TpM0jrkY1BvCsQew4yq4vHOOK0FKmEjoA0jc7FBahjI788ZAhdwgY4Imqp0yHZBaWZCJ33IQZDZD';

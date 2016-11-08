@@ -1,13 +1,114 @@
 <?php
 include_once '../../helper/mem.php';
 include_once '../lib/excel.php';
+include_once 'messenger_v2.php';
 
+	ini_set('max_execution_time', 300);	
+	
+	function create_persistent_menu($page_id, $data){
+		
+	}
+
+	/*********************SENDING MESSAGE FUNCTION********************************/
+	function get_list_conversation_from_json($json){
+		$result = new stdclass();
+		$result->data = array();
+		
+		$result->paging = new stdclass();
+		$result->paging->previous = 'link1';
+		$result->paging->next = 'link2';
+		
+		$obj_conversation = new stdclass();
+		$obj_conversation->id = '';
+		$obj_conversation->link = '';
+		$obj_conversation->updated_time = '';
+		
+		$lst = json_decode($json);
+		if(isset($lst) && isset($lst->data)){
+			$data = $lst->data;
+			if(is_array($data)){
+				foreach($data as $obj){
+					$result->data[] = $obj;
+				}
+			}
+			
+			if(isset($lst->paging)){
+				while(true){
+					//break;
+					$link = $lst->paging->next;
+					$result1 = send_http($link, array());
+					$result1 = $result1['content'];
+					
+					$lst = json_decode($result1);
+					if(isset($lst) && isset($lst->data)){
+						$data = $lst->data;
+						if(is_array($data) && count($data) > 0){
+							foreach($data as $obj){
+								$result->data[] = $obj;
+							}
+						}else{
+							break;
+						}
+					}
+				}
+				//$result->paging = $lst->paging;
+			}
+		}
+		return $result;
+	}
+	
+	function get_user_id_from_list_msg($lst_msg_json, $page_id){
+		$obj = json_decode($lst_msg_json);
+		
+		foreach($obj->data as $msg_obj){
+			if($msg_obj->from->id == $page_id){
+				continue;
+			}
+			return $msg_obj->from->id;
+		}
+		
+		return null;
+	}
+	
+	function get_list_user_id($page_id){
+		//$page_id = '1681271828857371'; // Auto all;
+		$acc_token = get_access_token($page_id);
+		
+		$result = call_send_api_get_list_conversations($page_id, $acc_token);
+		//echo '<pre>';
+		//var_dump($result);
+		//echo '</pre>';
+		//exit();
+		$data = get_list_conversation_from_json($result);
+		
+		$user_ids = array();
+		foreach($data->data as $conversation_obj){
+			$result = call_send_api_get_list_msg_of_conversation($conversation_obj->id, $acc_token);
+			$user_id = get_user_id_from_list_msg($result, $page_id);
+			if($user_id == null){
+				continue;
+			}
+			$user_ids[] = $user_id;
+		}
+		return $user_ids;
+	}
+	
+	/*****************************************************************************/
+	
 	$lst_page_id = array();
 	//$lst_page_id[] = '205662139870141'; // Demo khach san
 	//$lst_page_id[] = '1681271828857371'; // Auto all
 	
 	$lst_page_id['205662139870141'] = 'Demo khách sạn'; // Demo khach san
 	$lst_page_id['1681271828857371'] = 'Auto all'; // Auto all
+	
+	$lst_page_id['559437760920787'] = 'Vé máy bay';
+	$lst_page_id['693558664140347'] = 'Hàng thời trang';
+	$lst_page_id['1435247499821906'] = 'Trung tâm đào tạo';
+	$lst_page_id['1137226739706218'] = 'Phòng khám';
+	
+	$lst_page_id['556256761138693'] = 'Học viện robotics';
+	//$lst_page_id['556256761138693'] = 'Học viện robotics';
 
 	$uploaded_page_id = '';
 	$is_success = false;
@@ -52,13 +153,45 @@ include_once '../lib/excel.php';
 			 exit();
 		 }
 		 $data_key_name = 'init_data_' .$uploaded_page_id;
+		 
+		 // must send request to create persistent menu
+		 create_persistent_menu($uploaded_page_id, $result);
 		 store_to_mem($data_key_name, $result);
       }else{
          print_r($errors);
+		 //$is_success = $errors;
       }
    }
+   
+   if(isset($_REQUEST['txt_msg'])){
+	   $msg = trim($_REQUEST['txt_msg']);
+	   if($msg != ''){
+		   $sent_result = '';
+		   $lst_user_id = get_list_user_id($uploaded_page_id);
+			echo '<pre>';
+			var_dump($lst_user_id);
+			echo '</pre>';
+			exit();
+
+		   foreach($lst_user_id as $user_id){
+			   $result = send_text_message($uploaded_page_id, $user_id, $msg);
+			   $sent_result = $sent_result . $result . '<br />';
+		   }
+		   $is_success = $uploaded_page_id .'_sent to '. count($lst_user_id) .' user <br />';
+		   $is_success .= $sent_result;
+	   }
+	   //$is_success = $uploaded_page_id . '===' .$msg;
+   }
+   
+   
 ?>
 <html>
+	<style>
+		.space{
+			color: red;
+			font-weight: bold;
+		}
+	</style>
 	<body>
 		<div class="space">
 			<?php
@@ -66,6 +199,23 @@ include_once '../lib/excel.php';
 					echo $is_success;
 				}
 			?>
+		</div>
+		<div>
+			<form action="" method="POST" enctype="multipart/form-data">
+				<div>
+					<label>Chọn page:</label>
+					<select name="sl_pages" class="input">
+					<?php foreach($lst_page_id as $p_k => $p_v) {?>
+					<option value="<?php echo $p_k; ?>"><?php echo $p_v; ?></option>
+					<?php }?>
+					</select>
+				</div>
+				<div>
+					<label>Nhập nội dung tin nhắn: </label>
+					<input type="text" name="txt_msg" />
+				</div>
+				<input type="submit" value="Gửi tin nhắn" />
+			</form>
 		</div>
 		<div class="content">
 			<form action="" method="POST" enctype="multipart/form-data">
