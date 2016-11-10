@@ -8,6 +8,8 @@
 	define('RANK_HMENU_BTN', 5);
 	define('RANK_STATISTIC', 8);
 	define('RANK_KEYWORD', 9);
+	define('RANK_PERSISTANT_MENU', 10);
+	define('RANK_TIME_START_STOP', 11);
 	
 	define('ACTION_BTN_URL', 6);
 	define('ACTION_BTN_CALL', 7);
@@ -354,27 +356,32 @@
 		}
 	}
 	
-	function check_keyword_in_obj($obj_kw, $keyword){
-		if($obj_kw == null){
+	function check_keyword_in_obj($arr_kw_obj, $keyword){
+		if($arr_kw_obj == null || count($arr_kw_obj) == 0){
 			return false;
 		}
-		$lst_kw = $obj_kw->title;
-		write_file('call3.txt', 'KW: ' .$lst_kw, false);
-		/*
-		if(stripos($lst_kw, $keyword) !== false){
-			return true;
+		if($keyword == ''){
+			return false;
 		}
-		*/
-		$kws = explode(',', $lst_kw);
-		if(is_array($kws)){
-			foreach($kws as $kw){
-				if($kw == ''){
-					continue;
-				}
-				
-				$kw = trim($kw);
-				if($kw == $keyword){
-					return true;
+		foreach($arr_kw_obj as $obj_kw){
+			$lst_kw = $obj_kw->title;
+			write_file('call3.txt', 'KW: ' .$lst_kw, false);
+			/*
+			if(stripos($lst_kw, $keyword) !== false){
+				return true;
+			}
+			*/
+			$kws = explode(',', $lst_kw);
+			if(is_array($kws)){
+				foreach($kws as $kw){
+					if($kw == ''){
+						continue;
+					}
+					
+					$kw = trim($kw);
+					if($kw == $keyword){
+						return true;
+					}
 				}
 			}
 		}
@@ -395,9 +402,52 @@
 		return '';
 	}
 	
+	function need_stop_because_time($data){
+		$result = false;
+		
+		$time_to_check = get_data_by_rank($data, RANK_TIME_START_STOP);
+		if(count($time_to_check) > 0){
+			foreach($time_to_check as $time){
+				$str_time = $time->title;
+				$arr = explode('-', $str_time);
+				if(count($arr) > 1){
+					$str_start = trim($arr[0]);
+					$str_end = trim($arr[1]);
+					
+					$num_end = (int)str_replace(':', '', $str_end);
+					$num_start = (int)str_replace(':', '', $str_start);
+					
+					$start_date = strtotime($str_start);
+					$end_date = strtotime($str_end);
+					
+					$now = time();
+					if($num_start < $num_end){
+						if($now < $start_date || $now > $end_date){
+							return true;
+						}
+					}else{
+						if($now > $end_date && $now < $start_date){
+							return true;
+						}
+					}
+				}
+				
+				break;
+			}
+		}
+		
+		return $result;
+	}
+	
 	function show_menu_by_id($data, $id, $obj_id, $msg){
 		$sender_id = $obj_id->sender_id;
 		$recipient_id = $obj_id->recipient_id;
+		
+		// Check time
+		if(need_stop_because_time($data) != false){
+			write_file('call2.txt', 'STOP_TIME_' .$recipient_id, false);
+			return;
+		}
 		
 		$current_data = new stdclass();
 		$previous_obj = '';
@@ -1325,10 +1375,10 @@
 		
 		// 2. Check msg =>
 		$arr_obj = get_data_by_rank($data, RANK_KEYWORD);
-		$kw_obj = get_first_element_of_arr($arr_obj);
+		//$kw_obj = get_first_element_of_arr($arr_obj);
 		
 		// 	2.1 Check rank tu khoa => next_id;
-		$condition = check_keyword_in_obj($kw_obj, $msg);
+		$condition = check_keyword_in_obj($arr_obj, $msg);
 		//$condition = ($msg == 'Hi' || $msg == 'hi');
 		write_file('call3.txt', $msg .'__'. $condition .'===Payload: '. $payload, false);
 		$id_next = '';

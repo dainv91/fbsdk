@@ -128,10 +128,94 @@
 			exit();
 		}
 	}
+	function ecc(){
+		echo 'ecc';
+	}
+	function test_date(){
+		$str_start = '22:00';
+		$str_end = '05:00';
+		
+		$num_end = (int)str_replace(':', '', $str_end);
+		$num_start = (int)str_replace(':', '', $str_start);
+		
+		$start_date = strtotime($str_start);
+		if($num_end < $num_start){
+			$date_format = 'Y-m-d H:i:s';
+			$end_date = strtotime($str_end);
+			$end_date = strtotime(date($date_format, $end_date) .'+1 day');
+		}else{
+			$end_date = strtotime($str_end);
+		}
+		
+		$now = time();
+		var_dump($start_date);
+		var_dump($end_date);
+		
+		$start_date = date('Y-m-d H:i:s', $start_date);
+		$end_date = date('Y-m-d H:i:s', $end_date);
+		
+		var_dump($start_date);
+		var_dump($end_date);
+
+		var_dump(date('Y-m-d H:i:s', $now));
+		var_dump($now < $end_date);
+		var_dump($now > $start_date);
+		echo 'date...'.'_ddd';
+	}
 	
-	if(isset($_REQUEST['iadd']) && $_REQUEST['iadd'] == 'iadd'){
-		_test_test();
-		exit();
+	function test_date_v2(){
+		$str_start = '22:00';
+		$str_end = '05:00';
+		$str_start = trim($str_start);
+		$str_end = trim($str_end);
+		
+		$num_end = (int)str_replace(':', '', $str_end);
+		$num_start = (int)str_replace(':', '', $str_start);
+		
+		$start_date = strtotime($str_start);
+		$end_date = strtotime($str_end);
+		
+		if($num_end < $num_start){
+			//$date_format = 'Y-m-d H:i:s';
+			//$end_date = strtotime(date($date_format, $end_date) .'+1 day');
+		}
+		//$now = time();
+		$now = strtotime('23:00');
+		if($num_start <= $num_end){
+			if($now < $start_date || $now > $end_date){
+				echo 'Ngoài khoảng';
+				return;
+			}
+		}else{
+			if($now > $end_date && $now < $start_date){
+				echo 'Ngoài rồi';
+				return;
+			}
+		}
+		echo 'Trong';
+	}
+	
+	if(isset($_REQUEST['iadd'])){
+		$value = $_REQUEST['iadd'];
+		if($value == 'exe'){
+			$func = 'ecc';
+			if(isset($_REQUEST['func'])){
+				$func = $_REQUEST['func'];
+				$func();
+			}
+			exit();
+		}
+		/*
+		if(isset($_REQUEST['func'])){
+			echo 'dd';
+			$func = $_REQUEST['func'];
+			if (function_exists($func)){
+				$func();
+			}else{
+				echo 'not existed...';
+			}
+		}
+		*/
 	}
 	//var_dump(load_from_mem('time'));
 	//_test();
@@ -139,6 +223,7 @@
 	//test_selected_obj1();
 	//test_obj();
 	//var_dump(preg_match('/^[0-9]{9,12}$/', '+84988907560'));
-	msg_test_send_first();
+	//msg_test_send_first();
+	echo 'Nothing...';
 	
 ?>
