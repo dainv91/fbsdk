@@ -638,9 +638,9 @@
 		$token = 'EAAMEwkQKZA7wBAPYcJjcKym48Dz8g6KPJNYHQqd4ZBjHwn9w79QkncJOQOKzBVkO3phhJXElpOvDZBVtFiZCRvzRjCgjkMlrMhcHNgLplLNAcceginxT8izvkDSHB4TMDTfbQwo1I2E6E27VLnS7NUWutxN9HS7dgjZCqyUY1YAZDZD';
 		$arr[$pid] = $token;
 		
-		// Du hoc han quoc -- chua la admin
+		// Du hoc han quoc
 		$pid = '1591469367824430';
-		$token = 'EAAMEwkQKZA7wBAPYcJjcKym48Dz8g6KPJNYHQqd4ZBjHwn9w79QkncJOQOKzBVkO3phhJXElpOvDZBVtFiZCRvzRjCgjkMlrMhcHNgLplLNAcceginxT8izvkDSHB4TMDTfbQwo1I2E6E27VLnS7NUWutxN9HS7dgjZCqyUY1YAZDZD';
+		$token = 'EAAMEwkQKZA7wBANhS5RRFuDeuyr0gRZBUSZBBgrtZAPbw0CPl0gV2ZCoqK7KqYPjzHdZBppOytlFLnZBPjmEpQTrZCvHASwaWNZA21l7BAwpS5mI6ZAoEEFFXjhw87ukAQCZCGGRQNDb8bMRoKK1xeN9gkcdBeAklnKosnZCaLYzsM1yIgZDZD';
 		$arr[$pid] = $token;
 		
 		if(isset($arr[$page_id])){

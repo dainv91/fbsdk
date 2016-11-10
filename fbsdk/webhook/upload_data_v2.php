@@ -108,7 +108,7 @@ include_once 'messenger_v2.php';
 	$lst_page_id['1137226739706218'] = 'Phòng khám';
 	
 	$lst_page_id['556256761138693'] = 'Học viện robotics';
-	//$lst_page_id['556256761138693'] = 'Học viện robotics';
+	$lst_page_id['1591469367824430'] = 'Du học Hàn Quốc Wiscko';
 
 	$uploaded_page_id = '';
 	$is_success = false;
