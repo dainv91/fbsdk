@@ -374,13 +374,15 @@
 			$kws = explode(',', $lst_kw);
 			if(is_array($kws)){
 				foreach($kws as $kw){
+					$kw = trim($kw);
 					if($kw == ''){
 						continue;
 					}
-					
-					$kw = trim($kw);
+					//write_file('call3.txt', 'kw_' .$kw, false);
 					if($kw == $keyword){
-						return true;
+						//write_file('call3.txt', 'rrr_' . var_dum_to_string($obj_kw), false);
+						//return true;
+						return $obj_kw;
 					}
 				}
 			}
@@ -1376,13 +1378,14 @@
 		// 2. Check msg =>
 		$arr_obj = get_data_by_rank($data, RANK_KEYWORD);
 		//$kw_obj = get_first_element_of_arr($arr_obj);
-		
+		//return var_dum_to_string($arr_obj);
 		// 	2.1 Check rank tu khoa => next_id;
 		$condition = check_keyword_in_obj($arr_obj, $msg);
 		//$condition = ($msg == 'Hi' || $msg == 'hi');
-		write_file('call3.txt', $msg .'__'. $condition .'===Payload: '. $payload, false);
+		write_file('call3.txt', $msg .'__'. var_dum_to_string($condition) .'===Payload: '. $payload, false);
 		$id_next = '';
-		if( $condition === true){
+		if( $condition !== false){
+			$kw_obj = $condition;
 			$id_next = $kw_obj->id_next;
 			// Show menu of id_next;
 			return show_menu_by_id($data, $id_next, $obj_id, $msg);
