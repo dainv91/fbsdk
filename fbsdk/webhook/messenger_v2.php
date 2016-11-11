@@ -643,6 +643,11 @@
 		$token = 'EAAMEwkQKZA7wBANhS5RRFuDeuyr0gRZBUSZBBgrtZAPbw0CPl0gV2ZCoqK7KqYPjzHdZBppOytlFLnZBPjmEpQTrZCvHASwaWNZA21l7BAwpS5mI6ZAoEEFFXjhw87ukAQCZCGGRQNDb8bMRoKK1xeN9gkcdBeAklnKosnZCaLYzsM1yIgZDZD';
 		$arr[$pid] = $token;
 		
+		// David Health VN: https://www.facebook.com/davidhealthvietnam.official/
+		$pid = '1645086179071672';
+		$token = 'EAAMEwkQKZA7wBAMxyr25ajzWqnKo5ZBR6CVCetbqbP0HskCZBhrDRirx4TA8j5XgxT8TJsDic9OEVyb658Cl9buZA8Fio2JPrYxSSsZBqHTRs1tvLAOb4qN9XdV51wLSMufkweUgZAVf6qwJHRMLEZBgA6gFgHfsPEHNxW2tqzCugZDZD';
+		$arr[$pid] = $token;
+		
 		if(isset($arr[$page_id])){
 			$access_token = $arr[$page_id];
 		}

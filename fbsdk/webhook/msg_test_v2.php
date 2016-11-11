@@ -211,11 +211,12 @@
 		return $is_done;
 	}
 	
-	function save_data_for_user($sender_id, $key, $value, $is_append = false){
+	function save_data_for_user($page_id, $sender_id, $key, $value, $is_append = false){
 		write_file('call.txt', $key .'__CALLL_SAVE____' .var_dum_to_string($value), false);
 		$key_info = 'user_info';
 		$mem = load_from_mem($key_info);
 		
+		$page_data = array();
 		$arr = array();
 		$info = array();
 		$tmp = array();
@@ -226,10 +227,14 @@
 		
 		if($mem === false){
 		// Not existed
-			store_to_mem($key_info, $arr);
+			$page_data[$page_id] = $arr;
+			//store_to_mem($key_info, $arr);
+			store_to_mem($key_info, $page_data);
 		}else{
 			// Existed
-			$arr = $mem['value'];
+			//$arr = $mem['value'];
+			$page_data = $mem['value'];
+			$arr = $page_data[$page_id];
 			$tmp = $arr[$sender_id];
 			//$info = $tmp[0];
 			$index = max(array_keys($tmp));
@@ -256,12 +261,14 @@
 			}
 			
 			$arr[$sender_id] = $tmp;
-			store_to_mem($key_info, $arr);
+			$page_data[$page_id] = $arr;
+			//store_to_mem($key_info, $arr);
+			store_to_mem($key_info, $page_data);
 		}
 	}
 	
-	function save_data_for_user_v2($sender_id, $value){
-		save_data_for_user($sender_id, 'other', $value, true);
+	function save_data_for_user_v2($page_id, $sender_id, $value){
+		save_data_for_user($page_id, $sender_id, 'other', $value, true);
 	}
 	
 	function get_level_of_payload($data, $payload){
@@ -490,7 +497,8 @@
 		
 		if($obj == null){
 			//return 'aaaaa_bbbbb';
-			$msg = 'Chịu thôi, thằng chủ tao nó chưa dạy. Ahihi :">';
+			//$msg = 'Chịu thôi, thằng chủ tao nó chưa dạy. Ahihi :">';
+			$msg = 'Xin lỗi, tôi chưa thể tư vấn cho bạn ngay bây giờ.';
 			return send_text_message($recipient_id, $sender_id, $msg);
 		}
 		// Check obj is done to toggle_user_is_done
@@ -504,7 +512,7 @@
 		foreach($arr_id_need_save_info as $key => $value){
 			if($previous_obj != ''){
 				if($key == $previous_obj->id){
-					save_data_for_user($sender_id, $value, $msg);
+					save_data_for_user($recipient_id, $sender_id, $value, $msg);
 					break;
 				}
 				//write_file('call.txt', $key .'__CA111____' .var_dum_to_string($previous_obj), false);
@@ -1357,7 +1365,7 @@
 		$current_level = $current_level['value'];
 		// Increment current_level
 		msg_thread_status_set($sender_id . $current_level_str, $current_level + 1);
-		save_data_for_user_v2($sender_id, $payload);
+		//save_data_for_user_v2($sender_id, $payload); ==> Comment v1, now using v2
 		//return show_menu_of_level($current_level, $sender_id, $msg, $payload);
 		return show_menu_of_level_v2($current_level, $sender_id, $msg, $payload);
 	}
@@ -1390,7 +1398,7 @@
 			// Show menu of id_next;
 			return show_menu_by_id($data, $id_next, $obj_id, $msg);
 		}else{
-			save_data_for_user_v2($sender_id, $payload);
+			save_data_for_user_v2($recipient_id, $sender_id, $payload);
 			// Other menu
 			if(is_numeric($payload)){
 				// ** 1. Must save current data for next leve **

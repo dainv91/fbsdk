@@ -1,9 +1,50 @@
 <?php
 include_once '../../helper/mem.php';
 include_once '../lib/excel.php';
-include_once 'messenger_v2.php';
+//include_once 'messenger_v2.php';
+include_once 'msg_test_v2.php';
+
+	//echo '<pre>';
+	//var_dump($_REQUEST);
+	//echo '</pre>';
+	//exit();
 
 	ini_set('max_execution_time', 300);	
+	
+	function get_selected_value_v2($data, $str_id_selected){
+		$arr = explode('_', $str_id_selected);
+		
+		$obj_result = new stdclass();
+		$obj_result->arr = array();
+		$obj_result->text = '';
+		foreach($arr as $payload){
+			if($arr == ''){
+				continue;
+			}
+			$obj = get_obj_by_id($data, $payload);
+			if($obj != null){
+				
+				/*
+				if($obj->p_id != '' && $obj->p_id != -1){
+					$obj = get_obj_by_id($data, $obj->p_id);
+				}
+				*/
+				
+				// DEBUG
+				if($obj->rank == RANK_HMENU_BTN || $obj->rank == RANK_BTN){
+					$obj = get_obj_by_id($data, $obj->p_id);
+				}
+				if($obj->id == 1){
+					continue;
+				}
+				
+				
+				$obj_result->arr[] = $payload;
+				$obj_result->text .= '/ ' . $obj->title;
+			}
+		}
+		return $obj_result;
+	}
 	
 	function create_persistent_menu($page_id, $data){
 		
@@ -109,6 +150,7 @@ include_once 'messenger_v2.php';
 	
 	$lst_page_id['556256761138693'] = 'Học viện robotics';
 	$lst_page_id['1591469367824430'] = 'Du học Hàn Quốc Wiscko';
+	$lst_page_id['1645086179071672'] = 'David Health Vietnam';
 
 	$uploaded_page_id = '';
 	$is_success = false;
@@ -163,7 +205,7 @@ include_once 'messenger_v2.php';
       }
    }
    
-   if(isset($_REQUEST['txt_msg'])){
+   if(isset($_REQUEST['txtSendMessage']) && isset($_REQUEST['txt_msg'])){
 	   $msg = trim($_REQUEST['txt_msg']);
 	   if($msg != ''){
 		   $sent_result = '';
@@ -181,6 +223,76 @@ include_once 'messenger_v2.php';
 		   $is_success .= $sent_result;
 	   }
 	   //$is_success = $uploaded_page_id . '===' .$msg;
+   }
+   
+   if(isset($_REQUEST['txtExport'])){
+		$key = 'user_info';
+		$mem = load_from_mem($key);
+		$mem = $mem['value'];
+
+		$data_key_name = 'init_data_' .$uploaded_page_id;
+		$data = load_from_mem($data_key_name);
+		$data = $data['value'];
+
+		$result = array();
+		if(isset($mem[$uploaded_page_id])){
+			$page_data = $mem[$uploaded_page_id];
+			foreach($page_data as $k => $v){
+				$sender_id = $k;
+				//$result[$sender_id] = $v;
+				$result[$sender_id] = array();
+				foreach($v as $info){
+					$tmp = array();
+					//$selected = $info['other'];
+					//$obj_selected = get_selected_value_v2($data, $selected);
+					//$obj_selected->text;
+					//$result[$sender_id][] = $obj_selected->text;
+					foreach($info as $key_info => $value_info){
+						if($key_info == 'other'){
+							continue;
+						}
+						//$result[$sender_id][$key_info] = $value_info;
+						$tmp[$key_info] = $value_info;
+					}
+					$result[$sender_id][] = $tmp;
+				}
+			}
+		}
+		//echo '<pre>';
+		//var_dump($result);
+		//echo '</pre>';
+		//write_xlsx($result, 'test.xlsx');
+		$now = date('Ymd_His');
+		$file_name = "data_$now.xlsx";
+		//write_xlsx($result, 'php://output');
+		
+		$data_to_export = new stdclass();
+		$data_to_export->column = array();
+		$data_to_export->row = array();
+		foreach($result as $sender_id => $sender_data){
+			$data_to_export->column[] = 'fb_id';
+			//$data_to_export->row[] = $sender_id;
+			$tmp = array();
+			foreach($sender_data as $obj_arr){
+				$tmp = array();
+				$tmp[] = $sender_id;
+				foreach($obj_arr as $obj_key => $obj_data){
+					$data_to_export->column[] = $obj_key;
+					//$data_to_export->row[] = $obj_data;
+					$tmp[] = $obj_data;
+				}
+			}
+			$data_to_export->row[] = $tmp;
+		}
+		/*
+		echo '<pre>';
+		var_dump($result);
+		echo '=========================<br />';
+		var_dump($data_to_export);
+		echo '</pre>';
+		*/
+		write_xlsx_to_download($data_to_export, $file_name);
+		exit();
    }
    
    
@@ -214,7 +326,8 @@ include_once 'messenger_v2.php';
 					<label>Nhập nội dung tin nhắn: </label>
 					<input type="text" name="txt_msg" />
 				</div>
-				<input type="submit" value="Gửi tin nhắn" />
+				<input type="submit" value="Gửi tin nhắn" name="txtSendMessage" />
+				<input type="submit" value="Xuất dữ liệu" name="txtExport" />
 			</form>
 		</div>
 		<div class="content">
