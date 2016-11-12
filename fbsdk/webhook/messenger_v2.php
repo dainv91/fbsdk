@@ -116,13 +116,16 @@
 					$message = $value->message;
 					
 					$msg = "Ê, ai cho mày comment: $message ?";
-					return reply_cmt($comment_id, $msg);
+					return reply_cmt_1($comment_id, $msg);
 				}
 			}
 		}
 		
-		
 		return var_dum_to_string($messaging);
+	}
+	
+	function process_when_user_cmt(){
+		
 	}
 
 	function process_msg_when_chatting($sender_id, $msg, $payload){
@@ -490,13 +493,27 @@
 		return send_quick_replies_1($recipient_id, $title, $elements_obj_arr);
 	}
 	
-	function reply_cmt($cmt_id, $msg, $access_token = null){
+	function reply_cmt_1($cmt_id, $msg, $access_token = null){
 		if ($access_token == null){			
 			$access_token = 'EAAMEwkQKZA7wBAL9DjYj0hBbMzzdNoBUbXmnG2ma6kw6P4DtsqijouIVZBZCjv8WYu5KF3rCv2GGyeHpgIwyHMRaa4TLK4vDAufQkZCQg1fB8ZCU4avJBfeQGWvOtm7TTMd763dBzLdz4ZBBrQY1cCqHtJrsL2DZCMpfg3PA0gscAZDZD';
 			$access_token = ACCESS_TOKEN;
 		}
-		return call_send_api_reply_cmt($cmt_id, $msg, $access_token);
+		return call_send_api_reply_cmt_1($cmt_id, $msg, $access_token);
 	}
+	function reply_cmt($page_id, $cmt_id, $msg){
+		$access_token = get_access_token($page_id);
+		return call_send_api_reply_cmt_1($cmt_id, $msg, $access_token);
+	}
+	
+	function hide_cmt_of_page($page_id, $cmt_id){
+		$access_token = get_access_token($page_id);
+		$msg_data = array(
+			'is_hidden' => 'true',
+		);
+		
+		return call_send_api_cmt('', $cmt_id, $msg_data, $access_token);
+	}
+	
 	
 	function send_persistent_menu($page_id, $data){
 		$access_token = get_access_token($page_id);
@@ -518,11 +535,17 @@
 		return $result['content'];
 	}
 	
-	function call_send_api_reply_cmt($comment_id, $msg, $access_token){
+	function call_send_api_reply_cmt_1($comment_id, $msg, $access_token){
 		$msg_data = array(
 			'message' => $msg,
 		);
-		$url = "https://graph.facebook.com/v2.7/$comment_id/private_replies?access_token=" . $access_token;
+		//$url = "https://graph.facebook.com/v2.7/$comment_id/private_replies?access_token=" . $access_token;
+		$url_plus = '/private_replies';
+		return call_send_api_cmt($url_plus, $comment_id, $msg_data, $access_token);
+	}
+	
+	function call_send_api_cmt($url_plus, $comment_id, $msg_data, $access_token){
+		$url = "https://graph.facebook.com/v2.7/$comment_id$url_plus?access_token=" . $access_token;
 		$result = send_http($url, $msg_data, 'POST', array('Content-Type: application/json'));
 		return $result['content'];
 	}
@@ -603,7 +626,9 @@
 		
 		// auto all
 		$pid = '1681271828857371';
-		$token = 'EAAMEwkQKZA7wBAL9DjYj0hBbMzzdNoBUbXmnG2ma6kw6P4DtsqijouIVZBZCjv8WYu5KF3rCv2GGyeHpgIwyHMRaa4TLK4vDAufQkZCQg1fB8ZCU4avJBfeQGWvOtm7TTMd763dBzLdz4ZBBrQY1cCqHtJrsL2DZCMpfg3PA0gscAZDZD';
+		//$token = 'EAAMEwkQKZA7wBAL9DjYj0hBbMzzdNoBUbXmnG2ma6kw6P4DtsqijouIVZBZCjv8WYu5KF3rCv2GGyeHpgIwyHMRaa4TLK4vDAufQkZCQg1fB8ZCU4avJBfeQGWvOtm7TTMd763dBzLdz4ZBBrQY1cCqHtJrsL2DZCMpfg3PA0gscAZDZD';
+		// Van Dai Nguyen - first
+		$token = 'EAAMEwkQKZA7wBAJyccEkIiPXBunoeIslfIZBAPBcgRpcLgehen7UMw9XzqgZAhqM8UjzPQ6j9prWNGlTxIipqKycHyxEIYnW78BK00A4QC9mgnjoDkiJzMkhHgZCNuJKyRZCKDFTly10Sv3EeCsvbE3vzUi7N2QqVx4jFGZCUPSwZDZD';
 		$arr[$pid] = $token;
 		
 		// phong kham

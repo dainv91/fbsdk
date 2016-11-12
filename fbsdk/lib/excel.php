@@ -34,7 +34,38 @@ function conver_column_arr_to_obj($column_arr){
 	if(isset($column_arr[11])){
 		$obj->is_done = $column_arr[11];
 	}
+	if(isset($column_arr[12])){
+		$obj->is_continue = $column_arr[12];
+	}
+	
 	return $obj;
+}
+
+function set_column_auto($sheet, $max_col){
+	$pos = 0;
+	foreach(range('B', 'Z') as $char){
+		if($pos >= $max_col){
+			break;
+		}
+		$sheet->getColumnDimension($char)->setAutoSize(true);
+		$pos++;
+	}
+}
+
+function set_data_for_row($sheet, $data_of_row, $row, $max_col){
+	$pos = 0;
+	foreach(range('B', 'Z') as $char){
+		if($pos > $max_col){
+			break;
+		}
+		if(!isset($data_of_row[$pos])){
+			break;
+		}
+		$value = $data_of_row[$pos];
+		$index = $char . $row;
+		$sheet->setCellValue($index, $value);
+		$pos++;
+	}
 }
 
 function write_xlsx($data, $file_name){
@@ -90,6 +121,9 @@ function write_xlsx($data, $file_name){
 	// Add some data
 	//echo date('H:i:s') , " Add some data" , EOL;
 	$activeSheet = $objPHPExcel->setActiveSheetIndex(0);
+	$activeSheet->getStyle('B1:Z200')->getAlignment()->setWrapText(true);
+
+	$max_col = 0;
 	$i = 0;
 	foreach(range('B', 'Z') as $char){
 		if(!isset($data->column[$i])){
@@ -99,21 +133,13 @@ function write_xlsx($data, $file_name){
 		$value = $data->column[$i];
 		$activeSheet->setCellValue($index, $value);
 		$i++;
+		$max_col++;
 	}
-	$i = 2;
-	$j = 1;
-	foreach(range('B', 'Z') as $char){
-		$j = 1;
-		foreach($data->row as $obj_arr){
-			if(!isset($obj_arr[$j])){
-				break;
-			}
-			$index = $char . $i;
-			$value = $obj_arr[$j];
-			$activeSheet->setCellValue($index, $value);
-			$j++;
-		}
-		$i++;
+	set_column_auto($activeSheet, $max_col);
+
+	$i_break = false;
+	foreach($data->row as $row_num => $obj_arr){
+		set_data_for_row($activeSheet, $obj_arr, 2 + $row_num, $max_col);
 	}
 	/*
 	$objPHPExcel->setActiveSheetIndex(0)

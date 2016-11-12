@@ -258,38 +258,40 @@ include_once 'msg_test_v2.php';
 				}
 			}
 		}
-		//echo '<pre>';
-		//var_dump($result);
-		//echo '</pre>';
-		//write_xlsx($result, 'test.xlsx');
 		$now = date('Ymd_His');
 		$file_name = "data_$now.xlsx";
-		//write_xlsx($result, 'php://output');
 		
 		$data_to_export = new stdclass();
 		$data_to_export->column = array();
 		$data_to_export->row = array();
 		foreach($result as $sender_id => $sender_data){
-			$data_to_export->column[] = 'fb_id';
+			if(!in_array('fb_id', $data_to_export->column)){
+				$data_to_export->column[] = 'fb_id';
+			}
 			//$data_to_export->row[] = $sender_id;
 			$tmp = array();
 			foreach($sender_data as $obj_arr){
 				$tmp = array();
 				$tmp[] = $sender_id;
 				foreach($obj_arr as $obj_key => $obj_data){
-					$data_to_export->column[] = $obj_key;
-					//$data_to_export->row[] = $obj_data;
+					if($obj_key == ''){
+						continue;
+					}
+					if(!in_array($obj_key, $data_to_export->column)){
+						$data_to_export->column[] = $obj_key;	
+					}
 					$tmp[] = $obj_data;
 				}
-			}
-			$data_to_export->row[] = $tmp;
-		}
+				$data_to_export->row[] = $tmp;
+			} // array of item ( $obj_arr => array ['ten'=>.., ['phone'] => ...)
+		} // array of sender id (0 => arr, 1 => arr)
 		/*
 		echo '<pre>';
 		var_dump($result);
 		echo '=========================<br />';
 		var_dump($data_to_export);
 		echo '</pre>';
+		exit();
 		*/
 		write_xlsx_to_download($data_to_export, $file_name);
 		exit();

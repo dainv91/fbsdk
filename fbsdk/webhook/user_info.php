@@ -23,7 +23,7 @@
 		//$sender_id = '';
 		//$selected = $mem[$sender_id]['other'];
 		//$obj_selected = get_selected_value($data, $selected);
-		
+		/*
 		$result = array();
 		foreach($mem as $k => $v){
 			$sender_id = $k;
@@ -32,9 +32,9 @@
 			//$v['data_saved'] = $obj_selected;
 			$result[$sender_id] = $obj_selected->text;
 		}
-		
+		*/
 		echo '<pre>';
-		var_dump($result);
+		var_dump($mem);
 		echo '</pre>';
 	}
 	

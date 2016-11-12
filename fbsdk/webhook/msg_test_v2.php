@@ -372,7 +372,7 @@
 		}
 		foreach($arr_kw_obj as $obj_kw){
 			$lst_kw = $obj_kw->title;
-			write_file('call3.txt', 'KW: ' .$lst_kw, false);
+			//write_file('call3.txt', 'KW: ' .$lst_kw, false);
 			/*
 			if(stripos($lst_kw, $keyword) !== false){
 				return true;
@@ -385,12 +385,23 @@
 					if($kw == ''){
 						continue;
 					}
-					//write_file('call3.txt', 'kw_' .$kw, false);
-					if($kw == $keyword){
-						//write_file('call3.txt', 'rrr_' . var_dum_to_string($obj_kw), false);
-						//return true;
-						return $obj_kw;
+					//if(strpos($kw, '"') !== false){
+					//if(preg_match('/"/', $kw)){
+					if(strpos($kw, '[') !== false){
+						// check tu khoa chinh xac
+						//$kw = str_replace('"', '', $kw);
+						$kw = str_replace('[', '', $kw);
+						$kw = str_replace(']', '', $kw);
+						//write_file('call3.txt', 'kw_chinh_xac: ' .$kw, false);
+						if($kw == $keyword){
+							return $obj_kw;
+						}
+					}else{
+						if(mb_stripos($keyword, $kw) !== false){
+							return $obj_kw;
+						}
 					}
+					//write_file('call3.txt', 'kw_' .$kw, false);
 				}
 			}
 		}
@@ -583,8 +594,14 @@
 			
 			//write_file('call3.txt',$rank_action . '++'. $title . '######' . var_dum_to_string($menus), false);
 			write_file('call3.txt','RANK: '. $rank_action . '++'. $title . '######', false);
-			//write_file('call3.txt', var_dum_to_string($data_of_level), false);
-			return show_menu_by_type_v2($data_of_level, $rank_action);
+			//write_file('call3.txt','OBJ_INFO: '. var_dum_to_string($obj), false);
+			if(isset($obj->is_continue)){
+				$log = show_menu_by_type_v2($data_of_level, $rank_action);
+				write_file('call2.txt', 'LOG_1_' .$log, false);
+				show_menu_by_id($data, $obj->id_next, $obj_id, $msg);
+			}else{
+				return show_menu_by_type_v2($data_of_level, $rank_action);
+			}
 		}
 		
 		
@@ -674,10 +691,10 @@
 					
 					$msg = "Ê, ai cho mày comment: $message ?";
 					write_file('call2.txt', "$comment_id comment....", false);
-					return reply_cmt($comment_id, $msg);
+					//return reply_cmt_1($comment_id, $msg); ==> CMT, using v2
 				}else if($change->item == 'like'){
 					$parent_id = $value->post_id;
-					return reply_cmt($parent_id, 'hehe');
+					//return reply_cmt_1($parent_id, 'hehe');
 				}
 			}
 		}
@@ -777,6 +794,8 @@
 				$changes = $entry->changes;	
 			}
 			if($changes){
+				$page_id = $entry->id;
+				
 				$change = $changes[0];
 				$value = $change->value;
 				
@@ -784,12 +803,10 @@
 				if($change->field == 'feed'){
 					$comment_id = $value->comment_id;
 					$message = $value->message;
-					
-					$msg = "Ê, ai cho mày comment: $message ?";
-					reply_cmt($comment_id, $msg);
+					return process_when_user_like_cmt($page_id, $comment_id, $message);
 				}else if(isset($change->item) && $change->item == 'like'){
 					$parent_id = $value->post_id;
-					return reply_cmt($parent_id, 'hehe');
+					return reply_cmt($page_id, $parent_id, 'hehe');
 				}
 			}
 		}
@@ -1419,6 +1436,27 @@
 					return show_menu_by_id($data, $id_next, $obj_id, $msg);
 				}
 			}
+		}
+	}
+	
+	function process_when_user_like_cmt($page_id, $comment_id, $message){
+		$action_of_message = check_action_type_of_button($message);
+		switch($action_of_message){
+			case ACTION_BTN_CALL:
+				$msg = "Bạn vừa comment SĐT: $message. Mình ẩn lại nhé :\">";
+				$log = reply_cmt($page_id, $comment_id, $msg);
+				write_file('call2.txt', $comment_id.'_LOG_REPLY_CMT_' .$log, false);
+				$log = hide_cmt_of_page($page_id, $comment_id);
+				write_file('call2.txt', $comment_id.'_LOG_HIDE_CMT_' .$log, false);
+				break;
+			case ACTION_BTN_URL:
+				break;
+			default:
+				$msg = "Ê, ai cho mày comment: $message ?";
+				$log = reply_cmt($page_id, $comment_id, $msg);
+				write_file('call2.txt', $comment_id .'_LOG_REPLY_CMT_' .$log, false);
+				//$log = hide_cmt_of_page($page_id, $comment_id);
+				//write_file('call2.txt', 'LOG_HIDE_CMT_' .$log, false);
 		}
 	}
 	
