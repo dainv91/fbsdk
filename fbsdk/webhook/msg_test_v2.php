@@ -14,6 +14,10 @@
 	define('ACTION_BTN_URL', 6);
 	define('ACTION_BTN_CALL', 7);
 	
+	define('IS_DONE_BREAK', 1);
+	define('IS_DONE_SAVE_CURRENT', 2);
+	define('IS_DONE_SAVE_PARENT', 3);
+	
 	function get_leaf_from_data($data){
 		$result = array();
 		foreach($data as $obj){
@@ -267,8 +271,42 @@
 		}
 	}
 	
-	function save_data_for_user_v2($page_id, $sender_id, $value){
-		save_data_for_user($page_id, $sender_id, 'other', $value, true);
+	function save_data_for_user_v2($data, $obj_id, $payload){
+		$sender_id = $obj_id->sender_id;
+		$page_id = $obj_id->recipient_id;
+		
+		if(is_numeric($payload)){
+			$obj = get_obj_by_id($data, $payload);
+			if($obj != null){
+				if(isset($obj->is_done)){
+					$is_done = $obj->is_done;
+					$key = '';
+					$value = '';
+					switch($is_done){
+						case IS_DONE_SAVE_CURRENT:
+							if(isset($obj->save_info)){
+								$key = trim($obj->save_info);
+								$value = trim($obj->title);
+							}
+							break;
+						case IS_DONE_SAVE_PARENT:
+							$p_obj = get_obj_by_id($data, $obj->p_id);
+							if(isset($p_obj->save_info)){
+								$key = trim($p_obj->save_info);
+								$value = trim($p_obj->title);
+							}
+							break;
+						default:
+							break;
+					}
+					if($key != '' && $value != ''){
+						save_data_for_user($page_id, $sender_id, $key, $value);
+					}
+				}
+			}
+		}
+		
+		save_data_for_user($page_id, $sender_id, 'other', $payload, true);
 	}
 	
 	function get_level_of_payload($data, $payload){
@@ -513,7 +551,7 @@
 			return send_text_message($recipient_id, $sender_id, $msg);
 		}
 		// Check obj is done to toggle_user_is_done
-		if(isset($obj->is_done) && $obj->is_done != ''){
+		if(isset($obj->is_done) && $obj->is_done != '' && $obj->is_done == IS_DONE_BREAK){
 			write_file('call2.txt', $obj->id .'_IS_DONE_from_obj: ' .$obj->is_done, false);
 			toggle_user_is_done($sender_id);
 		}
@@ -1451,7 +1489,7 @@
 			// Show menu of id_next;
 			return show_menu_by_id($data, $id_next, $obj_id, $msg);
 		}else{
-			save_data_for_user_v2($recipient_id, $sender_id, $payload);
+			save_data_for_user_v2($data, $obj_id, $payload);
 			// Other menu
 			if(is_numeric($payload)){
 				// ** 1. Must save current data for next leve **
