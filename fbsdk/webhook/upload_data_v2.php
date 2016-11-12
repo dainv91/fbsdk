@@ -46,8 +46,14 @@ include_once 'msg_test_v2.php';
 		return $obj_result;
 	}
 	
-	function create_persistent_menu($page_id, $data){
-		
+	function prepare_create_persistent_menu($page_id, $data, $is_update_menu){
+		//$persistant_menu = get_data_by_rank($data, RANK_PERSISTANT_MENU);
+		if($is_update_menu !== false){
+			$result = create_persistent_menu($page_id, $data);
+			echo '<pre>';
+			var_dump($result);
+			echo '</pre>';
+		}
 	}
 
 	/*********************SENDING MESSAGE FUNCTION********************************/
@@ -165,6 +171,13 @@ include_once 'msg_test_v2.php';
 	}
 	
    if(isset($_FILES['data_file'])){
+	  $update_menu = false;
+	  if(isset($_REQUEST['chkUpdateMenu'])){
+		  if($_REQUEST['chkUpdateMenu'] == 'update_menu'){
+			  $update_menu = true;
+		  }
+	  }
+	  
       $errors= array();
       $file_name = $_FILES['data_file']['name'];
       $file_size =$_FILES['data_file']['size'];
@@ -197,7 +210,7 @@ include_once 'msg_test_v2.php';
 		 $data_key_name = 'init_data_' .$uploaded_page_id;
 		 
 		 // must send request to create persistent menu
-		 create_persistent_menu($uploaded_page_id, $result);
+		 prepare_create_persistent_menu($uploaded_page_id, $result, $update_menu);
 		 store_to_mem($data_key_name, $result);
       }else{
          print_r($errors);
@@ -345,6 +358,7 @@ include_once 'msg_test_v2.php';
 				<div>
 					<label>Chọn file dữ liệu:</label>
 					<input type="file" name="data_file" />
+					<input type="checkbox" name="chkUpdateMenu" value="update_menu" />Update menu
 				</div>
 				<input type="submit"/>
 			</form>

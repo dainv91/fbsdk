@@ -608,6 +608,39 @@
 		
 	}
 	
+	function create_persistent_menu($page_id, $data){
+		$persistant_menu = get_data_by_rank($data, RANK_PERSISTANT_MENU);
+		
+		$call_to_action_arr_obj = array();
+		$count = 0;
+		foreach($persistant_menu as $menu){
+			if($count++ > 5){
+				break;
+			}
+			$title = trim($menu->title);
+			
+			$menu_item = new stdclass();
+			$menu_item->type = 'postback';
+			$menu_item->title = $title;
+			if(mb_strlen($title) > 30){
+				$menu_item->title = mb_substr($title, 0, 29);
+			}
+			if(isset($menu->action)){
+				$action = trim($menu->action);
+				$action_type = check_action_type_of_button($action);
+				if($action_type == ACTION_BTN_URL){
+					$menu_item->type = 'web_url';
+					$menu_item->url = $action;
+				}
+			}else{
+				$menu_item->payload = $menu->id;
+			}
+			$call_to_action_arr_obj[] = $menu_item;
+		}
+		
+		return send_persistent_menu($page_id, $call_to_action_arr_obj);
+	}
+	
 	function msg_test($input){
 		$entry = json_decode($input);
 		$entry = $entry->entry[0];
@@ -801,6 +834,9 @@
 				
 				// cmt	
 				if($change->field == 'feed'){
+					if($value->verb == 'hide'){
+						return;
+					}
 					$comment_id = $value->comment_id;
 					$message = $value->message;
 					return process_when_user_like_cmt($page_id, $comment_id, $message);

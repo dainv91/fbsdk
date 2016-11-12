@@ -515,15 +515,16 @@
 	}
 	
 	
-	function send_persistent_menu($page_id, $data){
+	function send_persistent_menu($page_id, $call_to_action_arr_obj){
 		$access_token = get_access_token($page_id);
 		
 		$obj_msg = new stdclass();
 		$obj_msg->setting_type = 'call_to_actions';
 		$obj_msg->thread_state = 'existing_thread';
-		$obj_msg->call_to_actions = array();
+		//$obj_msg->call_to_actions = array();
+		$obj_msg->call_to_actions = $call_to_action_arr_obj;
 		
-		$menu_items = array();
+		//$menu_items = array();
 		
 		$msg_data = json_encode($obj_msg);
 		return call_send_api_persistent_menu($msg_data, $access_token);
