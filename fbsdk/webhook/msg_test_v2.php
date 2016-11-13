@@ -10,6 +10,7 @@
 	define('RANK_KEYWORD', 9);
 	define('RANK_PERSISTANT_MENU', 10);
 	define('RANK_TIME_START_STOP', 11);
+	define('RANK_MSG_EXCEPTION', 12);
 	
 	define('ACTION_BTN_URL', 6);
 	define('ACTION_BTN_CALL', 7);
@@ -570,7 +571,19 @@
 			//return 'aaaaa_bbbbb';
 			//$msg = 'Chịu thôi, thằng chủ tao nó chưa dạy. Ahihi :">';
 			$msg = 'Xin lỗi, tôi chưa thể tư vấn cho bạn ngay bây giờ.';
-			return send_text_message($recipient_id, $sender_id, $msg);
+			//return send_text_message($recipient_id, $sender_id, $msg);
+			
+			$msg_exception_arr = get_data_by_rank($data, RANK_MSG_EXCEPTION);
+			if(count($msg_exception_arr) > 0){
+				$msg_exception_obj = $msg_exception_arr[0];
+				$msg = trim($msg_exception_obj->title);
+				
+				// Send to admin
+				$log = send_msg_for_admin_of_page($recipient_id, 'Có thằng vừa nhắn linh tinh vào page kìa người đẹp: ');
+				write_file('call3.txt', $log, false);
+				
+				return show_menu_by_id($data, $msg_exception_obj->id, $obj_id, $msg);
+			}
 		}
 		// Check obj is done to toggle_user_is_done
 		if(isset($obj->is_done) && $obj->is_done != '' && $obj->is_done == IS_DONE_BREAK){
@@ -607,7 +620,7 @@
 		
 		//return var_dum_to_string($current_data);
 		
-		if($obj->id_next != null && $obj->rank != RANK_TEXT && $obj->rank != RANK_STATISTIC){
+		if($obj->id_next != null && $obj->rank != RANK_TEXT && $obj->rank != RANK_STATISTIC && $obj->rank != RANK_MSG_EXCEPTION){
 			/*
 			// ** 1. Must save current data for next leve **
 			$current_data->id_previous = $obj->id;
@@ -640,6 +653,8 @@
 
 			if($obj->rank == RANK_STATISTIC){
 				$rank_action = RANK_STATISTIC;
+			}else if($obj->rank == RANK_MSG_EXCEPTION){
+				$rank_action = RANK_MSG_EXCEPTION;
 			}
 			
 			$data_of_level = new stdclass();
@@ -1268,7 +1283,11 @@
 				//*/
 				$text = 'Bạn vừa chọn: ' . $obj_selected->text;
 				//$text = 'Bạn vừa chọn: ';
-				send_text_message($recipient_id, $data_of_level->sender_id, $text);
+				return send_text_message($recipient_id, $data_of_level->sender_id, $text);
+				break;
+			case RANK_MSG_EXCEPTION:
+				$type_rank = RANK_MSG_EXCEPTION;
+				return show_menu_by_type_v2($data_of_level, $type_rank);
 				break;
 		}
 	}
@@ -1555,5 +1574,52 @@
 				//write_file('call2.txt', 'LOG_HIDE_CMT_' .$log, false);
 		}
 	}
+	
+	function save_admin_of_page($page_id, $admin_id, $admin_name){
+		$key_admin_of_page = 'key_admin_of_page_';
+		$mem = load_from_mem($key_admin_of_page);
+		
+		$all_admin = array();
+		$page_admin = array();
+		
+		if($mem === false){
+			// Not existed
+			$page_admin[$admin_id] = $admin_name;
+			
+			$all_admin[$page_id] = $page_admin;
+			store_to_mem($key_admin_of_page, $all_admin);
+		}else{
+			$all_admin = $mem['value'];
+			if(isset($all_admin[$page_id])){
+				$page_admin = $all_admin[$page_id];
+				if(!isset($page_admin[$admin_id])){
+					$page_admin[$admin_id] = $admin_name;
+				}
+				$all_admin[$page_id] = $page_admin;
+				store_to_mem($key_admin_of_page, $all_admin);
+			}
+			
+		}
+	}
+
+	function send_msg_for_admin_of_page($page_id, $msg){
+		$key_admin_of_page = 'key_admin_of_page_';
+		$mem = load_from_mem($key_admin_of_page);
+		if($mem !== false){
+			$all_admin = $mem['value'];
+			if(isset($all_admin[$page_id])){
+				$log = '';
+				foreach($all_admin[$page_id] as $page_admin_key => $page_admin_value){
+					$log .= send_text_message($page_id, $page_admin_key, $msg . " $page_admin_value") . '\n';
+				}
+				return "LOG_SEND_TO_ADMIN: $log";
+			}else{
+				return "EMPTY_ADMIN_OF_PAGE_$page_id";
+			}
+		}
+		return "INVALID_PAGE_ID_$page_id";
+	}
+	
+	
 	
 ?>

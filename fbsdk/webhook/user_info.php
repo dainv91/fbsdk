@@ -41,6 +41,7 @@
 	function clear_info(){
 		clear_cache('user_info');
 		clear_cache('user_is_done');
+		clear_cache('key_admin_of_page_');
 	}
 	
 	if(isset($_REQUEST['iadd'])){

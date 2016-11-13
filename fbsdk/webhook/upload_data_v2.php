@@ -3,6 +3,7 @@ include_once '../../helper/mem.php';
 include_once '../lib/excel.php';
 //include_once 'messenger_v2.php';
 include_once 'msg_test_v2.php';
+include_once 'lst_page_id.php';
 
 	//echo '<pre>';
 	//var_dump($_REQUEST);
@@ -142,6 +143,7 @@ include_once 'msg_test_v2.php';
 	
 	/*****************************************************************************/
 	
+	/*
 	$lst_page_id = array();
 	//$lst_page_id[] = '205662139870141'; // Demo khach san
 	//$lst_page_id[] = '1681271828857371'; // Auto all
@@ -157,7 +159,8 @@ include_once 'msg_test_v2.php';
 	$lst_page_id['556256761138693'] = 'Học viện robotics';
 	$lst_page_id['1591469367824430'] = 'Du học Hàn Quốc Wiscko';
 	$lst_page_id['1645086179071672'] = 'David Health Vietnam';
-
+	*/
+	
 	$uploaded_page_id = '';
 	$is_success = false;
 	
