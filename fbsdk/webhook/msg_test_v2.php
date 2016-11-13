@@ -435,8 +435,30 @@
 							return $obj_kw;
 						}
 					}else{
-						if(mb_stripos($keyword, $kw) !== false){
-							return $obj_kw;
+						// Check keyword contain + character
+						$plus_char_pos = stripos($kw, '+');
+						if($plus_char_pos !== false){
+							$and_lst_kw_arr = explode('+', $kw);
+							$not_contain_all = false;
+							foreach($and_lst_kw_arr as $and_kw){
+								$and_kw = trim($and_kw);
+								if($and_kw == ''){
+									continue;
+								}
+								if(!(mb_stripos($keyword, $and_kw) !== false)){
+									$not_contain_all = true;
+								}
+								if($not_contain_all !== false){
+									break;
+								}
+							}
+							if($not_contain_all === false){
+								return $obj_kw;
+							}
+						}else{
+							if(mb_stripos($keyword, $kw) !== false){
+								return $obj_kw;
+							}
 						}
 					}
 					//write_file('call3.txt', 'kw_' .$kw, false);
