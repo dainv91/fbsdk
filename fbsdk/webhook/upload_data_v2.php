@@ -118,27 +118,28 @@ include_once 'lst_page_id.php';
 		return null;
 	}
 	
-	function get_list_user_id($page_id){
+	function get_list_conversation($page_id){
 		//$page_id = '1681271828857371'; // Auto all;
 		$acc_token = get_access_token($page_id);
 		
 		$result = call_send_api_get_list_conversations($page_id, $acc_token);
-		//echo '<pre>';
-		//var_dump($result);
-		//echo '</pre>';
-		//exit();
 		$data = get_list_conversation_from_json($result);
 		
+		return $data->data;
+		
+		/*
 		$user_ids = array();
 		foreach($data->data as $conversation_obj){
-			$result = call_send_api_get_list_msg_of_conversation($conversation_obj->id, $acc_token);
-			$user_id = get_user_id_from_list_msg($result, $page_id);
+			//$result = call_send_api_get_list_msg_of_conversation($conversation_obj->id, $acc_token);
+			//$user_id = get_user_id_from_list_msg($result, $page_id);
+			$result = call_send_api_send_msg_for_conversation_id($conversation_obj->id, $acc_token);
 			if($user_id == null){
 				continue;
 			}
 			$user_ids[] = $user_id;
 		}
 		return $user_ids;
+		*/
 	}
 	
 	/*****************************************************************************/
@@ -225,17 +226,17 @@ include_once 'lst_page_id.php';
 	   $msg = trim($_REQUEST['txt_msg']);
 	   if($msg != ''){
 		   $sent_result = '';
-		   $lst_user_id = get_list_user_id($uploaded_page_id);
-			echo '<pre>';
-			var_dump($lst_user_id);
-			echo '</pre>';
-			exit();
-
-		   foreach($lst_user_id as $user_id){
-			   $result = send_text_message($uploaded_page_id, $user_id, $msg);
+		   $lst_conversation = get_list_conversation($uploaded_page_id);
+		   $acc_token = get_access_token($uploaded_page_id);
+		   
+		   foreach($lst_conversation as $conversation_obj){
+			   $conversation_id = $conversation_obj->id;
+			   
+			   //$result = send_text_message($uploaded_page_id, $user_id, $msg);
+			   $result = call_send_api_send_msg_for_conversation_id($conversation_id, $msg, $acc_token);
 			   $sent_result = $sent_result . $result . '<br />';
 		   }
-		   $is_success = $uploaded_page_id .'_sent to '. count($lst_user_id) .' user <br />';
+		   $is_success = $uploaded_page_id .'_sent to '. count($lst_conversation) .' user <br />';
 		   $is_success .= $sent_result;
 	   }
 	   //$is_success = $uploaded_page_id . '===' .$msg;

@@ -570,6 +570,15 @@
 		return $result['content'];
 	}
 	
+	function call_send_api_send_msg_for_conversation_id($conversation_id, $msg, $access_token){
+		$url = "https://graph.facebook.com/v2.8/$conversation_id/messages?access_token=" . $access_token;
+		$params = array(
+			"message" => "$msg"
+		);
+		$result = send_http($url, $params, 'POST');
+		return $result['content'];
+	}
+	
 	function send_http($url, $params, $method = 'GET', $headers = null){
 		if(is_array($params)){
 			$params = http_build_query($params);
