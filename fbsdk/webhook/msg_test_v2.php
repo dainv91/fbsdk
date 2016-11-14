@@ -534,7 +534,7 @@
 		$previous_obj = '';
 		
 		//$previous_data = get_saved_data($sender_id);
-		//write_file('call.txt', 'ID: ' .$id .'_MSG____' .$msg, false);
+		//write_file('call2.txt', 'ID: ' .$id .'_MSG____' .$msg, false);
 		if(is_numeric($id)){
 			// ** 1. Must save current data for next leve **
 			$current_data->id_previous = $id;
@@ -555,36 +555,49 @@
 				$id = $id_next;
 			}
 		}
-		
+		//write_file('call2.txt', 'ID: ' .$id .'_MSG____' .$msg, false);
 		
 		$title = '';
 		$obj = get_obj_by_id($data, $id);
-		if($obj == '' || $obj->title == ''){
-			$title = 'Mời bạn chọn danh mục';
-		}else{
-			$title = $obj->title;
-			
-		}
 		//return var_dum_to_string($obj);
 		
 		if($obj == null){
 			//return 'aaaaa_bbbbb';
 			//$msg = 'Chịu thôi, thằng chủ tao nó chưa dạy. Ahihi :">';
-			$msg = 'Xin lỗi, tôi chưa thể tư vấn cho bạn ngay bây giờ.';
+			$msg_local = 'Xin lỗi, tôi chưa thể tư vấn cho bạn ngay bây giờ.';
 			//return send_text_message($recipient_id, $sender_id, $msg);
 			
 			$msg_exception_arr = get_data_by_rank($data, RANK_MSG_EXCEPTION);
 			if(count($msg_exception_arr) > 0){
 				$msg_exception_obj = $msg_exception_arr[0];
-				$msg = trim($msg_exception_obj->title);
-				
-				// Send to admin
-				$log = send_msg_for_admin_of_page($recipient_id, 'Có thằng vừa nhắn linh tinh vào page kìa người đẹp: ');
-				write_file('call3.txt', $log, false);
-				
+				$msg_local = trim($msg_exception_obj->title);
+				if($msg_local != ''){
+					// Send for user
+				}else{
+					
+				}		
+				if(isset($msg_exception_obj->action)){
+					$admin_id = trim($msg_exception_obj->action);
+					// Send for admin by id = $msg_exception_obj->action
+					if($admin_id != ''){
+						$log = send_msg_for_admin_of_page_v2($recipient_id, $admin_id, $msg);
+						write_file('call3.txt', "action $admin_id _". $log, false);
+					}
+					//write_file('call2.txt', "$admin_id - ".'_MSG____' .$msg, false);
+				}
 				return show_menu_by_id($data, $msg_exception_obj->id, $obj_id, $msg);
 			}
+			return 'obj_NULL';
+		} // end check obj null
+		
+		
+		if($obj == '' || $obj->title == ''){
+			//$title = 'Mời bạn chọn danh mục';
+		}else{
+			$title = $obj->title;
+			
 		}
+		
 		// Check obj is done to toggle_user_is_done
 		if(isset($obj->is_done) && $obj->is_done != '' && $obj->is_done == IS_DONE_BREAK){
 			write_file('call2.txt', $obj->id .'_IS_DONE_from_obj: ' .$obj->is_done, false);
@@ -1082,6 +1095,10 @@
 		$sender_id = $data_of_level->sender_id;
 		$recipient_id = $data_of_level->recipient_id;
 		
+		if($data_of_level->title == ''){
+			return "$type_rank - EMPTY_TITLE_STOP_SEND_$recipient_id";
+		}
+		
 		//return 'by_type';
 		if($type_rank != RANK_TEXT && $type_rank != RANK_STATISTIC){
 			if($data_of_level->data == null || count($data_of_level->data) == 0){
@@ -1176,8 +1193,12 @@
 						$obj->item_url = $leaf->action;
 					}
 					//$obj->image_url = $leaf->image_url;
-					$obj->image_url = $leaf->image;
-					//$obj->subtitle = $leaf->description;
+					if(isset($leaf->image)){
+						$obj->image_url = $leaf->image;
+					}
+					if(isset($leaf->description)){
+						$obj->subtitle = $leaf->description;
+					}
 					//$obj->subtitle = 'Giá: '. $leaf->price;
 					if($leaf->price != null){
 						$obj->subtitle = 'Giá: '. $leaf->price;
@@ -1618,6 +1639,9 @@
 			}
 		}
 		return "INVALID_PAGE_ID_$page_id";
+	}
+	function send_msg_for_admin_of_page_v2($page_id, $admin_id, $msg){
+		return send_text_message($page_id, $admin_id, "Có tin nhắn autoseller.vn không hiểu, bạn vào trợ giúp nhé: $msg");
 	}
 	
 	

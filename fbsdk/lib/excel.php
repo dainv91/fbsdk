@@ -12,7 +12,13 @@ define('EOL',(PHP_SAPI == 'cli') ? PHP_EOL : '<br />');
 require_once dirname(__FILE__) . '/./Classes/PHPExcel.php';
 
 function conver_column_arr_to_obj($column_arr){
+	/*
 	if(!$column_arr[0] || !$column_arr[1]){
+		return null;
+	}
+	*/
+	
+	if(!$column_arr[0] || !$column_arr[7]){
 		return null;
 	}
 	
@@ -28,7 +34,11 @@ function conver_column_arr_to_obj($column_arr){
 	//$obj->action = $column_arr[8];
 	$obj->rank = $column_arr[7]; // action: 1 - text, 2 - button, 3 - menu ngang. 4 - quick reply
 	$obj->save_info = $column_arr[8];
-	$obj->action = $column_arr[9];
+	if(isset($column_arr[9])){
+		$action = trim($column_arr[9]);
+		$action = str_replace("'", "", $action);
+		$obj->action = $action;
+	}
 	//$obj->show_statistic = $column_arr[10];
 	$obj->id_next = $column_arr[10];
 	if(isset($column_arr[11])){
