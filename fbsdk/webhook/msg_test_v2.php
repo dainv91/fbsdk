@@ -442,7 +442,7 @@
 							$and_lst_kw_arr = explode('+', $kw);
 							$not_contain_all = false;
 							foreach($and_lst_kw_arr as $and_kw){
-								$and_kw = trim($and_kw);
+								//$and_kw = trim($and_kw);
 								if($and_kw == ''){
 									continue;
 								}
@@ -698,7 +698,7 @@
 	
 	function create_persistent_menu($page_id, $data){
 		$persistant_menu = get_data_by_rank($data, RANK_PERSISTANT_MENU);
-		
+		//return var_dum_to_string($persistant_menu);
 		$call_to_action_arr_obj = array();
 		$count = 0;
 		foreach($persistant_menu as $menu){
@@ -719,6 +719,8 @@
 				if($action_type == ACTION_BTN_URL){
 					$menu_item->type = 'web_url';
 					$menu_item->url = $action;
+				}else{
+					$menu_item->payload = $menu->id;
 				}
 			}else{
 				$menu_item->payload = $menu->id;
