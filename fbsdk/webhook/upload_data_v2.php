@@ -165,12 +165,41 @@ include_once 'lst_page_id.php';
 	$uploaded_page_id = '';
 	$is_success = false;
 	
+	// Load list page from mem
+	$key_lst_page = 'lst_page_acc_token';
+	$lst_page = load_from_mem($key_lst_page);
+	if($lst_page === false){
+		//exit('Invalid page');
+	}else{
+		$lst_page = $lst_page['value'];
+		foreach($lst_page as $page_obj){
+			$lst_page_id[$page_obj->page_id] = $page_obj->page_name;
+		}
+	}
+	
 	if(isset($_REQUEST['sl_pages'])){
 		$sl_page = $_REQUEST['sl_pages'];
 		if(isset($lst_page_id[$sl_page])){
 			$uploaded_page_id = $sl_page;
 		}else{
-			exit('Invalid page');
+			// Check in mem
+			$key_lst_page = 'lst_page_acc_token';
+			$lst_page = load_from_mem($key_lst_page);
+			if($lst_page === false){
+				exit('Invalid page');
+			}else{
+				$lst_page = $lst_page['value'];
+				if(isset($lst_page[$sl_page])){
+					$uploaded_page_id = $sl_page;
+					/*
+					foreach($lst_page as $page_obj){
+						$lst_page_id[$page_obj->page_id] = $page_obj->page_name;
+					}
+					*/
+				}else{
+					exit('Invalid page');
+				}
+			}
 		}
 	}
 	

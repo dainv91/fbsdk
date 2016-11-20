@@ -42,6 +42,7 @@
 		clear_cache('user_info');
 		clear_cache('user_is_done');
 		clear_cache('key_admin_of_page_');
+		clear_cace('lst_page_acc_token');
 	}
 	
 	if(isset($_REQUEST['iadd'])){

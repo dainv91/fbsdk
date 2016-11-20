@@ -651,7 +651,7 @@
 		$pid = '559437760920787';
 		//$token = 'EAAMEwkQKZA7wBAENJZCMjPXXcDJeaCYyZAEWZChrUEFK22IwkKfUv6xwqQltAUMKif2AxEyT6URG16tYT7NuZBbfr1s8AWZB5vniDcdZChJ1ZBWqcJV1TEkIwdCsZAGBMeRLaYHoZCXYZAS9s4sfcuOxUZCJmT5shWuJG8iu45wYA7q1CAZDZD';
 		$token = 'EAAMEwkQKZA7wBANaPrZBZA5hSXsPAnfwMeA7FjcCq0wG4xOuFLx4IcURlGoQaYenPg9qZBdr3er9NZBzLMqlLBsVew1KUeGmEWptYbtG2ZBfrsFLGa5GHZAnlOZBvQaCRJtjRtnxoOERl7ZBjFo3wVa5thZBvj6FMasdK7rcATwVWQIAZDZD';
-		$arr[$pid] = $token;
+		//$arr[$pid] = $token;
 		
 		// khach san, 2nd bot
 		$pid = '205662139870141';
@@ -685,6 +685,18 @@
 		
 		if(isset($arr[$page_id])){
 			$access_token = $arr[$page_id];
+		}
+		if($access_token == null){
+			// Get from memory
+			$key_lst_page = 'lst_page_acc_token';
+			$lst_page = load_from_mem($key_lst_page);
+			if($lst_page !== false){
+				$lst_page = $lst_page['value'];
+				if(isset($lst_page[$page_id])){
+					$page = $lst_page[$page_id];
+					$access_token = $page->access_token;
+				}
+			}
 		}
 		return $access_token;
 	}
